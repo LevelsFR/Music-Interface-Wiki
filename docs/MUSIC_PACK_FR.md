@@ -2,6 +2,10 @@
 
 **Un guide accessible pour ajouter vos musiques, pochettes et thèmes adaptés aux situations dans Minecraft.**
 
+**Music Interface ne fournit aucune musique.** C'est un lecteur musical intégré à Minecraft et un gestionnaire de lecture automatique, pas une bibliothèque de chansons, un service de streaming ou un outil de téléchargement. À l'installation, il est normal que la bibliothèque soit vide. Les musiques vanilla et celles des autres mods ne sont pas automatiquement ajoutées à sa liste.
+
+Pour écouter des musiques personnalisées, il faut **ajouter un Music Pack** (resource pack Minecraft) contenant de vrais fichiers audio `.ogg` et leurs définitions JSON. Vous pouvez créer ce pack vous-même ou utiliser celui fourni par un créateur de modpack ou de serveur. Le modèle généré dans le lecteur contient des dossiers, des JSON et une pochette, **mais aucun son OGG** : il faut ajouter votre fichier.
+
 Music Interface utilise des **resource packs Minecraft** pour charger les chansons. Il n'est pas nécessaire de coder en Java. Le format des pistes est commun à Fabric et NeoForge. En revanche, les informations de compatibilité de Minecraft dans `pack.mcmeta` doivent correspondre à votre version du jeu.
 
 Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le [guide général](https://levelsfr.github.io/Music-Interface-Wiki/#overview). Le guide général est actuellement en anglais.
