@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Official Music Interface 2.0 documentation: music packs, contextual playback, Cobblemon battles, Fabric, NeoForge and Minecraft version support.">
+  <meta name="description" content="Music Interface 2.0 is a Minecraft music player, not a music download or song pack. Learn how to add tracks with resource packs, use Radio, create playlists and configure contextual music.">
   <title>Music Interface v2.0 Documentation</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="app.js"></script>
@@ -111,10 +111,22 @@
           <div class="page-heading">
             <span class="page-kicker">Music Interface v2.0</span>
             <h1>Music Interface</h1>
-            <p class="page-description">Your music library, personalized playback and contextual soundtrack inside Minecraft.</p>
+            <p class="page-description">A customizable music player for Minecraft. Bring your own songs through resource packs, organize them and decide when they play.</p>
           </div>
           
-<div class="hint hint-info"><strong>Music for your Minecraft world.</strong><p>Listen to songs from resource packs, build playlists, start Track Radio and let the scheduler react to biomes, weather and compatible Cobblemon battles. <a href="#installation" data-tab-link="installation">Start with installation</a> or <a href="#musicpacks" data-tab-link="musicpacks">create a Music Pack</a>.</p></div>
+<div class="hint hint-info">
+  <strong>Important: Music Interface does NOT include any songs.</strong>
+  <p>Think of Music Interface as a music player and soundtrack manager, not a music pack or streaming service. It gives you a player, playlists, Radio, recommendations and rules for when songs play. <strong>You supply the audio yourself</strong> through Minecraft resource packs (Music Packs), or use a pack shared by a modpack or server creator. Installing the mod by itself leaves the library empty.</p>
+</div>
+<h2>How do I get music?</h2>
+<ol>
+  <li>Install the Music Interface mod for your Minecraft version and loader.</li>
+  <li><strong>Get a Music Pack:</strong> use one provided by a creator, or <a href="#musicpacks" data-tab-link="musicpacks">make your own using the Music Pack guide</a>.</li>
+  <li>Place the Music Pack in your instance's <code>resourcepacks/</code> folder and enable it in Minecraft's Resource Packs menu.</li>
+  <li>Open Music Interface. Your tracks appear when the pack contains valid <code>music_data.json</code> and sound entries.</li>
+  <li>If the library is still empty, press <code>F3+T</code> or run <code>/musicinterface_diagnostics</code> and check the <a href="#troubleshooting" data-tab-link="troubleshooting">FAQ</a>.</li>
+</ol>
+<p><strong>Vanilla music is separate:</strong> Minecraft's built-in soundtrack is not automatically imported into the Music Interface track list. Installing another music-playing mod does not add its library to Music Interface either.</p>
 <h2>At a glance</h2>
 <ul><li>Complete library with favorites, artists, albums, playlists, search and a queue.</li>
 <li>Radio and four personal Smart Mixes: For You, On Repeat, Rediscover and Current Context.</li>
@@ -181,6 +193,7 @@
             <h1>Installation</h1>
             <p class="page-description">Install the correct Fabric or NeoForge build and set up your first music resource pack.</p>
           </div>
+          <div class="hint hint-info"><strong>Why is my Music Interface library empty?</strong><p>This is normal after installing only the mod: <strong>no tracks are bundled</strong>. A Music Pack containing audio files and track definitions must be installed and enabled separately. The built-in template creates the folder structure and example JSON/cover, <strong>but no playable OGG song</strong>. <a href="#musicpacks" data-tab-link="musicpacks">Follow the Music Pack tutorial</a> to add your first track.</p></div>
           <div class="hint hint-warning"><strong>Choose the exact file for your setup.</strong><p>The source contains 9 Minecraft targets and two loaders. A configured target is not proof that every feature was tested in-game on that exact combination. Use the official release listing to choose the correct version and loader.</p></div><h2>Install and open the player</h2>
 <h3>What you need</h3>
 <ul>
@@ -240,7 +253,7 @@
 <li><strong>Music metadata:</strong> <code>genres</code>, <code>moods</code>, <code>tags</code> and <code>energy</code> describe songs and assist Radio/Smart Mixes.</li>
 <li><strong>Music contexts:</strong> explicit rules in <code>music_data.json</code> or <code>music_contexts.json</code> tell the scheduler <em>when</em> a track is eligible. Supported conditions are <strong>dimension</strong>, <strong>biome</strong>, <strong>biome tag</strong>, <strong>day/night</strong>, <strong>weather</strong> and <strong>Cobblemon combat active/inactive</strong>.</li>
 </ul>
-<p>For actual JSON and fully working examples, see the <a href="#musicpacks" data-tab-link="musicpacks">English Music Pack guide</a> or the <a href="#musicpacks" data-tab-link="musicpacks">French guide</a>.</p>
+<p>For actual JSON and fully working examples, see the <a href="#musicpacks" data-tab-link="musicpacks">Music Pack guide</a>, or the <a href="https://github.com/LevelsFR/Music-Interface-Wiki/blob/main/docs/MUSIC_PACK_FR.md" target="_blank" rel="noopener noreferrer">French Music Pack guide</a>.</p>
 <h3>Title screen</h3>
 <p>The <code>customMenuMusicEnabled</code> option enables Music Interface music on the title screen (enabled by default).</p>
 <ul>
@@ -367,6 +380,7 @@
             <strong>Prefer French?</strong>
             <p>The complete <a href="https://github.com/LevelsFR/Music-Interface-Wiki/blob/main/docs/MUSIC_PACK_FR.md" target="_blank" rel="noopener noreferrer">Music Pack creation guide is also available in French</a>.</p>
           </div>
+          <div class="hint hint-info"><strong>No music is included with the mod or with the generated template.</strong><p>You need your own legally obtained <code>.ogg</code> audio files. The template creates a <code>music_data.json</code>, <code>sounds.json</code>, folders and an example cover, but it does not create or download an audio file. A track will not play until its referenced OGG exists.</p></div>
           <p><strong>A beginner-friendly guide to adding your own songs, cover art and music for specific situations in Minecraft.</strong></p>
 <p>Music Interface reads music from a standard Minecraft <strong>resource pack</strong>. You do not need to program a mod. The track metadata format works on Fabric and NeoForge, but vanilla resource-pack compatibility metadata must match the Minecraft version you use.</p>
 <p>For the player, settings, queues, playlists and Radio, see the <a href="#overview" data-tab-link="overview">complete user guide</a>.</p>
@@ -656,7 +670,35 @@
             <h1>Troubleshooting</h1>
             <p class="page-description">Troubleshoot silent tracks, missing covers, menu music, battle events and incompatible packs.</p>
           </div>
-          <h2>Troubleshooting</h2>
+          <h2>Frequently asked questions</h2>
+<h3>Does Music Interface come with music? Where do I download tracks?</h3>
+<p><strong>No songs or ready-made music library are included.</strong> You must create or obtain a separate Music Pack (a Minecraft resource pack with OGG audio and track metadata). These packs may be made by you or shared by modpack/server creators. There is no built-in music catalog or automatic download service. See <a href="#musicpacks" data-tab-link="musicpacks">Music Packs</a> for the full setup.</p>
+
+<h3>Why can't I find any songs, including Minecraft's vanilla soundtrack?</h3>
+<p>The Music Interface library displays <strong>custom tracks declared by active Music Packs</strong>. Vanilla Minecraft music is handled by Minecraft's own music system and does not appear automatically as Music Interface tracks. If you only installed the mod, an empty library is expected. Check that a valid pack is enabled, then reload with <code>F3+T</code>.</p>
+
+<h3>Is Music Interface a Cobblemon mod? Can I use it without Cobblemon or with an older Cobblemon version?</h3>
+<p>Music Interface is <strong>independent of Cobblemon</strong>. Ordinary music playback works without Cobblemon, as long as you install the correct Minecraft/loader build and a Music Pack. Cobblemon is an <strong>optional</strong> integration for battle detection; its battle features depend on the versions and integration hooks available. Having an older Cobblemon release does not make Cobblemon a required dependency for the player.</p>
+
+<h3>Does Music Interface work with Constant Music or other music mods?</h3>
+<p>Music Interface does not automatically read another mod's track list or resource files. Other mods may also manage Minecraft's <code>MUSIC</code> sound channel, so <strong>universal compatibility is not guaranteed</strong>. Music Interface has playback controls for vanilla/external music and a <code>strictExclusiveMusic</code> option to avoid starting music over another active soundtrack. If tracks overlap or interrupt one another, review both mods' music settings or let only one mod manage automatic music. You still need a Music Pack for Music Interface tracks.</p>
+
+<h3>What are moods, and do they control when songs play?</h3>
+<p><code>moods</code> describe the atmosphere of a track, for example <code>calm</code>, <code>relaxing</code> or <code>intense</code>. Along with <code>genres</code>, <code>tags</code> and <code>energy</code>, they help Track Radio and Smart Mixes find related songs. <strong>Moods and tags are not event triggers.</strong> A song tagged <code>battle</code> is not automatically played during a battle.</p>
+
+<h3>How can I assign music to the menu, exploration or Cobblemon battles? Do I need Minecraft predicates?</h3>
+<p><strong>No vanilla Minecraft predicates are required.</strong> Use the <code>contexts</code> rules in a track's <code>music_data.json</code>, or put them in <code>music_contexts.json</code>. Rules can match dimension, biome, biome tags, day/night, weather and Cobblemon combat. Example: <code>"combat": true</code> with a priority selects a battle track when the Cobblemon battle mode is set to <code>context</code>. The menu is handled separately by the <strong>Title-screen track ID</strong> setting. See <a href="#musicpacks" data-tab-link="musicpacks">examples for both files</a>.</p>
+
+<h3>Can I change the Now Playing toast outline color?</h3>
+<p>The accent color is <strong>generated automatically from each track's cover art</strong>, with a default fallback if no usable cover exists. You can change the cover in your Music Pack, but Music Interface 2.0 has <strong>no manual outline-color setting</strong>.</p>
+
+<h3>Can a resource-pack lang file translate music titles?</h3>
+<p>The mod interface itself supports language files, but custom track names in <code>music_data.json</code> are currently <strong>plain display strings</strong>. The <code>title</code> value is displayed as written, not resolved as a translation key from <code>assets/.../lang/*.json</code>. <strong>Automatic per-language music title translation is not supported in 2.0.</strong> Authors should supply a readable title, or offer separate translated metadata packs where appropriate.</p>
+
+<h3>The generated template appears in the list, but its example track is silent. Why?</h3>
+<p>The template is a <strong>starting structure</strong>: it provides an example track definition, a sound event and cover, but <strong>not the <code>example_track.ogg</code> audio file</strong>. Add a real OGG file at the referenced path or replace the example with your song, then reload resources.</p>
+
+<h2>Troubleshooting</h2>
 <table><thead><tr><th>Symptom</th><th>Check / solution</th></tr></thead><tbody>
 <tr><td>No tracks appear</td><td>Is the Music Pack enabled? Does it contain <code>assets/musicinterface/music_data.json</code> with a JSON array? Try <code>F3+T</code></td></tr>
 <tr><td>A track appears but stays silent</td><td>Check <code>.ogg</code> path, <code>sounds.json</code> event name, and <code>music_data.json</code> <code>sound</code> ID. Use diagnostics</td></tr>
