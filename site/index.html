@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Official Music Interface 2.0 documentation: music packs, contextual playback, Cobblemon battles, Fabric, NeoForge and Minecraft version support.">
+  <title>Music Interface v2.0 Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation">☰</button>
+
+    <a class="brand" href="#overview" data-tab-link="overview">
+      <span class="brand-mark">MI</span>
+      <span class="brand-copy">
+        <strong>Music Interface</strong>
+        <small>v2.0 Documentation</small>
+      </span>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true"></span>
+      <input id="wikiSearch" type="search" placeholder="Search the documentation..." autocomplete="off">
+      <kbd>Ctrl K</kbd>
+      <div class="search-results" id="searchResults" hidden></div>
+    </div>
+
+    <a class="community-badge bisecthosting-badge" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored" aria-label="Save 25% on BisectHosting servers with code OurStory">
+      <span class="community-icon bisecthosting-icon" aria-hidden="true">BH</span>
+      <span class="community-copy">
+        <strong>25% OFF Servers</strong>
+        <small>BisectHosting <span class="community-divider">•</span> Code <b>OurStory</b></small>
+      </span>
+    </a>
+
+    <a class="community-badge discord-badge" id="discordBadge" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer" aria-label="Join the Our Story Network Discord">
+      <svg class="community-icon discord-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19.54 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15.1 15.1 0 0 0-5.86 0L8.56 4a16.5 16.5 0 0 0-4.1 1.35C1.87 9.2 1.17 12.96 1.52 16.67a16.7 16.7 0 0 0 5.03 2.55l1.23-1.68c-.67-.25-1.3-.56-1.9-.93l.46-.36c3.67 1.69 7.65 1.69 11.28 0l.47.36c-.6.37-1.24.69-1.9.94l1.22 1.67a16.6 16.6 0 0 0 5.04-2.55c.42-4.3-.72-8.03-2.91-11.33ZM8.5 14.44c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Zm7 0c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Z"/>
+      </svg>
+      <span class="community-copy">
+        <strong>Discord</strong>
+        <small id="discordStats"><span class="status-dot"></span>Join the server</small>
+      </span>
+    </a>
+
+    <a class="community-badge curseforge-badge" id="curseforgeBadge" href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer" aria-label="View Music Interface on CurseForge">
+      <span class="community-icon curseforge-icon" aria-hidden="true">CF</span>
+      <span class="community-copy">
+        <strong>CurseForge</strong>
+        <small id="curseforgeStats">Music Interface</small>
+      </span>
+    </a>
+
+    <a class="community-badge modrinth-badge" id="modrinthBadge" href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer" aria-label="View Music Interface on Modrinth">
+      <span class="community-icon modrinth-icon" aria-hidden="true">MR</span>
+      <span class="community-copy">
+        <strong>Modrinth</strong>
+        <small id="modrinthStats">Music Interface</small>
+      </span>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+      <span class="theme-icon theme-icon-sun">☀</span>
+      <span class="theme-icon theme-icon-moon">☾</span>
+    </button>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="sidebar-title">Documentation</div>
+      <nav class="sidebar-navigation" aria-label="Documentation sections">
+        <a href="#overview" data-tab-link="overview" class="active">👋 Overview</a>
+        <a href="#installation" data-tab-link="installation">📦 Installation</a>
+        <a href="#configuration" data-tab-link="configuration">⚙️ Configuration</a>
+        <a href="#commands" data-tab-link="commands">⌨️ Commands</a>
+        <a href="#musicpacks" data-tab-link="musicpacks">🎵 Music Packs</a>
+        <a href="#troubleshooting" data-tab-link="troubleshooting">🛠️ Troubleshooting</a>
+      </nav>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Links</div>
+        <a class="sidebar-link" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored">🤝 BisectHosting Partner</a>
+        <a class="sidebar-link" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">💬 Discord</a>
+        <a class="sidebar-link" href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer">🧡 CurseForge</a>
+        <a class="sidebar-link" href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer">🟢 Modrinth</a>
+        <a class="sidebar-link" href="https://github.com/LevelsFR/Music-Interface-Wiki" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
+        <a class="sidebar-link" href="https://www.patreon.com/c/OurStoryCollection" target="_blank" rel="noopener noreferrer">❤️ Patreon</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <strong>Music Interface</strong>
+        <span>Documentation for v2.0</span>
+      </div>
+    </aside>
+
+    <main>
+      <div class="tabs" role="tablist" aria-label="Documentation tabs">
+        <button class="tab active" type="button" data-tab="overview">Overview</button>
+        <button class="tab" type="button" data-tab="installation">Installation</button>
+        <button class="tab" type="button" data-tab="configuration">Configuration</button>
+        <button class="tab" type="button" data-tab="commands">Commands</button>
+        <button class="tab" type="button" data-tab="musicpacks">Music Packs</button>
+        <button class="tab" type="button" data-tab="troubleshooting">Troubleshooting</button>
+      </div>
+
+      <article>
+
+        <section class="tab-panel active" id="overview" data-panel="overview">
+          <div class="page-heading">
+            <span class="page-kicker">Music Interface v2.0</span>
+            <h1>Music Interface</h1>
+            <p class="page-description">Your music library, personalized playback and contextual soundtrack inside Minecraft.</p>
+          </div>
+          
+<div class="hint hint-info"><strong>Music for your Minecraft world.</strong><p>Listen to songs from resource packs, build playlists, start Track Radio and let the scheduler react to biomes, weather and compatible Cobblemon battles. <a href="#installation" data-tab-link="installation">Start with installation</a> or <a href="#musicpacks" data-tab-link="musicpacks">create a Music Pack</a>.</p></div>
+<h2>At a glance</h2>
+<ul><li>Complete library with favorites, artists, albums, playlists, search and a queue.</li>
+<li>Radio and four personal Smart Mixes: For You, On Repeat, Rediscover and Current Context.</li>
+<li>Menu, ambient, day/night, weather, dimension, biome and optional battle music.</li>
+<li>Public Music Pack format; no Java development needed to add songs.</li></ul>
+<h2>Using the music library</h2>
+<p>The player has a home library, search, <strong>grid/list display</strong>, <strong>Favorites</strong>, <strong>Albums</strong>, <strong>Artists</strong>, <strong>Playlists</strong>, <strong>History</strong>, <strong>Queue</strong> and <strong>Made for You</strong>.</p>
+<ul>
+<li><strong>Play a track:</strong> choose it in the library. The player offers play/pause, previous, next and stop controls.</li>
+<li><strong>Find a track:</strong> search or browse albums and authors. Use the home/favorites sorting controls where shown.</li>
+<li><strong>Favorite a track:</strong> use the favorite control. Favorites are saved locally and can be played as a collection, in order or shuffled.</li>
+<li><strong>Disable a track:</strong> use the track's available action. Disabled tracks are excluded from automatic selection. The library can optionally hide them.</li>
+<li><strong>Repeat:</strong> the repeat control cycles between <strong>Off</strong>, <strong>Playlist</strong> and <strong>Track</strong>.</li>
+<li><strong>Playlists:</strong> create, rename and delete playlists, manage their tracks and order, and play in order or shuffle.</li>
+<li><strong>History:</strong> displays a recent-track list with a configurable maximum size. This UI history is separate from the long-term listening statistics.</li>
+</ul>
+<p>When a song starts, Music Interface can display a <strong>Now Playing</strong> toast with the cover, artist and album. The toast's <strong>outer border accent is derived automatically from the track cover's dominant color</strong>, with a built-in fallback color if no usable cover is available. Position, animation and displayed metadata are configurable; <strong>there is no separate setting for manually choosing the border color</strong>.</p>
+<h3>Playlists and sharing</h3>
+<p>The playlist view offers <strong>Copy share code</strong>, <strong>Import from clipboard</strong> and <strong>Share in chat</strong> actions. A share code contains a playlist name and track IDs, <strong>not audio files</strong>. The recipient therefore needs packs containing those song IDs for those entries to play. Client/server-supported sharing requires the appropriate Music Interface networking to be present.</p>
+<p>Use the on-screen playlist controls for creation, editing and track management. A code import creates a local playlist; it does not download missing OGG files.</p>
+<h2>Queue, Radio and Made for You</h2>
+<h3>Manual queue</h3>
+<p>Open a song's actions, then select:</p>
+<ul>
+<li><strong>Play Next:</strong> insert that song at the front of the pending manual queue.</li>
+<li><strong>Add to Queue:</strong> append it at the end.</li>
+<li><strong>Play Now:</strong> start it immediately instead of waiting for its queued turn.</li>
+</ul>
+<p>The <strong>Queue</strong> screen lets you move songs up/down, drag to reorder, remove an entry, clear the queue, and <strong>Save as Playlist</strong>. The <code>persistQueue</code> setting controls whether the queue is saved to <code>queue.json</code>. It is enabled by default.</p>
+<p>When the scheduler selects the next song, <strong>manual queue entries take precedence</strong>, followed by the active repeat/Radio/playlist flow and then normal autoplay as appropriate. Stop and manual playback actions can change the current playback source.</p>
+<h3>Track Radio</h3>
+<p>Open a song's actions and choose <strong>Start Radio</strong>. This keeps a starting song as the reference for choosing related tracks. Similarity considers:</p>
+<ul>
+<li>shared <code>tags</code>, <code>genres</code> and <code>moods</code>;</li>
+<li>artist, album and source Music Pack;</li>
+<li>approximate energy level;</li>
+<li>favorites and locally learned listening preferences.</li>
+</ul>
+<p>Radio continues selecting tracks while active and candidates are available. Choose <strong>Stop Radio</strong> from the track action screen to return to the normal playback flow. <strong>Radio is not the same as context-triggered playback</strong>.</p>
+<h3>Made for You</h3>
+<p>Open <strong>Made for You</strong> in the player. It offers four automatically generated collections:</p>
+<table><thead><tr><th>Mix</th><th>How tracks are selected</th></tr></thead><tbody>
+<tr><td><strong>For You</strong></td><td>Ranks tracks using favorites, listening history and shared metadata; starts with general choices if no habits exist</td></tr>
+<tr><td><strong>On Repeat</strong></td><td>Tracks played most often</td></tr>
+<tr><td><strong>Rediscover</strong></td><td>Previously played tracks whose last play was at least seven days ago</td></tr>
+<tr><td><strong>Current Context</strong></td><td>Tracks eligible for the current in-game situation, ordered with listening history as a preference</td></tr>
+</tbody></table>
+<p>Each mix has <strong>Play</strong> and <strong>Shuffle</strong> actions. Collections evolve as your library, favorites, context and local profile change. They are not server-synced recommendations.</p>
+<h3>Listening profile</h3>
+<p>The profile presents total listening time, plays, favorites, tracks, top songs and habits such as artists, albums, packs, biomes, dimensions, time and weather. The data is stored <strong>locally</strong>. The source code does not synchronize it to a server or send telemetry.</p>
+<p>The profile also provides separate reset actions for <strong>statistics</strong>, <strong>recommendations</strong>, and <strong>recent history</strong>. Be deliberate: a reset cannot be assumed reversible without a backup.</p>
+<h2>Cobblemon and CobbleSafari</h2>
+<p>These integrations are <strong>optional</strong>, client-side compatibility paths. Music Interface should remain functional without either mod.</p>
+<ul>
+<li><strong>Cobblemon:</strong> a compatible battle event toggles Music Interface's combat context. <code>external</code> mode suspends Music Interface's runtime for the battle; <code>context</code> mode allows the scheduler to use combat rules.</li>
+<li><strong>CobbleSafari:</strong> a compatibility bridge detects when CobbleSafari claims music playback, so Music Interface can coordinate music ownership rather than blindly overlapping it.</li>
+</ul>
+<p>Availability depends on the installed companion mod, the Minecraft version and working integrations. Do not assume battle integration is available on every source target just because Music Interface itself builds.</p>
+        </section>
+
+        <section class="tab-panel" id="installation" data-panel="installation">
+          <div class="page-heading">
+            <span class="page-kicker">Getting started</span>
+            <h1>Installation</h1>
+            <p class="page-description">Install the correct Fabric or NeoForge build and set up your first music resource pack.</p>
+          </div>
+          <div class="hint hint-warning"><strong>Choose the exact file for your setup.</strong><p>The source contains 9 Minecraft targets and two loaders. A configured target is not proof that every feature was tested in-game on that exact combination. Use the official release listing to choose the correct version and loader.</p></div><h2>Install and open the player</h2>
+<h3>What you need</h3>
+<ul>
+<li><strong>Minecraft:</strong> use one of the versions listed below, <strong>only if a compatible JAR has actually been released for it</strong>.</li>
+<li><strong>Loader:</strong> Fabric <strong>or</strong> NeoForge. Use the matching JAR, never both loaders' JARs together.</li>
+<li><strong>Java:</strong> Minecraft 1.21.x projects use Java 21; 26.x projects use Java 25.</li>
+<li><strong>Dependencies:</strong> install the matching loader dependencies. Do not mix dependency builds for different Minecraft versions.</li>
+<li><strong>Music Pack:</strong> required if you want to add your own songs; the mod itself does not provide your personal audio collection.</li>
+</ul>
+<ol>
+<li>Download the correct Music Interface JAR from <a href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer">CurseForge</a> or <a href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer">Modrinth</a>. Check the file's actual game version and loader.</li>
+<li>Install the dependencies shown on that file's release page and loader metadata.</li>
+<li>Place the JAR and dependency JARs in your Minecraft instance's <code>mods/</code> directory.</li>
+<li>Launch the game. Open the Music Interface player using its assigned keybind or in-game UI entry point. Check Minecraft's <strong>Controls</strong> menu if you need to find or change the keybind.</li>
+<li>Enable a Music Pack from Minecraft's <strong>Resource Packs</strong> screen. The library is filled from active packs.</li>
+</ol>
+<p><strong>Settings screen:</strong> Music Interface integrates with <strong>Cloth Config</strong>, when installed and compatible. Without Cloth Config, the mod still loads, but the in-game settings screen is not available through that integration. Advanced users can edit <code>config/musicinterface/config.json</code> while the game is closed.</p>
+<h2>Compatibility and dependencies</h2>
+<h3>Configured source targets</h3>
+<table><thead><tr><th>Source project</th><th>Minecraft</th><th>Loader targets</th><th>Java</th></tr></thead><tbody>
+<tr><td>Repository root</td><td>1.21.1</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.4</code></td><td>1.21.4</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.5</code></td><td>1.21.5</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.8</code></td><td>1.21.8</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.10</code></td><td>1.21.10</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.11</code></td><td>1.21.11</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/26.1</code></td><td>26.1</td><td>Fabric / NeoForge</td><td>25</td></tr>
+<tr><td><code>versions/26.2</code></td><td>26.2</td><td>Fabric / NeoForge</td><td>25</td></tr>
+<tr><td><code>versions/26.3</code></td><td>26.3</td><td>Fabric / NeoForge</td><td>25</td></tr>
+</tbody></table>
+<p>That is <strong>18 configured loader/version outputs</strong>. Targets are <strong>not</strong> evidence of verified release availability, binary compatibility, or runtime passing tests.</p>
+<h3>Root Minecraft 1.21.1 metadata</h3>
+<table><thead><tr><th>Loader</th><th>Dependency</th><th>Declared requirement</th></tr></thead><tbody>
+<tr><td>Fabric</td><td>Fabric Loader</td><td><code>&gt;=0.18.4</code></td></tr>
+<tr><td>Fabric</td><td>Fabric API</td><td>Required</td></tr>
+<tr><td>Fabric</td><td>Architectury API</td><td><code>&gt;=13.0.8</code></td></tr>
+<tr><td>Fabric</td><td>Java</td><td><code>&gt;=21</code></td></tr>
+<tr><td>Fabric</td><td>Minecraft</td><td><code>~1.21.1</code></td></tr>
+<tr><td>Fabric</td><td>Cloth Config</td><td>Suggested (<code>&gt;=15.0.140</code>)</td></tr>
+<tr><td>NeoForge</td><td>NeoForge</td><td><code>[21.1,21.2)</code></td></tr>
+<tr><td>NeoForge</td><td>Architectury API</td><td><code>[13.0.8,)</code></td></tr>
+<tr><td>NeoForge</td><td>Minecraft</td><td><code>[1.21.1,1.21.2)</code></td></tr>
+<tr><td>NeoForge</td><td>Cloth Config</td><td>Optional client integration (<code>[15.0.140,)</code>)</td></tr>
+</tbody></table>
+<p>These constraints apply to the <strong>root 1.21.1 source</strong>, not automatically to every other version project. For a different version, inspect that project's <code>gradle.properties</code>, loader metadata and release dependency list. Java 25 belongs to the 26.x generation.</p>
+        </section>
+
+        <section class="tab-panel" id="configuration" data-panel="configuration">
+          <div class="page-heading">
+            <span class="page-kicker">Playback and preferences</span>
+            <h1>Configuration</h1>
+            <p class="page-description">Control title-screen music, automatic scheduling, contexts, fades, notifications and locally saved data.</p>
+          </div>
+          <h2>Menu, ambient and contextual playback</h2>
+<p>Music Interface controls a custom playback scheduler. There are two complementary concepts:</p>
+<ul>
+<li><strong>Music metadata:</strong> <code>genres</code>, <code>moods</code>, <code>tags</code> and <code>energy</code> describe songs and assist Radio/Smart Mixes.</li>
+<li><strong>Music contexts:</strong> explicit rules in <code>music_data.json</code> or <code>music_contexts.json</code> tell the scheduler <em>when</em> a track is eligible. Supported conditions are <strong>dimension</strong>, <strong>biome</strong>, <strong>biome tag</strong>, <strong>day/night</strong>, <strong>weather</strong> and <strong>Cobblemon combat active/inactive</strong>.</li>
+</ul>
+<p>For actual JSON and fully working examples, see the <a href="#musicpacks" data-tab-link="musicpacks">English Music Pack guide</a> or the <a href="#musicpacks" data-tab-link="musicpacks">French guide</a>.</p>
+<h3>Title screen</h3>
+<p>The <code>customMenuMusicEnabled</code> option enables Music Interface music on the title screen (enabled by default).</p>
+<ul>
+<li>If <strong>Title-screen track ID</strong> is <strong>empty</strong>, eligible library songs can be selected automatically for the menu. Empty <strong>does not mean disabled</strong>.</li>
+<li>If the ID contains an existing track ID, that track is reserved for custom title-screen autoplay and is excluded from world autoplay.</li>
+<li>To stop <strong>custom</strong> title-screen music, switch <strong>Custom menu music</strong> off.</li>
+<li><strong>Allow vanilla menu music</strong> is separate and controls Minecraft's original menu soundtrack.</li>
+<li>Title-screen autoplay uses the menu selection path; <strong>in-world context filters are not applied on the title screen</strong>.</li>
+</ul>
+<h3>Ambient versus Continuous</h3>
+<ul>
+<li><strong>Ambient</strong> (default): the scheduler can leave a configurable gap between songs in a world.</li>
+<li><strong>Continuous:</strong> no intentional between-track delay.</li>
+<li><strong>World join silence:</strong> waits after entering a world before scheduled music starts; default is 10 seconds.</li>
+</ul>
+<h3>Context selection</h3>
+<ul>
+<li>A context rule matches when <strong>all its specified condition groups</strong> match. For a group accepting multiple values, <strong>any</strong> listed value may match.</li>
+<li>More than one rule can be attached to a track. A matching rule makes the track eligible.</li>
+<li>The scheduler selects from the <strong>highest matching numerical <code>priority</code></strong>. Greater specificity alone does not raise priority.</li>
+<li>If nothing matches, <strong>Library fallback</strong> (default) considers the normal available library, while <strong>Dedicated fallback</strong> restricts fallback to tracks marked <code>context_fallback: true</code>.</li>
+<li><strong>Finish</strong> (default) waits for the current track to finish after a context change. <strong>Crossfade</strong> can transition a track <strong>that the context scheduler started</strong>, when a different track is preferred.</li>
+<li>A manually chosen track, queue item, playlist or Radio source does not become a forced battle cue just because a rule exists.</li>
+<li>Track <code>cooldown</code> and disabled/failed tracks also affect automatic selection.</li>
+</ul>
+<h3>Cobblemon battles</h3>
+<p>Cobblemon integration is optional. The <strong>Cobblemon Battle Music</strong> setting defaults to <strong>External</strong> so Music Interface yields control while a recognized battle is active.</p>
+<p>To let Music Interface select battle music:</p>
+<ol>
+<li>Install a compatible Cobblemon version for your Minecraft/loader, if one is available.</li>
+<li>In Music Interface settings, set <strong>Cobblemon Battle Music</strong> to <strong>Context</strong> (value <code>context</code>).</li>
+<li>Enable <strong>Context Music</strong>.</li>
+<li>Add tracks with a <code>&quot;combat&quot;: true</code> context rule and an appropriate priority.</li>
+<li>To resume exploration music after battle, provide <code>&quot;combat&quot;: false</code> rules or other eligible fallback tracks.</li>
+<li>If you want contextual music to switch during an already-playing contextual song, choose <strong>Crossfade</strong> instead of <strong>Finish</strong>.</li>
+</ol>
+<p>A tag named <code>battle</code> alone <strong>does not</strong> create a battle event. Music Interface also supports an optional CobbleSafari music-coordination bridge; neither Cobblemon nor CobbleSafari is required for ordinary playback.</p>
+<h2>Settings explained</h2>
+<p>The in-game Cloth Config screen groups settings into <strong>Playback</strong>, <strong>Timing</strong>, <strong>Context</strong>, <strong>Library</strong> and <strong>Toast</strong>. Defaults below come from the 1.21.1 source configuration, not necessarily from an older user config file.</p>
+<table><thead><tr><th>Setting / JSON field</th><th>Default</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>customMusicEnabled</code></td><td><code>true</code></td><td>Master enable for Music Interface playback</td></tr>
+<tr><td><code>vanillaMusicEnabled</code></td><td><code>false</code></td><td>Let vanilla in-world music play</td></tr>
+<tr><td><code>allowMenuMusic</code></td><td><code>false</code></td><td>Let vanilla menu music play</td></tr>
+<tr><td><code>customMenuMusicEnabled</code></td><td><code>true</code></td><td>Enable custom title-screen music</td></tr>
+<tr><td><code>titleScreenTrackId</code></td><td><code>&quot;&quot;</code></td><td>Blank: library-based menu selection; filled: fixed track ID</td></tr>
+<tr><td><code>playbackMode</code></td><td><code>&quot;ambient&quot;</code></td><td><code>ambient</code> or <code>continuous</code></td></tr>
+<tr><td><code>customWeight</code></td><td><code>75</code></td><td>Custom/vanilla scheduling weighting when both are enabled; not the per-track <code>weight</code></td></tr>
+<tr><td><code>strictExclusiveMusic</code></td><td><code>false</code></td><td>Avoid starting custom music while other music is already playing</td></tr>
+<tr><td><code>contextMusicEnabled</code></td><td><code>true</code></td><td>Enable context-aware autoplay</td></tr>
+<tr><td><code>contextTransitionMode</code></td><td><code>&quot;finish&quot;</code></td><td><code>finish</code> or <code>crossfade</code></td></tr>
+<tr><td><code>contextFallbackMode</code></td><td><code>&quot;library&quot;</code></td><td><code>library</code> or <code>dedicated</code></td></tr>
+<tr><td><code>cobblemonBattleMode</code></td><td><code>&quot;external&quot;</code></td><td><code>external</code> or <code>context</code></td></tr>
+<tr><td><code>delayMinSeconds</code> / <code>delayMaxSeconds</code></td><td><code>15</code> / <code>90</code></td><td>Ambient interval range in a world</td></tr>
+<tr><td><code>worldJoinSilenceSeconds</code></td><td><code>10</code></td><td>Initial world-entry silence</td></tr>
+<tr><td><code>crossfadeSeconds</code></td><td><code>4</code></td><td>Transition duration (UI range 0–10 seconds)</td></tr>
+<tr><td><code>persistQueue</code></td><td><code>true</code></td><td>Save pending manual queue across starts</td></tr>
+<tr><td><code>hideDisabledTracks</code></td><td><code>false</code></td><td>Hide disabled tracks from library display</td></tr>
+<tr><td><code>stopMusicOnDeath</code></td><td><code>false</code></td><td>Stop Music Interface playback when the player dies</td></tr>
+<tr><td><code>historySize</code></td><td><code>10</code></td><td>Recent tracks retained in history</td></tr>
+<tr><td><code>playerListMode</code></td><td><code>false</code></td><td>Grid when false; list when true</td></tr>
+<tr><td><code>playerHomeSortMode</code></td><td><code>&quot;default&quot;</code></td><td>Default order or alphabetical</td></tr>
+<tr><td><code>playerFavoritesSortMode</code></td><td><code>&quot;recent&quot;</code></td><td>Recent or alphabetical favorites</td></tr>
+<tr><td><code>toastEnabled</code></td><td><code>true</code></td><td>Display Now Playing toasts</td></tr>
+<tr><td><code>toastShowAuthor</code> / <code>toastShowAlbum</code></td><td><code>true</code> / <code>true</code></td><td>Include these metadata lines</td></tr>
+<tr><td><code>toastPosition</code></td><td><code>TOP_RIGHT</code></td><td><code>TOP_RIGHT</code> or <code>BOTTOM_RIGHT</code></td></tr>
+<tr><td><code>toastAnimation</code></td><td><code>SLIDE</code></td><td><code>SLIDE</code>, <code>FADE</code> or <code>NONE</code></td></tr>
+<tr><td><code>toastAnimInMs</code> / <code>toastAnimOutMs</code></td><td><code>250</code> / <code>250</code></td><td>Toast entrance and exit durations</td></tr>
+</tbody></table>
+<p><strong>Two different weights:</strong> a track's <code>weight</code> affects selection relative to other tracks. <code>customWeight</code> changes the balance between Music Interface and Minecraft's vanilla music.</p>
+<h2>Files and privacy</h2>
+<p>The following files live under the current Minecraft instance's <code>config/musicinterface/</code> folder:</p>
+<table><thead><tr><th>File</th><th>Contents</th></tr></thead><tbody>
+<tr><td><code>config.json</code></td><td>Playback, context, menu, queue, toast and UI options</td></tr>
+<tr><td><code>favorites.json</code></td><td>Favorite track IDs</td></tr>
+<tr><td><code>disabled_tracks.json</code></td><td>Manually disabled track IDs</td></tr>
+<tr><td><code>playlists.json</code></td><td>User playlists and their track IDs</td></tr>
+<tr><td><code>queue.json</code></td><td>Saved manual queue, when persistence is enabled</td></tr>
+<tr><td><code>music_profile.json</code></td><td>Local listening counts, times and preferences</td></tr>
+</tbody></table>
+<p>Recent listening <strong>History</strong> is a separate in-memory list, not a long-term disk log. Back up your config directory before reinstalling, migrating instances or resetting statistics. The profile remains local; its code does not upload usage telemetry.</p>
+        </section>
+
+        <section class="tab-panel" id="commands" data-panel="commands">
+          <div class="page-heading">
+            <span class="page-kicker">Client and multiplayer</span>
+            <h1>Commands</h1>
+            <p class="page-description">Client-side commands, diagnostics and permission-protected server music controls.</p>
+          </div>
+          <h2>Commands and multiplayer</h2>
+<p><strong>Distinguish client-local commands from administrator commands.</strong> A local player command does not imply that every multiplayer server allows the same literal syntax.</p>
+<h3>Client-side commands</h3>
+<table><thead><tr><th>Command</th><th>Where defined</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>/musicinterface_diagnostics</code></td><td>Fabric and NeoForge clients</td><td>Show loaded Music Pack counts, duplicate IDs, warnings and menu music state</td></tr>
+<tr><td><code>/musicinterface_open_resourcepacks</code></td><td>Fabric and NeoForge clients</td><td>Open the resourcepacks folder</td></tr>
+<tr><td><code>/musicinterface_import_playlist &lt;code&gt;</code></td><td>Fabric and NeoForge clients</td><td>Import a playlist share code</td></tr>
+<tr><td><code>/musicinterface_import_shared &lt;token&gt;</code></td><td>Fabric and NeoForge clients</td><td>Import a pending shared playlist token</td></tr>
+<tr><td><code>/musicgui</code></td><td>Fabric client registration</td><td>Open the player</td></tr>
+<tr><td><code>/musicinterface</code></td><td>NeoForge client registration</td><td>Open the player</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>NeoForge client registration</td><td>Show local diagnostics</td></tr>
+</tbody></table>
+<p>Client aliases can conflict with server command names in some setups. The local diagnostics alias is usually the clearest way to inspect a Music Pack.</p>
+<h3>Dedicated / integrated server command tree</h3>
+<p>These commands are registered on the server side with <strong>permission level 2</strong>. They require the relevant server installation; some actions also require compatible Music Interface clients.</p>
+<table><thead><tr><th>Command</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>/musicinterface</code></td><td>Request that the executing player's GUI opens</td></tr>
+<tr><td><code>/musicgui</code></td><td>GUI alias</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>Request client diagnostics</td></tr>
+<tr><td><code>/musicinterface list</code></td><td>List server-visible song IDs</td></tr>
+<tr><td><code>/musicinterface search &lt;text&gt;</code></td><td>Search server-visible song IDs</td></tr>
+<tr><td><code>/musicinterface play &lt;id&gt; &lt;targets&gt;</code></td><td>Request playback for selected players</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt;</code></td><td>Request a stop</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt; fade</code></td><td>Request a fade-out stop</td></tr>
+</tbody></table>
+<p>For example, <code>/musicinterface play route_01 @a</code> sends the track request to all eligible players, <strong>if</strong> the server knows <code>route_01</code> and those clients have the corresponding music resource. The command does not transmit the OGG file. In single-player and multiplayer, permission and command registration may differ.</p>
+        </section>
+
+        <section class="tab-panel" id="musicpacks" data-panel="musicpacks">
+          <div class="page-heading">
+            <span class="page-kicker">Resource pack creation</span>
+            <h1>Music Packs</h1>
+            <p class="page-description">Step-by-step audio, JSON, cover art, moods, contexts and Cobblemon battle music examples.</p>
+          </div>
+          <p><strong>A beginner-friendly guide to adding your own songs, cover art and music for specific situations in Minecraft.</strong></p>
+<p>Music Interface reads music from a standard Minecraft <strong>resource pack</strong>. You do not need to program a mod. The track metadata format works on Fabric and NeoForge, but vanilla resource-pack compatibility metadata must match the Minecraft version you use.</p>
+<p>For the player, settings, queues, playlists and Radio, see the <a href="#overview" data-tab-link="overview">complete user guide</a>.</p>
+<h2>Quick answers</h2>
+<ul>
+<li><strong>Where are songs assigned to events?</strong> In a track's <code>contexts</code> field or optional <code>music_contexts.json</code>.</li>
+<li><strong>Are tags enough for battle music?</strong> No. <code>tags</code>, <code>genres</code> and <code>moods</code> describe songs for Radio and recommendations; they do not trigger events.</li>
+<li><strong>How do I pick one menu theme?</strong> Enter its song <code>id</code> in the <strong>Title-screen track ID</strong> setting. Blank allows automatic menu selection.</li>
+<li><strong>How does Cobblemon music work?</strong> Set <strong>Cobblemon Battle Music</strong> to <strong>Context</strong> and use a <code>combat: true</code> context rule.</li>
+<li><strong>Can I combine packs?</strong> Yes, including folders and ZIP files. Keep song IDs unique.</li>
+</ul>
+<h2>1. Create the pack folder</h2>
+<p>Open the folder of your Minecraft <strong>instance</strong>, then create <code>My Music Pack</code> inside its <code>resourcepacks/</code> directory:</p>
+<pre><code class="language-text">.minecraft/
+└── resourcepacks/
+    └── My Music Pack/
+        ├── pack.mcmeta
+        ├── pack.png                         (optional)
+        └── assets/
+            └── musicinterface/
+                ├── music_data.json
+                ├── music_contexts.json      (optional)
+                ├── sounds.json
+                ├── sounds/
+                │   └── custom/
+                │       ├── route_01.ogg
+                │       └── battle_theme.ogg
+                └── textures/
+                    └── covers/
+                        ├── route_01.png
+                        └── battle_theme.png</code></pre>
+<p><strong>Exact spelling matters.</strong> Music Interface reads the namespace <code>assets/musicinterface/</code>. Use lowercase names without spaces or accents for resource paths.</p>
+<h3>Easier option: generate a template</h3>
+<p>Open the Music Interface player and use its <strong>template generation</strong> control (hover for the tooltip). The mod creates <code>resourcepacks/MusicInterface Template/</code> with folders, basic JSON and an example cover. It <strong>does not overwrite existing template files</strong>.</p>
+<p>Replace the example track with your own OGG, then update its paths and IDs. The generated <code>pack.mcmeta</code> is a baseline example that may require changes for your Minecraft version.</p>
+<h2>2. Set up pack.mcmeta</h2>
+<p>Minecraft reads <code>pack.mcmeta</code> before enabling a resource pack. The project generator uses this for the <strong>Minecraft 1.21.1 baseline</strong>:</p>
+<pre><code class="language-json">{
+  &quot;pack&quot;: {
+    &quot;pack_format&quot;: 34,
+    &quot;description&quot;: &quot;My Music Pack for Music Interface&quot;
+  }
+}</code></pre>
+<p><strong>Do not copy <code>pack_format: 34</code> blindly to 1.21.4, 1.21.11 or 26.x.</strong> Resource-pack metadata changes between Minecraft versions. Some versions also require different/additional format fields. Use the requirements for your <strong>exact Minecraft version</strong>. The music metadata documented below is independent of Fabric versus NeoForge.</p>
+<p>If Minecraft reports that the pack is incompatible, fix <code>pack.mcmeta</code> first.</p>
+<h2>3. Add OGG files</h2>
+<p>Put your song here:</p>
+<pre><code class="language-text">assets/musicinterface/sounds/custom/route_01.ogg</code></pre>
+<p>Use actual <strong>OGG audio</strong>, not an MP3 renamed to OGG. Short, consistent file names are easiest to manage.</p>
+<h2>4. Register sounds in sounds.json</h2>
+<p>Minecraft needs a sound event entry for each OGG. Save this file as <code>assets/musicinterface/sounds.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;custom/route_01&quot;: {
+    &quot;sounds&quot;: [
+      {
+        &quot;name&quot;: &quot;musicinterface:custom/route_01&quot;,
+        &quot;stream&quot;: true
+      }
+    ]
+  },
+  &quot;custom/battle_theme&quot;: {
+    &quot;sounds&quot;: [
+      {
+        &quot;name&quot;: &quot;musicinterface:custom/battle_theme&quot;,
+        &quot;stream&quot;: true
+      }
+    ]
+  }
+}</code></pre>
+<p>The event <code>musicinterface:custom/route_01</code> points to <code>assets/musicinterface/sounds/custom/route_01.ogg</code>. Omit the file extension and the <code>sounds/</code> folder from the JSON name. Keep <code>&quot;stream&quot;: true</code> for long music.</p>
+<h2>5. Register tracks in music_data.json</h2>
+<p>Save a <strong>JSON array</strong> inside <code>assets/musicinterface/music_data.json</code>. Here are two tracks:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: &quot;route_01&quot;,
+    &quot;title&quot;: &quot;Route 01&quot;,
+    &quot;author&quot;: &quot;Your Name&quot;,
+    &quot;album&quot;: &quot;Exploration&quot;,
+    &quot;sound&quot;: &quot;musicinterface:custom/route_01&quot;,
+    &quot;cover&quot;: &quot;musicinterface:textures/covers/route_01.png&quot;,
+    &quot;enabled&quot;: true,
+    &quot;weight&quot;: 1,
+    &quot;genres&quot;: [&quot;ambient&quot;],
+    &quot;moods&quot;: [&quot;calm&quot;],
+    &quot;tags&quot;: [&quot;overworld&quot;, &quot;exploration&quot;],
+    &quot;energy&quot;: 0.3,
+    &quot;contexts&quot;: [
+      {
+        &quot;combat&quot;: false,
+        &quot;priority&quot;: 10
+      }
+    ]
+  },
+  {
+    &quot;id&quot;: &quot;battle_theme&quot;,
+    &quot;title&quot;: &quot;Battle Theme&quot;,
+    &quot;author&quot;: &quot;Your Name&quot;,
+    &quot;album&quot;: &quot;Battles&quot;,
+    &quot;sound&quot;: &quot;musicinterface:custom/battle_theme&quot;,
+    &quot;cover&quot;: &quot;musicinterface:textures/covers/battle_theme.png&quot;,
+    &quot;enabled&quot;: true,
+    &quot;weight&quot;: 2,
+    &quot;genres&quot;: [&quot;orchestral&quot;],
+    &quot;moods&quot;: [&quot;intense&quot;],
+    &quot;tags&quot;: [&quot;battle&quot;, &quot;combat&quot;],
+    &quot;energy&quot;: 0.9,
+    &quot;contexts&quot;: [
+      {
+        &quot;combat&quot;: true,
+        &quot;priority&quot;: 100
+      }
+    ]
+  }
+]</code></pre>
+<p><code>route_01</code> can match when no battle is active; <code>battle_theme</code> can match while a compatible Cobblemon battle is active. <strong>You still need to enable Cobblemon's Context mode in settings</strong>, as explained below.</p>
+<h3>Track fields</h3>
+<table><thead><tr><th>Field</th><th>Type</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>id</code></td><td>string</td><td>Unique song identifier, required</td></tr>
+<tr><td><code>sound</code></td><td>resource ID</td><td>Registered sound event, required</td></tr>
+<tr><td><code>title</code></td><td>string</td><td>Display title; defaults to ID</td></tr>
+<tr><td><code>author</code> / <code>album</code></td><td>strings</td><td>Artist and collection</td></tr>
+<tr><td><code>cover</code></td><td>resource ID</td><td>PNG cover; optional, fallback if missing</td></tr>
+<tr><td><code>enabled</code></td><td>boolean</td><td>Initially enabled, default <code>true</code></td></tr>
+<tr><td><code>weight</code></td><td>integer</td><td>Relative weight in random order, minimum/default <code>1</code></td></tr>
+<tr><td><code>genres</code> / <code>moods</code> / <code>tags</code></td><td>string or string array</td><td>Descriptive labels for Radio, mixes and recommendations</td></tr>
+<tr><td><code>energy</code></td><td>number</td><td>Radio energy similarity, clamped <code>0.0</code> to <code>1.0</code>, default <code>0.5</code></td></tr>
+<tr><td><code>cooldown</code></td><td>integer</td><td>Seconds before repeat eligibility in autoplay, default <code>0</code></td></tr>
+<tr><td><code>volume</code></td><td>number</td><td>Track volume multiplier, clamped <code>0.0</code> to <code>1.0</code>, default <code>1.0</code></td></tr>
+<tr><td><code>fade_in</code> / <code>fade_out</code></td><td>integers</td><td>Optional per-track fade durations in seconds</td></tr>
+<tr><td><code>context_fallback</code></td><td>boolean</td><td>Included in <strong>Dedicated</strong> fallback, default <code>false</code></td></tr>
+<tr><td><code>contexts</code></td><td>object or array</td><td>Rules controlling contextual autoplay</td></tr>
+<tr><td><code>duration</code></td><td>string</td><td>Accepted optional metadata; not required for playback timing</td></tr>
+</tbody></table>
+<p>Optional fields can be omitted. Simple older track definitions remain valid in the 2.0 parser.</p>
+<p>Use consistent labels, such as <code>calm</code> or <code>orchestral</code>, across your library to make Radio similarity useful. No fixed genre, mood or tag vocabulary is required.</p>
+<h2>Tags vs contexts</h2>
+<p>A tag answers <strong>&quot;what kind of music is this?&quot;</strong> A context answers <strong>&quot;when can the scheduler choose it?&quot;</strong></p>
+<pre><code class="language-json">{
+  &quot;tags&quot;: [&quot;battle&quot;, &quot;boss&quot;],
+  &quot;contexts&quot;: [
+    {
+      &quot;combat&quot;: true,
+      &quot;priority&quot;: 100
+    }
+  ]
+}</code></pre>
+<p>This block shows <strong>fields within a track</strong>, not a standalone <code>music_data.json</code> file. Only <code>contexts</code> creates the battle condition; <code>tags</code> helps with similarity.</p>
+<h3>Context rule fields</h3>
+<table><thead><tr><th>Field</th><th>Example</th><th>Behavior</th></tr></thead><tbody>
+<tr><td><code>priority</code></td><td><code>100</code></td><td>Highest matching numeric priority wins; default <code>0</code></td></tr>
+<tr><td><code>dimensions</code></td><td><code>[&quot;minecraft:overworld&quot;]</code></td><td>Dimension identifiers</td></tr>
+<tr><td><code>biomes</code></td><td><code>[&quot;minecraft:plains&quot;]</code></td><td>Biome identifiers</td></tr>
+<tr><td><code>biome_tags</code></td><td><code>[&quot;#minecraft:is_forest&quot;]</code></td><td>Biome tag IDs; <code>#</code> prefix accepted</td></tr>
+<tr><td><code>time</code></td><td><code>[&quot;day&quot;]</code></td><td><code>day</code> or <code>night</code></td></tr>
+<tr><td><code>weather</code></td><td><code>[&quot;clear&quot;, &quot;rain&quot;]</code></td><td><code>clear</code>, <code>rain</code> or <code>thunder</code></td></tr>
+<tr><td><code>combat</code></td><td><code>true</code></td><td>Boolean: supported Cobblemon combat active or inactive</td></tr>
+</tbody></table>
+<p>For list properties, you may use a single string or an array. Multiple values <strong>in one property</strong> mean OR; different properties <strong>in one rule</strong> must all match (AND). Several rule objects represent alternative situations.</p>
+<p>For example, this rule matches <strong>rain or thunder, at night, on plains in the Overworld, outside combat</strong>:</p>
+<pre><code class="language-json">{
+  &quot;dimensions&quot;: [&quot;minecraft:overworld&quot;],
+  &quot;biomes&quot;: [&quot;minecraft:plains&quot;],
+  &quot;time&quot;: [&quot;night&quot;],
+  &quot;weather&quot;: [&quot;rain&quot;, &quot;thunder&quot;],
+  &quot;combat&quot;: false,
+  &quot;priority&quot;: 30
+}</code></pre>
+<p><strong>Priority is explicit:</strong> a more specific rule is not automatically stronger than a general rule. A missing <code>contexts</code> rule does not restrict a song to any particular biome. Unrestricted/legacy songs can remain eligible during library fallback.</p>
+<h2>6. Ambient / exploration music</h2>
+<p>Put this property into an exploration track:</p>
+<pre><code class="language-json">&quot;contexts&quot;: [
+  {
+    &quot;combat&quot;: false,
+    &quot;priority&quot;: 10
+  }
+]</code></pre>
+<p>To select forest music, add <code>&quot;biomes&quot;: [&quot;minecraft:forest&quot;]</code> inside that rule. For time or weather, add <code>time</code> or <code>weather</code>.</p>
+<p><strong>Ambient</strong> is also a global playback mode: it can leave a delay between tracks. It is not a special tag or context value. <strong>Continuous</strong> removes the intentional delay.</p>
+<h2>7. Cobblemon battle music</h2>
+<p>For a song meant to play during a detected battle:</p>
+<pre><code class="language-json">&quot;contexts&quot;: [
+  {
+    &quot;combat&quot;: true,
+    &quot;priority&quot;: 100
+  }
+]</code></pre>
+<p>Also configure the mod:</p>
+<ol>
+<li>Install compatible Cobblemon for the loader/game version, where available.</li>
+<li>Turn <strong>Context Music</strong> on in Music Interface.</li>
+<li>Set <strong>Cobblemon Battle Music</strong> to <strong>Context</strong>. Its default <strong>External</strong> mode suspends Music Interface music while a Cobblemon battle is detected.</li>
+<li>Select <strong>Context Transition: Crossfade</strong> if you want an already-playing <em>context-managed</em> song to change during context switches. Default <strong>Finish</strong> allows it to finish.</li>
+<li>Provide non-combat tracks, or a fallback library, for when battles end.</li>
+</ol>
+<p>The integration observes supported Cobblemon battle events, not arbitrary Minecraft damage or other combat mods. A manual track, pending queue, Radio or playlist may take priority over context autoplay.</p>
+<h2>8. Title-screen music</h2>
+<p>A menu track is assigned <strong>through player settings</strong>, not by adding a <code>menu</code> tag:</p>
+<ol>
+<li>Add your menu song to <code>music_data.json</code> and <code>sounds.json</code>, with ID <code>main_menu_theme</code>.</li>
+<li>In Music Interface settings, enable <strong>Custom Menu Music</strong>.</li>
+<li>Set <strong>Title-screen track ID</strong> to <code>main_menu_theme</code>.</li>
+</ol>
+<p>A <strong>blank</strong> title-screen track ID lets the mod choose automatically from the library on the title screen. To stop custom title-screen music, turn <strong>Custom Menu Music</strong> <strong>off</strong>. The <strong>Allow Vanilla Menu Music</strong> switch only controls Minecraft's own music. In-world context filtering is not applied to title-screen selection.</p>
+<h2>9. Optional music_contexts.json</h2>
+<p>If you prefer to keep context rules separate from song metadata, create <code>assets/musicinterface/music_contexts.json</code>. A JSON <strong>object keyed by track ID</strong> is supported:</p>
+<pre><code class="language-json">{
+  &quot;route_01&quot;: [
+    {
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 10
+    },
+    {
+      &quot;biomes&quot;: [&quot;minecraft:forest&quot;],
+      &quot;time&quot;: [&quot;day&quot;],
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 30
+    }
+  ],
+  &quot;battle_theme&quot;: [
+    {
+      &quot;combat&quot;: true,
+      &quot;priority&quot;: 100
+    }
+  ]
+}</code></pre>
+<p>An <strong>array of rules</strong> is also supported:</p>
+<pre><code class="language-json">[
+  {
+    &quot;track&quot;: &quot;route_01&quot;,
+    &quot;combat&quot;: false,
+    &quot;priority&quot;: 10
+  },
+  {
+    &quot;track&quot;: &quot;battle_theme&quot;,
+    &quot;combat&quot;: true,
+    &quot;priority&quot;: 100
+  }
+]</code></pre>
+<p>External rules are <strong>added to</strong> a track's inline rules. When multiple packs supply external rules for the same track ID, the higher-priority pack's external definition wins. A reference to an unknown track ID produces a warning.</p>
+<p>For simple packs, choose either inline <code>contexts</code> <strong>or</strong> <code>music_contexts.json</code>, to avoid duplicating rules unintentionally.</p>
+<h2>10. Fallback when nothing matches</h2>
+<p>In <strong>Context Fallback</strong> settings, select:</p>
+<ul>
+<li><strong>Library</strong> (default): choose from available tracks if no explicit context matches.</li>
+<li><strong>Dedicated</strong>: choose only songs marked <code>&quot;context_fallback&quot;: true</code> if no rule matches.</li>
+</ul>
+<p>Example <strong>single track</strong> for the <code>music_data.json</code> array:</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;route_01&quot;,
+  &quot;title&quot;: &quot;Route 01&quot;,
+  &quot;sound&quot;: &quot;musicinterface:custom/route_01&quot;,
+  &quot;context_fallback&quot;: true,
+  &quot;contexts&quot;: [
+    {
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 10
+    }
+  ]
+}</code></pre>
+<h2>11. Covers, pack priority and reload</h2>
+<p>Place covers under <code>assets/musicinterface/textures/covers/</code> and reference them by resource ID:</p>
+<pre><code class="language-json">&quot;cover&quot;: &quot;musicinterface:textures/covers/route_01.png&quot;</code></pre>
+<p><strong>Toast colors:</strong> the Now Playing toast automatically samples its border accent from the track's cover artwork. If no usable cover is available, it uses a built-in fallback accent. There is no setting or Music Pack JSON field for choosing an arbitrary outline color.</p>
+<p>Enable the folder or ZIP pack in Minecraft's <strong>Resource Packs</strong> menu. After editing, press <code>F3+T</code>. Music Interface rebuilds the track list from active packs; it does not accumulate old definitions.</p>
+<p>When two packs define the same <code>id</code>, the higher-priority pack wins. Prefer stable, unique IDs: playlists and favorites store these IDs.</p>
+<p>Use the local <code>/musicinterface_diagnostics</code> client command to see active packs, duplicate IDs, missing audio events, missing covers and parse warnings. NeoForge also registers <code>/musicinterface diagnostics</code> locally; a server command with the same name may require administrator permissions.</p>
+<h2>12. Common problems</h2>
+<table><thead><tr><th>Problem</th><th>What to check</th></tr></thead><tbody>
+<tr><td>Minecraft says the pack is incompatible</td><td>Edit <code>pack.mcmeta</code> for the exact game version</td></tr>
+<tr><td>Nothing appears</td><td>Correct namespace and JSON array, enable pack, press <code>F3+T</code></td></tr>
+<tr><td>Song shows but does not play</td><td>Actual OGG, exact <code>sounds.json</code> event and <code>music_data.json</code> <code>sound</code></td></tr>
+<tr><td>Wrong/missing cover</td><td>Check PNG and <code>cover</code> resource path</td></tr>
+<tr><td>Battle tag does nothing</td><td>Add <code>combat: true</code> context and select Cobblemon Battle Music <code>context</code></td></tr>
+<tr><td>Track plays at the wrong time</td><td>Check matching rules, numerical priority, fallback and active playback source</td></tr>
+<tr><td>Context does not interrupt</td><td>Default transition is <code>finish</code>; <code>crossfade</code> only affects contextual playback</td></tr>
+<tr><td>Blank title ID plays music</td><td>Expected: blank means library-based selection</td></tr>
+<tr><td>Same ID exists in two packs</td><td>Rename an ID or change resource-pack order</td></tr>
+<tr><td>No music after joining world</td><td>World-entry silence and Ambient delay may still be active</td></tr>
+<tr><td>Template marked incompatible on another version</td><td>Adapt baseline <code>pack.mcmeta</code> to that game version</td></tr>
+</tbody></table>
+<p><strong>Advice:</strong> start with one OGG and one JSON entry, make it play, then add contexts and metadata. Keep permissions for the recordings and artwork you distribute.</p>
+        </section>
+
+        <section class="tab-panel" id="troubleshooting" data-panel="troubleshooting">
+          <div class="page-heading">
+            <span class="page-kicker">Support and diagnostics</span>
+            <h1>Troubleshooting</h1>
+            <p class="page-description">Troubleshoot silent tracks, missing covers, menu music, battle events and incompatible packs.</p>
+          </div>
+          <h2>Troubleshooting</h2>
+<table><thead><tr><th>Symptom</th><th>Check / solution</th></tr></thead><tbody>
+<tr><td>No tracks appear</td><td>Is the Music Pack enabled? Does it contain <code>assets/musicinterface/music_data.json</code> with a JSON array? Try <code>F3+T</code></td></tr>
+<tr><td>A track appears but stays silent</td><td>Check <code>.ogg</code> path, <code>sounds.json</code> event name, and <code>music_data.json</code> <code>sound</code> ID. Use diagnostics</td></tr>
+<tr><td>The cover is missing</td><td>Check the PNG file and exact <code>cover</code> resource location</td></tr>
+<tr><td>Two packs define the same song ID</td><td>Higher-priority pack wins; see diagnostics for duplicates</td></tr>
+<tr><td>Music doesn't start instantly on world join</td><td>Default world-entry silence is 10 seconds, plus possible Ambient scheduling gaps</td></tr>
+<tr><td>Music doesn't play in a Cobblemon battle</td><td>Set <code>cobblemonBattleMode</code> to <code>context</code> and provide matching <code>combat: true</code> rules. Default is <code>external</code></td></tr>
+<tr><td>A song tagged <code>battle</code> plays while exploring</td><td>Tags do not set event rules. Use a context rule and matching priorities</td></tr>
+<tr><td>A context doesn't interrupt the current song</td><td>Default transition is <code>finish</code>; choose <code>crossfade</code> for context-managed playback</td></tr>
+<tr><td>Menu music uses an unexpected track</td><td>Blank title-screen ID permits library selection; set a valid fixed track ID or disable custom menu music</td></tr>
+<tr><td>I can't open the settings screen</td><td>Check whether a compatible Cloth Config is installed</td></tr>
+<tr><td>The template pack is marked incompatible</td><td>Its baseline metadata uses <code>pack_format: 34</code>. Adapt <code>pack.mcmeta</code> to your Minecraft version</td></tr>
+<tr><td>Commands work in one loader but not the other</td><td>Check the <strong>client command</strong> versus <strong>server administrator command</strong> sections above</td></tr>
+</tbody></table>
+<p>When asking for help, provide the <strong>exact</strong> Minecraft version, loader, Music Interface JAR/version, relevant dependencies, steps to reproduce and <code>latest.log</code> excerpts (with private details removed).</p>
+<div class="hint hint-info"><strong>Need help?</strong><p>Join the <a href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">Our Story Network Discord</a> and include your Minecraft version, loader, Music Interface build, pack files and relevant logs.</p></div>
+        </section>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
