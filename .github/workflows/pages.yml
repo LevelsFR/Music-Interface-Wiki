@@ -41,6 +41,9 @@ jobs:
       - name: Build guides and search index
         run: node scripts/render-guides.mjs
 
+      - name: Generate standalone documentation pages
+        run: node scripts/render-pages.mjs
+
       - name: Check generated site
         run: |
           node --check site/app.js
