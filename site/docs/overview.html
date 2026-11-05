@@ -1,0 +1,89 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Music Interface | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Music Interface"><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Wiki home</a><a href="../fr/docs/overview.html" hreflang="fr">Français</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Back to wiki</a><div class="sidebar-title">On this page</div><nav class="guide-toc"><a class="toc-level-2" href="#how-do-i-get-music">How do I get music?</a>
+<a class="toc-level-2" href="#at-a-glance">At a glance</a>
+<a class="toc-level-2" href="#using-the-music-library">Using the music library</a>
+<a class="toc-level-3" href="#playlists-and-sharing">Playlists and sharing</a>
+<a class="toc-level-2" href="#queue-radio-and-made-for-you">Queue, Radio and Made for You</a>
+<a class="toc-level-3" href="#manual-queue">Manual queue</a>
+<a class="toc-level-3" href="#track-radio">Track Radio</a>
+<a class="toc-level-3" href="#made-for-you">Made for You</a>
+<a class="toc-level-3" href="#listening-profile">Listening profile</a>
+<a class="toc-level-2" href="#cobblemon-and-cobblesafari">Cobblemon and CobbleSafari</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+          <div class="page-heading">
+            <span class="page-kicker">Music Interface v2.0</span>
+            <h1>Music Interface</h1>
+            <p class="page-description">A customizable music player for Minecraft. Bring your own songs through resource packs, organize them and decide when they play.</p>
+          </div>
+          
+<div class="hint hint-info">
+  <strong>Important: Music Interface does NOT include any songs.</strong>
+  <p>Think of Music Interface as a music player and soundtrack manager, not a music pack or streaming service. It gives you a player, playlists, Radio, recommendations and rules for when songs play. <strong>You supply the audio yourself</strong> through Minecraft resource packs (Music Packs), or use a pack shared by a modpack or server creator. Installing the mod by itself leaves the library empty.</p>
+</div>
+<p><a href="../music-packs.html"><strong>Open the complete Music Pack tutorial →</strong></a> · <a href="../releases.html">Version history</a></p>
+<h2 id="how-do-i-get-music">How do I get music?</h2>
+<ol>
+  <li>Install the Music Interface mod for your Minecraft version and loader.</li>
+  <li><strong>Get a Music Pack:</strong> use one provided by a creator, or <a href="../#musicpacks" data-tab-link="musicpacks">make your own using the Music Pack guide</a>.</li>
+  <li>Place the Music Pack in your instance's <code>resourcepacks/</code> folder and enable it in Minecraft's Resource Packs menu.</li>
+  <li>Open Music Interface. Your tracks appear when the pack contains valid <code>music_data.json</code> and sound entries.</li>
+  <li>If the library is still empty, press <code>F3+T</code> or run <code>/musicinterface_diagnostics</code> and check the <a href="../#troubleshooting" data-tab-link="troubleshooting">FAQ</a>.</li>
+</ol>
+<p><strong>Vanilla music is separate:</strong> Minecraft's built-in soundtrack is not automatically imported into the Music Interface track list. Installing another music-playing mod does not add its library to Music Interface either.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<ul><li>Complete library with favorites, artists, albums, playlists, search and a queue.</li>
+<li>Radio and four personal Smart Mixes: For You, On Repeat, Rediscover and Current Context.</li>
+<li>Menu, ambient, day/night, weather, dimension, biome and optional battle music.</li>
+<li>Public Music Pack format; no Java development needed to add songs.</li></ul>
+<h2 id="using-the-music-library">Using the music library</h2>
+<p>The player has a home library, search, <strong>grid/list display</strong>, <strong>Favorites</strong>, <strong>Albums</strong>, <strong>Artists</strong>, <strong>Playlists</strong>, <strong>History</strong>, <strong>Queue</strong> and <strong>Made for You</strong>.</p>
+<ul>
+<li><strong>Play a track:</strong> choose it in the library. The player offers play/pause, previous, next and stop controls.</li>
+<li><strong>Find a track:</strong> search or browse albums and authors. Use the home/favorites sorting controls where shown.</li>
+<li><strong>Favorite a track:</strong> use the favorite control. Favorites are saved locally and can be played as a collection, in order or shuffled.</li>
+<li><strong>Disable a track:</strong> use the track's available action. Disabled tracks are excluded from automatic selection. The library can optionally hide them.</li>
+<li><strong>Repeat:</strong> the repeat control cycles between <strong>Off</strong>, <strong>Playlist</strong> and <strong>Track</strong>.</li>
+<li><strong>Playlists:</strong> create, rename and delete playlists, manage their tracks and order, and play in order or shuffle.</li>
+<li><strong>History:</strong> displays a recent-track list with a configurable maximum size. This UI history is separate from the long-term listening statistics.</li>
+</ul>
+<p>When a song starts, Music Interface can display a <strong>Now Playing</strong> toast with the cover, artist and album. The toast's <strong>outer border accent is derived automatically from the track cover's dominant color</strong>, with a built-in fallback color if no usable cover is available. Position, animation and displayed metadata are configurable; <strong>there is no separate setting for manually choosing the border color</strong>.</p>
+<h3 id="playlists-and-sharing">Playlists and sharing</h3>
+<p>The playlist view offers <strong>Copy share code</strong>, <strong>Import from clipboard</strong> and <strong>Share in chat</strong> actions. A share code contains a playlist name and track IDs, <strong>not audio files</strong>. The recipient therefore needs packs containing those song IDs for those entries to play. Client/server-supported sharing requires the appropriate Music Interface networking to be present.</p>
+<p>Use the on-screen playlist controls for creation, editing and track management. A code import creates a local playlist; it does not download missing OGG files.</p>
+<h2 id="queue-radio-and-made-for-you">Queue, Radio and Made for You</h2>
+<h3 id="manual-queue">Manual queue</h3>
+<p>Open a song's actions, then select:</p>
+<ul>
+<li><strong>Play Next:</strong> insert that song at the front of the pending manual queue.</li>
+<li><strong>Add to Queue:</strong> append it at the end.</li>
+<li><strong>Play Now:</strong> start it immediately instead of waiting for its queued turn.</li>
+</ul>
+<p>The <strong>Queue</strong> screen lets you move songs up/down, drag to reorder, remove an entry, clear the queue, and <strong>Save as Playlist</strong>. The <code>persistQueue</code> setting controls whether the queue is saved to <code>queue.json</code>. It is enabled by default.</p>
+<p>When the scheduler selects the next song, <strong>manual queue entries take precedence</strong>, followed by the active repeat/Radio/playlist flow and then normal autoplay as appropriate. Stop and manual playback actions can change the current playback source.</p>
+<h3 id="track-radio">Track Radio</h3>
+<p>Open a song's actions and choose <strong>Start Radio</strong>. This keeps a starting song as the reference for choosing related tracks. Similarity considers:</p>
+<ul>
+<li>shared <code>tags</code>, <code>genres</code> and <code>moods</code>;</li>
+<li>artist, album and source Music Pack;</li>
+<li>approximate energy level;</li>
+<li>favorites and locally learned listening preferences.</li>
+</ul>
+<p>Radio continues selecting tracks while active and candidates are available. Choose <strong>Stop Radio</strong> from the track action screen to return to the normal playback flow. <strong>Radio is not the same as context-triggered playback</strong>.</p>
+<h3 id="made-for-you">Made for You</h3>
+<p>Open <strong>Made for You</strong> in the player. It offers four automatically generated collections:</p>
+<table><thead><tr><th>Mix</th><th>How tracks are selected</th></tr></thead><tbody>
+<tr><td><strong>For You</strong></td><td>Ranks tracks using favorites, listening history and shared metadata; starts with general choices if no habits exist</td></tr>
+<tr><td><strong>On Repeat</strong></td><td>Tracks played most often</td></tr>
+<tr><td><strong>Rediscover</strong></td><td>Previously played tracks whose last play was at least seven days ago</td></tr>
+<tr><td><strong>Current Context</strong></td><td>Tracks eligible for the current in-game situation, ordered with listening history as a preference</td></tr>
+</tbody></table>
+<p>Each mix has <strong>Play</strong> and <strong>Shuffle</strong> actions. Collections evolve as your library, favorites, context and local profile change. They are not server-synced recommendations.</p>
+<h3 id="listening-profile">Listening profile</h3>
+<p>The profile presents total listening time, plays, favorites, tracks, top songs and habits such as artists, albums, packs, biomes, dimensions, time and weather. The data is stored <strong>locally</strong>. The source code does not synchronize it to a server or send telemetry.</p>
+<p>The profile also provides separate reset actions for <strong>statistics</strong>, <strong>recommendations</strong>, and <strong>recent history</strong>. Be deliberate: a reset cannot be assumed reversible without a backup.</p>
+<h2 id="cobblemon-and-cobblesafari">Cobblemon and CobbleSafari</h2>
+<p>These integrations are <strong>optional</strong>, client-side compatibility paths. Music Interface should remain functional without either mod.</p>
+<ul>
+<li><strong>Cobblemon:</strong> a compatible battle event toggles Music Interface's combat context. <code>external</code> mode suspends Music Interface's runtime for the battle; <code>context</code> mode allows the scheduler to use combat rules.</li>
+<li><strong>CobbleSafari:</strong> a compatibility bridge detects when CobbleSafari claims music playback, so Music Interface can coordinate music ownership rather than blindly overlapping it.</li>
+</ul>
+<p>Availability depends on the installed companion mod, the Minecraft version and working integrations. Do not assume battle integration is available on every source target just because Music Interface itself builds.</p>
+        </div><p class="guide-footer"><a href="../">← Back to wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

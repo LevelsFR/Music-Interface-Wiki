@@ -1,0 +1,100 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Configuration | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Configuration"><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Wiki home</a><a href="../fr/docs/configuration.html" hreflang="fr">Français</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Back to wiki</a><div class="sidebar-title">On this page</div><nav class="guide-toc"><a class="toc-level-2" href="#menu-ambient-and-contextual-playback">Menu, ambient and contextual playback</a>
+<a class="toc-level-3" href="#title-screen">Title screen</a>
+<a class="toc-level-3" href="#ambient-versus-continuous">Ambient versus Continuous</a>
+<a class="toc-level-3" href="#context-selection">Context selection</a>
+<a class="toc-level-3" href="#cobblemon-battles">Cobblemon battles</a>
+<a class="toc-level-2" href="#settings-explained">Settings explained</a>
+<a class="toc-level-2" href="#files-and-privacy">Files and privacy</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+          <div class="page-heading">
+            <span class="page-kicker">Playback and preferences</span>
+            <h1>Configuration</h1>
+            <p class="page-description">Control title-screen music, automatic scheduling, contexts, fades, notifications and locally saved data.</p>
+          </div>
+          <h2 id="menu-ambient-and-contextual-playback">Menu, ambient and contextual playback</h2>
+<p>Music Interface controls a custom playback scheduler. There are two complementary concepts:</p>
+<ul>
+<li><strong>Music metadata:</strong> <code>genres</code>, <code>moods</code>, <code>tags</code> and <code>energy</code> describe songs and assist Radio/Smart Mixes.</li>
+<li><strong>Music contexts:</strong> explicit rules in <code>music_data.json</code> or <code>music_contexts.json</code> tell the scheduler <em>when</em> a track is eligible. Supported conditions are <strong>dimension</strong>, <strong>biome</strong>, <strong>biome tag</strong>, <strong>day/night</strong>, <strong>weather</strong> and <strong>Cobblemon combat active/inactive</strong>.</li>
+</ul>
+<p>For actual JSON and fully working examples, see the <a href="../#musicpacks" data-tab-link="musicpacks">Music Pack guide</a>, or the <a href="../fr/music-packs.html" target="_blank" rel="noopener noreferrer">French Music Pack guide</a>.</p>
+<h3 id="title-screen">Title screen</h3>
+<p>The <code>customMenuMusicEnabled</code> option enables Music Interface music on the title screen (enabled by default).</p>
+<ul>
+<li>If <strong>Title-screen track ID</strong> is <strong>empty</strong>, eligible library songs can be selected automatically for the menu. Empty <strong>does not mean disabled</strong>.</li>
+<li>If the ID contains an existing track ID, that track is reserved for custom title-screen autoplay and is excluded from world autoplay.</li>
+<li>To stop <strong>custom</strong> title-screen music, switch <strong>Custom menu music</strong> off.</li>
+<li><strong>Allow vanilla menu music</strong> is separate and controls Minecraft's original menu soundtrack.</li>
+<li>Title-screen autoplay uses the menu selection path; <strong>in-world context filters are not applied on the title screen</strong>.</li>
+</ul>
+<h3 id="ambient-versus-continuous">Ambient versus Continuous</h3>
+<ul>
+<li><strong>Ambient</strong> (default): the scheduler can leave a configurable gap between songs in a world.</li>
+<li><strong>Continuous:</strong> no intentional between-track delay.</li>
+<li><strong>World join silence:</strong> waits after entering a world before scheduled music starts; default is 10 seconds.</li>
+</ul>
+<h3 id="context-selection">Context selection</h3>
+<ul>
+<li>A context rule matches when <strong>all its specified condition groups</strong> match. For a group accepting multiple values, <strong>any</strong> listed value may match.</li>
+<li>More than one rule can be attached to a track. A matching rule makes the track eligible.</li>
+<li>The scheduler selects from the <strong>highest matching numerical <code>priority</code></strong>. Greater specificity alone does not raise priority.</li>
+<li>If nothing matches, <strong>Library fallback</strong> (default) considers the normal available library, while <strong>Dedicated fallback</strong> restricts fallback to tracks marked <code>context_fallback: true</code>.</li>
+<li><strong>Finish</strong> (default) waits for the current track to finish after a context change. <strong>Crossfade</strong> can transition a track <strong>that the context scheduler started</strong>, when a different track is preferred.</li>
+<li>A manually chosen track, queue item, playlist or Radio source does not become a forced battle cue just because a rule exists.</li>
+<li>Track <code>cooldown</code> and disabled/failed tracks also affect automatic selection.</li>
+</ul>
+<h3 id="cobblemon-battles">Cobblemon battles</h3>
+<p>Cobblemon integration is optional. The <strong>Cobblemon Battle Music</strong> setting defaults to <strong>External</strong> so Music Interface yields control while a recognized battle is active.</p>
+<p>To let Music Interface select battle music:</p>
+<ol>
+<li>Install a compatible Cobblemon version for your Minecraft/loader, if one is available.</li>
+<li>In Music Interface settings, set <strong>Cobblemon Battle Music</strong> to <strong>Context</strong> (value <code>context</code>).</li>
+<li>Enable <strong>Context Music</strong>.</li>
+<li>Add tracks with a <code>&quot;combat&quot;: true</code> context rule and an appropriate priority.</li>
+<li>To resume exploration music after battle, provide <code>&quot;combat&quot;: false</code> rules or other eligible fallback tracks.</li>
+<li>If you want contextual music to switch during an already-playing contextual song, choose <strong>Crossfade</strong> instead of <strong>Finish</strong>.</li>
+</ol>
+<p>A tag named <code>battle</code> alone <strong>does not</strong> create a battle event. Music Interface also supports an optional CobbleSafari music-coordination bridge; neither Cobblemon nor CobbleSafari is required for ordinary playback.</p>
+<h2 id="settings-explained">Settings explained</h2>
+<p>The in-game Cloth Config screen groups settings into <strong>Playback</strong>, <strong>Timing</strong>, <strong>Context</strong>, <strong>Library</strong> and <strong>Toast</strong>. Defaults below come from the 1.21.1 source configuration, not necessarily from an older user config file.</p>
+<table><thead><tr><th>Setting / JSON field</th><th>Default</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>customMusicEnabled</code></td><td><code>true</code></td><td>Master enable for Music Interface playback</td></tr>
+<tr><td><code>vanillaMusicEnabled</code></td><td><code>false</code></td><td>Let vanilla in-world music play</td></tr>
+<tr><td><code>allowMenuMusic</code></td><td><code>false</code></td><td>Let vanilla menu music play</td></tr>
+<tr><td><code>customMenuMusicEnabled</code></td><td><code>true</code></td><td>Enable custom title-screen music</td></tr>
+<tr><td><code>titleScreenTrackId</code></td><td><code>&quot;&quot;</code></td><td>Blank: library-based menu selection; filled: fixed track ID</td></tr>
+<tr><td><code>playbackMode</code></td><td><code>&quot;ambient&quot;</code></td><td><code>ambient</code> or <code>continuous</code></td></tr>
+<tr><td><code>customWeight</code></td><td><code>75</code></td><td>Custom/vanilla scheduling weighting when both are enabled; not the per-track <code>weight</code></td></tr>
+<tr><td><code>strictExclusiveMusic</code></td><td><code>false</code></td><td>Avoid starting custom music while other music is already playing</td></tr>
+<tr><td><code>contextMusicEnabled</code></td><td><code>true</code></td><td>Enable context-aware autoplay</td></tr>
+<tr><td><code>contextTransitionMode</code></td><td><code>&quot;finish&quot;</code></td><td><code>finish</code> or <code>crossfade</code></td></tr>
+<tr><td><code>contextFallbackMode</code></td><td><code>&quot;library&quot;</code></td><td><code>library</code> or <code>dedicated</code></td></tr>
+<tr><td><code>cobblemonBattleMode</code></td><td><code>&quot;external&quot;</code></td><td><code>external</code> or <code>context</code></td></tr>
+<tr><td><code>delayMinSeconds</code> / <code>delayMaxSeconds</code></td><td><code>15</code> / <code>90</code></td><td>Ambient interval range in a world</td></tr>
+<tr><td><code>worldJoinSilenceSeconds</code></td><td><code>10</code></td><td>Initial world-entry silence</td></tr>
+<tr><td><code>crossfadeSeconds</code></td><td><code>4</code></td><td>Transition duration (UI range 0–10 seconds)</td></tr>
+<tr><td><code>persistQueue</code></td><td><code>true</code></td><td>Save pending manual queue across starts</td></tr>
+<tr><td><code>hideDisabledTracks</code></td><td><code>false</code></td><td>Hide disabled tracks from library display</td></tr>
+<tr><td><code>stopMusicOnDeath</code></td><td><code>false</code></td><td>Stop Music Interface playback when the player dies</td></tr>
+<tr><td><code>historySize</code></td><td><code>10</code></td><td>Recent tracks retained in history</td></tr>
+<tr><td><code>playerListMode</code></td><td><code>false</code></td><td>Grid when false; list when true</td></tr>
+<tr><td><code>playerHomeSortMode</code></td><td><code>&quot;default&quot;</code></td><td>Default order or alphabetical</td></tr>
+<tr><td><code>playerFavoritesSortMode</code></td><td><code>&quot;recent&quot;</code></td><td>Recent or alphabetical favorites</td></tr>
+<tr><td><code>toastEnabled</code></td><td><code>true</code></td><td>Display Now Playing toasts</td></tr>
+<tr><td><code>toastShowAuthor</code> / <code>toastShowAlbum</code></td><td><code>true</code> / <code>true</code></td><td>Include these metadata lines</td></tr>
+<tr><td><code>toastPosition</code></td><td><code>TOP_RIGHT</code></td><td><code>TOP_RIGHT</code> or <code>BOTTOM_RIGHT</code></td></tr>
+<tr><td><code>toastAnimation</code></td><td><code>SLIDE</code></td><td><code>SLIDE</code>, <code>FADE</code> or <code>NONE</code></td></tr>
+<tr><td><code>toastAnimInMs</code> / <code>toastAnimOutMs</code></td><td><code>250</code> / <code>250</code></td><td>Toast entrance and exit durations</td></tr>
+</tbody></table>
+<p><strong>Two different weights:</strong> a track's <code>weight</code> affects selection relative to other tracks. <code>customWeight</code> changes the balance between Music Interface and Minecraft's vanilla music.</p>
+<h2 id="files-and-privacy">Files and privacy</h2>
+<p>The following files live under the current Minecraft instance's <code>config/musicinterface/</code> folder:</p>
+<table><thead><tr><th>File</th><th>Contents</th></tr></thead><tbody>
+<tr><td><code>config.json</code></td><td>Playback, context, menu, queue, toast and UI options</td></tr>
+<tr><td><code>favorites.json</code></td><td>Favorite track IDs</td></tr>
+<tr><td><code>disabled_tracks.json</code></td><td>Manually disabled track IDs</td></tr>
+<tr><td><code>playlists.json</code></td><td>User playlists and their track IDs</td></tr>
+<tr><td><code>queue.json</code></td><td>Saved manual queue, when persistence is enabled</td></tr>
+<tr><td><code>music_profile.json</code></td><td>Local listening counts, times and preferences</td></tr>
+</tbody></table>
+<p>Recent listening <strong>History</strong> is a separate in-memory list, not a long-term disk log. Back up your config directory before reinstalling, migrating instances or resetting statistics. The profile remains local; its code does not upload usage telemetry.</p>
+        </div><p class="guide-footer"><a href="../">← Back to wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

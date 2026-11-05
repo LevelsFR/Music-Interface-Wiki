@@ -1,0 +1,58 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Installation | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Installation"><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Wiki home</a><a href="../fr/docs/installation.html" hreflang="fr">Français</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Back to wiki</a><div class="sidebar-title">On this page</div><nav class="guide-toc"><a class="toc-level-2" href="#install-and-open-the-player">Install and open the player</a>
+<a class="toc-level-3" href="#what-you-need">What you need</a>
+<a class="toc-level-2" href="#compatibility-and-dependencies">Compatibility and dependencies</a>
+<a class="toc-level-3" href="#configured-source-targets">Configured source targets</a>
+<a class="toc-level-3" href="#root-minecraft-1211-metadata">Root Minecraft 1.21.1 metadata</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+          <div class="page-heading">
+            <span class="page-kicker">Getting started</span>
+            <h1>Installation</h1>
+            <p class="page-description">Install the correct Fabric or NeoForge build and set up your first music resource pack.</p>
+          </div>
+          <div class="hint hint-info"><strong>Why is my Music Interface library empty?</strong><p>This is normal after installing only the mod: <strong>no tracks are bundled</strong>. A Music Pack containing audio files and track definitions must be installed and enabled separately. The built-in template creates the folder structure and example JSON/cover, <strong>but no playable OGG song</strong>. <a href="../#musicpacks" data-tab-link="musicpacks">Follow the Music Pack tutorial</a> to add your first track.</p></div>
+          <div class="hint hint-warning"><strong>Choose the exact file for your setup.</strong><p>The source contains 9 Minecraft targets and two loaders. A configured target is not proof that every feature was tested in-game on that exact combination. Use the official release listing to choose the correct version and loader.</p></div><h2 id="install-and-open-the-player">Install and open the player</h2>
+<h3 id="what-you-need">What you need</h3>
+<ul>
+<li><strong>Minecraft:</strong> use one of the versions listed below, <strong>only if a compatible JAR has actually been released for it</strong>.</li>
+<li><strong>Loader:</strong> Fabric <strong>or</strong> NeoForge. Use the matching JAR, never both loaders' JARs together.</li>
+<li><strong>Java:</strong> Minecraft 1.21.x projects use Java 21; 26.x projects use Java 25.</li>
+<li><strong>Dependencies:</strong> install the matching loader dependencies. Do not mix dependency builds for different Minecraft versions.</li>
+<li><strong>Music Pack:</strong> required if you want to add your own songs; the mod itself does not provide your personal audio collection.</li>
+</ul>
+<ol>
+<li>Download the correct Music Interface JAR from <a href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer">CurseForge</a> or <a href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer">Modrinth</a>. Check the file's actual game version and loader.</li>
+<li>Install the dependencies shown on that file's release page and loader metadata.</li>
+<li>Place the JAR and dependency JARs in your Minecraft instance's <code>mods/</code> directory.</li>
+<li>Launch the game. Open the Music Interface player using its assigned keybind or in-game UI entry point. Check Minecraft's <strong>Controls</strong> menu if you need to find or change the keybind.</li>
+<li>Enable a Music Pack from Minecraft's <strong>Resource Packs</strong> screen. The library is filled from active packs.</li>
+</ol>
+<p><strong>Settings screen:</strong> Music Interface integrates with <strong>Cloth Config</strong>, when installed and compatible. Without Cloth Config, the mod still loads, but the in-game settings screen is not available through that integration. Advanced users can edit <code>config/musicinterface/config.json</code> while the game is closed.</p>
+<div class="hint hint-warning"><strong>Check the actual file metadata.</strong><p>One published CurseForge entry (<a href="https://www.curseforge.com/minecraft/mc-mods/music-interface/files/9004584">file 9004584</a>) is named <code>musicinterface-fabric-1.21.1-2.0.jar</code> but is tagged as Minecraft <code>1.21.5</code>. This is an inconsistency in the public listing, not proof of compatibility with either version. Check the JAR's loader metadata before installing it.</p></div>
+<h2 id="compatibility-and-dependencies">Compatibility and dependencies</h2>
+<h3 id="configured-source-targets">Configured source targets</h3>
+<table><thead><tr><th>Source project</th><th>Minecraft</th><th>Loader targets</th><th>Java</th></tr></thead><tbody>
+<tr><td>Repository root</td><td>1.21.1</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.4</code></td><td>1.21.4</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.5</code></td><td>1.21.5</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.8</code></td><td>1.21.8</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.10</code></td><td>1.21.10</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/1.21.11</code></td><td>1.21.11</td><td>Fabric / NeoForge</td><td>21</td></tr>
+<tr><td><code>versions/26.1</code></td><td>26.1</td><td>Fabric / NeoForge</td><td>25</td></tr>
+<tr><td><code>versions/26.2</code></td><td>26.2</td><td>Fabric / NeoForge</td><td>25</td></tr>
+<tr><td><code>versions/26.3</code></td><td>26.3</td><td>Fabric / NeoForge</td><td>25</td></tr>
+</tbody></table>
+<p>That is <strong>18 configured loader/version outputs</strong>. Targets are <strong>not</strong> evidence of verified release availability, binary compatibility, or runtime passing tests.</p>
+<h3 id="root-minecraft-1211-metadata">Root Minecraft 1.21.1 metadata</h3>
+<table><thead><tr><th>Loader</th><th>Dependency</th><th>Declared requirement</th></tr></thead><tbody>
+<tr><td>Fabric</td><td>Fabric Loader</td><td><code>&gt;=0.18.4</code></td></tr>
+<tr><td>Fabric</td><td>Fabric API</td><td>Required</td></tr>
+<tr><td>Fabric</td><td>Architectury API</td><td><code>&gt;=13.0.8</code></td></tr>
+<tr><td>Fabric</td><td>Java</td><td><code>&gt;=21</code></td></tr>
+<tr><td>Fabric</td><td>Minecraft</td><td><code>~1.21.1</code></td></tr>
+<tr><td>Fabric</td><td>Cloth Config</td><td>Suggested (<code>&gt;=15.0.140</code>)</td></tr>
+<tr><td>NeoForge</td><td>NeoForge</td><td><code>[21.1,21.2)</code></td></tr>
+<tr><td>NeoForge</td><td>Architectury API</td><td><code>[13.0.8,)</code></td></tr>
+<tr><td>NeoForge</td><td>Minecraft</td><td><code>[1.21.1,1.21.2)</code></td></tr>
+<tr><td>NeoForge</td><td>Cloth Config</td><td>Optional client integration (<code>[15.0.140,)</code>)</td></tr>
+</tbody></table>
+<p>These constraints apply to the <strong>root 1.21.1 source</strong>, not automatically to every other version project. For a different version, inspect that project's <code>gradle.properties</code>, loader metadata and release dependency list. Java 25 belongs to the 26.x generation.</p>
+        </div><p class="guide-footer"><a href="../">← Back to wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

@@ -1,0 +1,21 @@
+<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commandes | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Commandes"><link rel="stylesheet" href="../../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Accueil</a><a href="../../docs/commands.html" hreflang="en">English</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Retour au wiki</a><div class="sidebar-title">Sur cette page</div><nav class="guide-toc"><a class="toc-level-2" href="#commandes-cote-client">Commandes côté client</a>
+<a class="toc-level-2" href="#commandes-serveur-niveau-de-permission-2">Commandes serveur, niveau de permission 2</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+<div class="page-heading"><span class="page-kicker">Référence</span><h1>Commandes</h1><p class="page-description">Distinguez bien les commandes du client de celles du serveur.</p></div>
+<h2 id="commandes-cote-client">Commandes côté client</h2>
+<table><thead><tr><th>Commande</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>/musicinterface_diagnostics</code></td><td>Diagnostic des Music Packs, conflits, pistes et avertissements</td></tr>
+<tr><td><code>/musicinterface_open_resourcepacks</code></td><td>Ouvre le dossier des resource packs</td></tr>
+<tr><td><code>/musicinterface_import_playlist &lt;code&gt;</code></td><td>Importe une playlist depuis son code</td></tr>
+<tr><td><code>/musicinterface_import_shared &lt;token&gt;</code></td><td>Importe un jeton de partage reçu</td></tr>
+<tr><td><code>/musicgui</code></td><td>Ouvre le lecteur sur Fabric</td></tr>
+<tr><td><code>/musicinterface</code></td><td>Ouvre le lecteur sur NeoForge</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>Alias diagnostic local NeoForge</td></tr></tbody></table>
+<h2 id="commandes-serveur-niveau-de-permission-2">Commandes serveur, niveau de permission 2</h2>
+<table><thead><tr><th>Commande</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>/musicinterface list</code></td><td>Liste les identifiants de pistes connus du serveur</td></tr>
+<tr><td><code>/musicinterface search &lt;text&gt;</code></td><td>Recherche de pistes</td></tr>
+<tr><td><code>/musicinterface play &lt;id&gt; &lt;targets&gt;</code></td><td>Demande la lecture d'une piste à certains joueurs</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt;</code></td><td>Arrêt de la lecture</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt; fade</code></td><td>Arrêt en fondu</td></tr></tbody></table>
+<p>Les commandes serveur nécessitent l'installation compatible côté serveur et peuvent nécessiter la présence du mod côté client. Elles n'envoient pas les fichiers OGG aux joueurs.</p>
+</div><p class="guide-footer"><a href="../">← Retour au wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

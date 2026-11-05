@@ -1,0 +1,29 @@
+<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Configuration | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Configuration"><link rel="stylesheet" href="../../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Accueil</a><a href="../../docs/configuration.html" hreflang="en">English</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Retour au wiki</a><div class="sidebar-title">Sur cette page</div><nav class="guide-toc"><a class="toc-level-2" href="#comment-fonctionne-la-musique-contextuelle">Comment fonctionne la musique contextuelle ?</a>
+<a class="toc-level-2" href="#modes-de-lecture">Modes de lecture</a>
+<a class="toc-level-2" href="#musique-de-lecran-titre">Musique de l'écran titre</a>
+<a class="toc-level-2" href="#combats-cobblemon">Combats Cobblemon</a>
+<a class="toc-level-2" href="#quelques-valeurs-par-defaut-importantes">Quelques valeurs par défaut importantes</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+<div class="page-heading"><span class="page-kicker">Lecture et comportements</span><h1>Configuration</h1><p class="page-description">Configurez la lecture automatique, les contextes et les notifications.</p></div>
+<h2 id="comment-fonctionne-la-musique-contextuelle">Comment fonctionne la musique contextuelle ?</h2>
+<p><strong>Métadonnées</strong> : <code>tags</code>, <code>genres</code>, <code>moods</code> et <code>energy</code> servent à classer les chansons et alimentent la Radio et les recommandations. <strong>Contextes</strong> : des règles dans <code>music_data.json</code> ou <code>music_contexts.json</code> déclenchent la sélection automatique selon dimension, biome, tags de biome, jour/nuit, météo ou combat Cobblemon.</p>
+<p>Une règle correspond quand toutes ses conditions renseignées sont respectées. Le scheduler utilise la priorité numérique la plus élevée parmi les règles compatibles. Le mode de transition par défaut est <strong>Finish</strong> : une piste contextuelle déjà jouée n'est pas interrompue immédiatement. Choisissez <strong>Crossfade</strong> pour permettre la transition des pistes gérées par le contexte.</p>
+<h2 id="modes-de-lecture">Modes de lecture</h2>
+<ul><li><strong>Ambient</strong> : musique espacée de pauses, par défaut de 15 à 90 secondes entre les morceaux.</li><li><strong>Continuous</strong> : pas de délai volontaire entre les pistes.</li><li><strong>World join silence</strong> : délai initial de 10 secondes par défaut en entrant dans un monde.</li><li><strong>Queue prioritaire</strong> : les morceaux ajoutés manuellement passent avant les sélections automatiques.</li></ul>
+<h2 id="musique-de-lecran-titre">Musique de l'écran titre</h2>
+<p>La musique personnalisée de menu est activée par défaut. Un champ <code>titleScreenTrackId</code> vide signifie une sélection possible dans la bibliothèque, pas une désactivation. Pour choisir une piste précise, renseignez son ID. Pour arrêter la musique personnalisée du menu, désactivez l'option correspondante. La musique vanilla du menu possède un réglage distinct.</p>
+<h2 id="combats-cobblemon">Combats Cobblemon</h2>
+<p>Le mode par défaut <code>cobblemonBattleMode = external</code> laisse la priorité au système audio du combat. Pour une piste personnalisée, sélectionnez <code>context</code>, activez les contextes, puis définissez une règle <code>"combat": true</code> sur la piste. Un simple tag <code>battle</code> ne suffit pas.</p>
+<h2 id="quelques-valeurs-par-defaut-importantes">Quelques valeurs par défaut importantes</h2>
+<table><thead><tr><th>Paramètre</th><th>Valeur initiale</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>playbackMode</code></td><td><code>ambient</code></td><td>Lecture espacée</td></tr>
+<tr><td><code>contextMusicEnabled</code></td><td><code>true</code></td><td>Musique contextuelle active</td></tr>
+<tr><td><code>contextTransitionMode</code></td><td><code>finish</code></td><td>Attend la fin du morceau</td></tr>
+<tr><td><code>contextFallbackMode</code></td><td><code>library</code></td><td>Retour à la bibliothèque normale</td></tr>
+<tr><td><code>cobblemonBattleMode</code></td><td><code>external</code></td><td>Priorité au son de combat externe</td></tr>
+<tr><td><code>persistQueue</code></td><td><code>true</code></td><td>Conserve la file au redémarrage</td></tr>
+<tr><td><code>worldJoinSilenceSeconds</code></td><td><code>10</code></td><td>Silence initial après connexion</td></tr>
+<tr><td><code>toastPosition</code></td><td><code>TOP_RIGHT</code></td><td>Position de la notification</td></tr>
+<tr><td><code>toastAnimation</code></td><td><code>SLIDE</code></td><td>Animation d'apparition</td></tr>
+<tr><td><code>vanillaMusicEnabled</code></td><td><code>false</code></td><td>Musique vanilla en jeu</td></tr></tbody></table>
+<p>L'écran de paramètres utilise l'intégration optionnelle de Cloth Config. Les configurations locales sont enregistrées dans <code>config/musicinterface/</code>.</p>
+</div><p class="guide-footer"><a href="../">← Retour au wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

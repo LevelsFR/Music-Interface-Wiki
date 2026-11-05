@@ -1,0 +1,35 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commands | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Commands"><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Wiki home</a><a href="../fr/docs/commands.html" hreflang="fr">Français</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Back to wiki</a><div class="sidebar-title">On this page</div><nav class="guide-toc"><a class="toc-level-2" href="#commands-and-multiplayer">Commands and multiplayer</a>
+<a class="toc-level-3" href="#client-side-commands">Client-side commands</a>
+<a class="toc-level-3" href="#dedicated-integrated-server-command-tree">Dedicated / integrated server command tree</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+          <div class="page-heading">
+            <span class="page-kicker">Client and multiplayer</span>
+            <h1>Commands</h1>
+            <p class="page-description">Client-side commands, diagnostics and permission-protected server music controls.</p>
+          </div>
+          <h2 id="commands-and-multiplayer">Commands and multiplayer</h2>
+<p><strong>Distinguish client-local commands from administrator commands.</strong> A local player command does not imply that every multiplayer server allows the same literal syntax.</p>
+<h3 id="client-side-commands">Client-side commands</h3>
+<table><thead><tr><th>Command</th><th>Where defined</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>/musicinterface_diagnostics</code></td><td>Fabric and NeoForge clients</td><td>Show loaded Music Pack counts, duplicate IDs, warnings and menu music state</td></tr>
+<tr><td><code>/musicinterface_open_resourcepacks</code></td><td>Fabric and NeoForge clients</td><td>Open the resourcepacks folder</td></tr>
+<tr><td><code>/musicinterface_import_playlist &lt;code&gt;</code></td><td>Fabric and NeoForge clients</td><td>Import a playlist share code</td></tr>
+<tr><td><code>/musicinterface_import_shared &lt;token&gt;</code></td><td>Fabric and NeoForge clients</td><td>Import a pending shared playlist token</td></tr>
+<tr><td><code>/musicgui</code></td><td>Fabric client registration</td><td>Open the player</td></tr>
+<tr><td><code>/musicinterface</code></td><td>NeoForge client registration</td><td>Open the player</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>NeoForge client registration</td><td>Show local diagnostics</td></tr>
+</tbody></table>
+<p>Client aliases can conflict with server command names in some setups. The local diagnostics alias is usually the clearest way to inspect a Music Pack.</p>
+<h3 id="dedicated-integrated-server-command-tree">Dedicated / integrated server command tree</h3>
+<p>These commands are registered on the server side with <strong>permission level 2</strong>. They require the relevant server installation; some actions also require compatible Music Interface clients.</p>
+<table><thead><tr><th>Command</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>/musicinterface</code></td><td>Request that the executing player's GUI opens</td></tr>
+<tr><td><code>/musicgui</code></td><td>GUI alias</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>Request client diagnostics</td></tr>
+<tr><td><code>/musicinterface list</code></td><td>List server-visible song IDs</td></tr>
+<tr><td><code>/musicinterface search &lt;text&gt;</code></td><td>Search server-visible song IDs</td></tr>
+<tr><td><code>/musicinterface play &lt;id&gt; &lt;targets&gt;</code></td><td>Request playback for selected players</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt;</code></td><td>Request a stop</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt; fade</code></td><td>Request a fade-out stop</td></tr>
+</tbody></table>
+<p>For example, <code>/musicinterface play route_01 @a</code> sends the track request to all eligible players, <strong>if</strong> the server knows <code>route_01</code> and those clients have the corresponding music resource. The command does not transmit the OGG file. In single-player and multiplayer, permission and command registration may differ.</p>
+        </div><p class="guide-footer"><a href="../">← Back to wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>

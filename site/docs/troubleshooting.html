@@ -1,0 +1,62 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Troubleshooting | Music Interface Wiki</title><meta name="description" content="Music Interface 2.0 Troubleshooting"><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="../">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="../">Wiki home</a><a href="../fr/docs/troubleshooting.html" hreflang="fr">Français</a><button id="themeToggle" type="button">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="../">← Back to wiki</a><div class="sidebar-title">On this page</div><nav class="guide-toc"><a class="toc-level-2" href="#frequently-asked-questions">Frequently asked questions</a>
+<a class="toc-level-3" href="#does-music-interface-come-with-music-where-do-i-download-tracks">Does Music Interface come with music? Where do I download tracks?</a>
+<a class="toc-level-3" href="#why-cant-i-find-any-songs-including-minecrafts-vanilla-soundtrack">Why can't I find any songs, including Minecraft's vanilla soundtrack?</a>
+<a class="toc-level-3" href="#is-music-interface-a-cobblemon-mod-can-i-use-it-without-cobblemon-or-with-an-older-cobblemon-version">Is Music Interface a Cobblemon mod? Can I use it without Cobblemon or with an older Cobblemon version?</a>
+<a class="toc-level-3" href="#does-music-interface-work-with-constant-music-or-other-music-mods">Does Music Interface work with Constant Music or other music mods?</a>
+<a class="toc-level-3" href="#what-are-moods-and-do-they-control-when-songs-play">What are moods, and do they control when songs play?</a>
+<a class="toc-level-3" href="#how-can-i-assign-music-to-the-menu-exploration-or-cobblemon-battles-do-i-need-minecraft-predicates">How can I assign music to the menu, exploration or Cobblemon battles? Do I need Minecraft predicates?</a>
+<a class="toc-level-3" href="#can-i-change-the-now-playing-toast-outline-color">Can I change the Now Playing toast outline color?</a>
+<a class="toc-level-3" href="#can-a-resource-pack-lang-file-translate-music-titles">Can a resource-pack lang file translate music titles?</a>
+<a class="toc-level-3" href="#the-generated-template-appears-in-the-list-but-its-example-track-is-silent-why">The generated template appears in the list, but its example track is silent. Why?</a>
+<a class="toc-level-2" href="#troubleshooting">Troubleshooting</a></nav></aside><main class="guide-main"><article class="guide-content"><div class="guide-body">
+          <div class="page-heading">
+            <span class="page-kicker">Support and diagnostics</span>
+            <h1>Troubleshooting</h1>
+            <p class="page-description">Troubleshoot silent tracks, missing covers, menu music, battle events and incompatible packs.</p>
+          </div>
+          <h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3 id="does-music-interface-come-with-music-where-do-i-download-tracks">Does Music Interface come with music? Where do I download tracks?</h3>
+<p><strong>No songs or ready-made music library are included.</strong> You must create or obtain a separate Music Pack (a Minecraft resource pack with OGG audio and track metadata). These packs may be made by you or shared by modpack/server creators. There is no built-in music catalog or automatic download service. See <a href="../#musicpacks" data-tab-link="musicpacks">Music Packs</a> for the full setup.</p>
+
+<h3 id="why-cant-i-find-any-songs-including-minecrafts-vanilla-soundtrack">Why can't I find any songs, including Minecraft's vanilla soundtrack?</h3>
+<p>The Music Interface library displays <strong>custom tracks declared by active Music Packs</strong>. Vanilla Minecraft music is handled by Minecraft's own music system and does not appear automatically as Music Interface tracks. If you only installed the mod, an empty library is expected. Check that a valid pack is enabled, then reload with <code>F3+T</code>.</p>
+
+<h3 id="is-music-interface-a-cobblemon-mod-can-i-use-it-without-cobblemon-or-with-an-older-cobblemon-version">Is Music Interface a Cobblemon mod? Can I use it without Cobblemon or with an older Cobblemon version?</h3>
+<p>Music Interface is <strong>independent of Cobblemon</strong>. Ordinary music playback works without Cobblemon, as long as you install the correct Minecraft/loader build and a Music Pack. Cobblemon is an <strong>optional</strong> integration for battle detection; its battle features depend on the versions and integration hooks available. Having an older Cobblemon release does not make Cobblemon a required dependency for the player.</p>
+
+<h3 id="does-music-interface-work-with-constant-music-or-other-music-mods">Does Music Interface work with Constant Music or other music mods?</h3>
+<p>Music Interface does not automatically read another mod's track list or resource files. Other mods may also manage Minecraft's <code>MUSIC</code> sound channel, so <strong>universal compatibility is not guaranteed</strong>. Music Interface has playback controls for vanilla/external music and a <code>strictExclusiveMusic</code> option to avoid starting music over another active soundtrack. If tracks overlap or interrupt one another, review both mods' music settings or let only one mod manage automatic music. You still need a Music Pack for Music Interface tracks.</p>
+
+<h3 id="what-are-moods-and-do-they-control-when-songs-play">What are moods, and do they control when songs play?</h3>
+<p><code>moods</code> describe the atmosphere of a track, for example <code>calm</code>, <code>relaxing</code> or <code>intense</code>. Along with <code>genres</code>, <code>tags</code> and <code>energy</code>, they help Track Radio and Smart Mixes find related songs. <strong>Moods and tags are not event triggers.</strong> A song tagged <code>battle</code> is not automatically played during a battle.</p>
+
+<h3 id="how-can-i-assign-music-to-the-menu-exploration-or-cobblemon-battles-do-i-need-minecraft-predicates">How can I assign music to the menu, exploration or Cobblemon battles? Do I need Minecraft predicates?</h3>
+<p><strong>No vanilla Minecraft predicates are required.</strong> Use the <code>contexts</code> rules in a track's <code>music_data.json</code>, or put them in <code>music_contexts.json</code>. Rules can match dimension, biome, biome tags, day/night, weather and Cobblemon combat. Example: <code>"combat": true</code> with a priority selects a battle track when the Cobblemon battle mode is set to <code>context</code>. The menu is handled separately by the <strong>Title-screen track ID</strong> setting. See <a href="../#musicpacks" data-tab-link="musicpacks">examples for both files</a>.</p>
+
+<h3 id="can-i-change-the-now-playing-toast-outline-color">Can I change the Now Playing toast outline color?</h3>
+<p>The accent color is <strong>generated automatically from each track's cover art</strong>, with a default fallback if no usable cover exists. You can change the cover in your Music Pack, but Music Interface 2.0 has <strong>no manual outline-color setting</strong>.</p>
+
+<h3 id="can-a-resource-pack-lang-file-translate-music-titles">Can a resource-pack lang file translate music titles?</h3>
+<p>The mod interface itself supports language files, but custom track names in <code>music_data.json</code> are currently <strong>plain display strings</strong>. The <code>title</code> value is displayed as written, not resolved as a translation key from <code>assets/.../lang/*.json</code>. <strong>Automatic per-language music title translation is not supported in 2.0.</strong> Authors should supply a readable title, or offer separate translated metadata packs where appropriate.</p>
+
+<h3 id="the-generated-template-appears-in-the-list-but-its-example-track-is-silent-why">The generated template appears in the list, but its example track is silent. Why?</h3>
+<p>The template is a <strong>starting structure</strong>: it provides an example track definition, a sound event and cover, but <strong>not the <code>example_track.ogg</code> audio file</strong>. Add a real OGG file at the referenced path or replace the example with your song, then reload resources.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table><thead><tr><th>Symptom</th><th>Check / solution</th></tr></thead><tbody>
+<tr><td>No tracks appear</td><td>Is the Music Pack enabled? Does it contain <code>assets/musicinterface/music_data.json</code> with a JSON array? Try <code>F3+T</code></td></tr>
+<tr><td>A track appears but stays silent</td><td>Check <code>.ogg</code> path, <code>sounds.json</code> event name, and <code>music_data.json</code> <code>sound</code> ID. Use diagnostics</td></tr>
+<tr><td>The cover is missing</td><td>Check the PNG file and exact <code>cover</code> resource location</td></tr>
+<tr><td>Two packs define the same song ID</td><td>Higher-priority pack wins; see diagnostics for duplicates</td></tr>
+<tr><td>Music doesn't start instantly on world join</td><td>Default world-entry silence is 10 seconds, plus possible Ambient scheduling gaps</td></tr>
+<tr><td>Music doesn't play in a Cobblemon battle</td><td>Set <code>cobblemonBattleMode</code> to <code>context</code> and provide matching <code>combat: true</code> rules. Default is <code>external</code></td></tr>
+<tr><td>A song tagged <code>battle</code> plays while exploring</td><td>Tags do not set event rules. Use a context rule and matching priorities</td></tr>
+<tr><td>A context doesn't interrupt the current song</td><td>Default transition is <code>finish</code>; choose <code>crossfade</code> for context-managed playback</td></tr>
+<tr><td>Menu music uses an unexpected track</td><td>Blank title-screen ID permits library selection; set a valid fixed track ID or disable custom menu music</td></tr>
+<tr><td>I can't open the settings screen</td><td>Check whether a compatible Cloth Config is installed</td></tr>
+<tr><td>The template pack is marked incompatible</td><td>Its baseline metadata uses <code>pack_format: 34</code>. Adapt <code>pack.mcmeta</code> to your Minecraft version</td></tr>
+<tr><td>Commands work in one loader but not the other</td><td>Check the <strong>client command</strong> versus <strong>server administrator command</strong> sections above</td></tr>
+</tbody></table>
+<p>When asking for help, provide the <strong>exact</strong> Minecraft version, loader, Music Interface JAR/version, relevant dependencies, steps to reproduce and <code>latest.log</code> excerpts (with private details removed).</p>
+<div class="hint hint-info"><strong>Need help?</strong><p>Join the <a href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">Our Story Network Discord</a> and include your Minecraft version, loader, Music Interface build, pack files and relevant logs.</p></div>
+        </div><p class="guide-footer"><a href="../">← Back to wiki</a></p></article></main></div><script>const st=localStorage.getItem("musicinterface-wiki-theme");if(st==="light"||st==="dark")document.documentElement.dataset.theme=st;document.getElementById("themeToggle").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark";localStorage.setItem("musicinterface-wiki-theme",r.dataset.theme)});</script></body></html>
