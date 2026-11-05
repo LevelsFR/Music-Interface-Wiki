@@ -1,0 +1,280 @@
+<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Guide complet en français pour créer un Music Pack Music Interface 2.0 avec OGG, JSON, contextes et Cobblemon."><title>Créer un Music Pack | Music Interface Wiki</title><link rel="stylesheet" href="../styles.css"></head><body class="guide-page"><header class="guide-topbar"><a class="guide-brand" href="./">♫ Music Interface <span>v2.0 Wiki</span></a><nav><a href="./">Accueil du wiki</a><a href="../music-packs.html" hreflang="en">English</a><button id="themeToggle" type="button" aria-label="Switch appearance">☀ / ☾</button></nav></header><div class="guide-layout"><aside class="guide-sidebar"><a href="./">← Retour au wiki</a><div class="sidebar-title">Sur cette page</div><nav class="guide-toc"><a class="toc-level-2" href="#reponses-rapides">Réponses rapides</a>
+<a class="toc-level-2" href="#1-creer-le-dossier-du-pack">1. Créer le dossier du pack</a>
+<a class="toc-level-3" href="#methode-encore-plus-simple-generer-un-modele">Méthode encore plus simple : générer un modèle</a>
+<a class="toc-level-2" href="#2-preparer-packmcmeta">2. Préparer pack.mcmeta</a>
+<a class="toc-level-2" href="#3-ajouter-les-fichiers-audio-ogg">3. Ajouter les fichiers audio OGG</a>
+<a class="toc-level-2" href="#4-declarer-les-sons-dans-soundsjson">4. Déclarer les sons dans sounds.json</a>
+<a class="toc-level-2" href="#5-ajouter-les-pistes-dans-musicdatajson">5. Ajouter les pistes dans music_data.json</a>
+<a class="toc-level-3" href="#reference-des-champs">Référence des champs</a>
+<a class="toc-level-2" href="#tags-et-contextes">Tags et contextes</a>
+<a class="toc-level-3" href="#champs-autorises-dans-une-regle-de-contexte">Champs autorisés dans une règle de contexte</a>
+<a class="toc-level-2" href="#6-musique-dexploration-et-ambient">6. Musique d'exploration et Ambient</a>
+<a class="toc-level-2" href="#7-musique-de-combat-cobblemon">7. Musique de combat Cobblemon</a>
+<a class="toc-level-2" href="#8-choisir-une-musique-pour-lecran-titre">8. Choisir une musique pour l'écran titre</a>
+<a class="toc-level-2" href="#9-placer-les-contextes-dans-musiccontextsjson">9. Placer les contextes dans music_contexts.json</a>
+<a class="toc-level-2" href="#10-que-se-passe-t-il-si-aucune-regle-ne-correspond">10. Que se passe-t-il si aucune règle ne correspond ?</a>
+<a class="toc-level-2" href="#11-ajouter-les-pochettes">11. Ajouter les pochettes</a>
+<a class="toc-level-2" href="#12-activer-actualiser-et-cumuler-les-music-packs">12. Activer, actualiser et cumuler les Music Packs</a>
+<a class="toc-level-2" href="#13-resoudre-les-problemes-courants">13. Résoudre les problèmes courants</a></nav></aside><main class="guide-main"><article class="guide-content"><span class="page-kicker">Music Interface 2.0</span><div class="guide-body"><h1 id="creer-un-music-pack-pour-music-interface-20">Créer un Music Pack pour Music Interface 2.0</h1>
+<p><strong>Un guide accessible pour ajouter vos musiques, pochettes et thèmes adaptés aux situations dans Minecraft.</strong></p>
+<p><strong>Music Interface ne fournit aucune musique.</strong> C'est un lecteur musical intégré à Minecraft et un gestionnaire de lecture automatique, pas une bibliothèque de chansons, un service de streaming ou un outil de téléchargement. À l'installation, il est normal que la bibliothèque soit vide. Les musiques vanilla et celles des autres mods ne sont pas automatiquement ajoutées à sa liste.</p>
+<p>Pour écouter des musiques personnalisées, il faut <strong>ajouter un Music Pack</strong> (resource pack Minecraft) contenant de vrais fichiers audio <code>.ogg</code> et leurs définitions JSON. Vous pouvez créer ce pack vous-même ou utiliser celui fourni par un créateur de modpack ou de serveur. Le modèle généré dans le lecteur contient des dossiers, des JSON et une pochette, <strong>mais aucun son OGG</strong> : il faut ajouter votre fichier.</p>
+<p>Music Interface utilise des <strong>resource packs Minecraft</strong> pour charger les chansons. Il n'est pas nécessaire de coder en Java. Le format des pistes est commun à Fabric et NeoForge. En revanche, les informations de compatibilité de Minecraft dans <code>pack.mcmeta</code> doivent correspondre à votre version du jeu.</p>
+<p>Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le <a href="./#overview">guide général</a>. Le guide général est actuellement en anglais.</p>
+<h2 id="reponses-rapides">Réponses rapides</h2>
+<ul>
+<li><strong>Comment attribuer une musique à un événement ?</strong> Avec <code>contexts</code> dans <code>music_data.json</code> ou dans le fichier facultatif <code>music_contexts.json</code>.</li>
+<li><strong>Les tags suffisent-ils pour une musique de combat ?</strong> Non. <code>tags</code>, <code>genres</code> et <code>moods</code> servent à décrire les pistes et à améliorer les recommandations et la Radio.</li>
+<li><strong>Comment choisir une musique de menu ?</strong> Entrez son <code>id</code> dans le réglage <strong>Title-screen track ID</strong>. Un identifiant vide autorise la sélection automatique.</li>
+<li><strong>Comment activer la musique de combat Cobblemon ?</strong> Choisissez <strong>Context</strong> pour <strong>Cobblemon Battle Music</strong> et définissez une règle <code>combat: true</code>.</li>
+<li><strong>Peut-on utiliser plusieurs Music Packs ?</strong> Oui, sous forme de dossiers ou de ZIP. Chaque piste doit idéalement avoir son propre ID.</li>
+</ul>
+<h2 id="1-creer-le-dossier-du-pack">1. Créer le dossier du pack</h2>
+<p>Ouvrez le dossier de votre <strong>instance Minecraft</strong>, puis créez <code>Mon Music Pack</code> dans <code>resourcepacks/</code> :</p>
+<pre><code>.minecraft/
+└── resourcepacks/
+    └── Mon Music Pack/
+        ├── pack.mcmeta
+        ├── pack.png                         (facultatif)
+        └── assets/
+            └── musicinterface/
+                ├── music_data.json
+                ├── music_contexts.json      (facultatif)
+                ├── sounds.json
+                ├── sounds/
+                │   └── custom/
+                │       ├── route_01.ogg
+                │       └── battle_theme.ogg
+                └── textures/
+                    └── covers/
+                        ├── route_01.png
+                        └── battle_theme.png</code></pre>
+<p><strong>Respectez exactement les chemins.</strong> Le mod recherche le namespace <code>assets/musicinterface/</code>. Utilisez de préférence des noms de fichiers en minuscules, sans espace ni accent.</p>
+<h3 id="methode-encore-plus-simple-generer-un-modele">Méthode encore plus simple : générer un modèle</h3>
+<p>Dans le lecteur Music Interface, utilisez le <strong>bouton de génération d'un pack modèle</strong>. Survolez le bouton pour afficher son info-bulle. Le mod crée <code>resourcepacks/MusicInterface Template/</code>, avec des dossiers, des fichiers JSON et une pochette d'exemple, <strong>sans écraser les fichiers déjà présents</strong>.</p>
+<p>Remplacez la piste d'exemple par votre fichier OGG et adaptez les chemins dans les JSON. Selon votre version de Minecraft, il faudra aussi adapter <code>pack.mcmeta</code>.</p>
+<h2 id="2-preparer-packmcmeta">2. Préparer pack.mcmeta</h2>
+<p>Minecraft lit <code>pack.mcmeta</code> pour déterminer la compatibilité du resource pack. Pour la <strong>base Minecraft 1.21.1</strong>, le générateur du mod utilise :</p>
+<pre><code>{
+  &quot;pack&quot;: {
+    &quot;pack_format&quot;: 34,
+    &quot;description&quot;: &quot;Mon Music Pack pour Music Interface&quot;
+  }
+}</code></pre>
+<p><strong>Attention : ne recopiez pas automatiquement <code>pack_format: 34</code> sur les versions 1.21.4, 1.21.11 ou 26.x.</strong> Le format des resource packs évolue avec Minecraft. Certaines versions attendent également d'autres champs. Adaptez <code>pack.mcmeta</code> aux exigences de votre <strong>version exacte de Minecraft</strong>. Le format Music Interface des chansons, lui, n'a pas besoin d'une variante Fabric ou NeoForge.</p>
+<p>Si Minecraft signale une incompatibilité du pack, vérifiez d'abord <code>pack.mcmeta</code>.</p>
+<h2 id="3-ajouter-les-fichiers-audio-ogg">3. Ajouter les fichiers audio OGG</h2>
+<p>Placez votre première musique ici :</p>
+<pre><code>assets/musicinterface/sounds/custom/route_01.ogg</code></pre>
+<p>Le fichier doit contenir de <strong>véritables données audio OGG</strong>. Renommer un MP3 en OGG ne le convertit pas. Utilisez des noms simples et cohérents.</p>
+<h2 id="4-declarer-les-sons-dans-soundsjson">4. Déclarer les sons dans sounds.json</h2>
+<p>Minecraft doit connaître chaque son avant de pouvoir le jouer. Créez <code>assets/musicinterface/sounds.json</code> avec ce contenu :</p>
+<pre><code>{
+  &quot;custom/route_01&quot;: {
+    &quot;sounds&quot;: [
+      {
+        &quot;name&quot;: &quot;musicinterface:custom/route_01&quot;,
+        &quot;stream&quot;: true
+      }
+    ]
+  },
+  &quot;custom/battle_theme&quot;: {
+    &quot;sounds&quot;: [
+      {
+        &quot;name&quot;: &quot;musicinterface:custom/battle_theme&quot;,
+        &quot;stream&quot;: true
+      }
+    ]
+  }
+}</code></pre>
+<p>L'événement sonore <code>musicinterface:custom/route_01</code> correspond au fichier <code>assets/musicinterface/sounds/custom/route_01.ogg</code>. On n'écrit <strong>ni le dossier <code>sounds/</code>, ni l'extension <code>.ogg</code></strong> dans le nom du son du JSON.</p>
+<p>Conservez <code>&quot;stream&quot;: true</code> pour les longues musiques.</p>
+<h2 id="5-ajouter-les-pistes-dans-musicdatajson">5. Ajouter les pistes dans music_data.json</h2>
+<p>Créez <code>assets/musicinterface/music_data.json</code>. La racine du fichier doit être un <strong>tableau JSON</strong>, entre crochets. Exemple avec une musique d'exploration et une de combat :</p>
+<pre><code>[
+  {
+    &quot;id&quot;: &quot;route_01&quot;,
+    &quot;title&quot;: &quot;Route 01&quot;,
+    &quot;author&quot;: &quot;Votre Nom&quot;,
+    &quot;album&quot;: &quot;Exploration&quot;,
+    &quot;sound&quot;: &quot;musicinterface:custom/route_01&quot;,
+    &quot;cover&quot;: &quot;musicinterface:textures/covers/route_01.png&quot;,
+    &quot;enabled&quot;: true,
+    &quot;weight&quot;: 1,
+    &quot;genres&quot;: [&quot;ambient&quot;],
+    &quot;moods&quot;: [&quot;calm&quot;],
+    &quot;tags&quot;: [&quot;overworld&quot;, &quot;exploration&quot;],
+    &quot;energy&quot;: 0.3,
+    &quot;contexts&quot;: [
+      {
+        &quot;combat&quot;: false,
+        &quot;priority&quot;: 10
+      }
+    ]
+  },
+  {
+    &quot;id&quot;: &quot;battle_theme&quot;,
+    &quot;title&quot;: &quot;Battle Theme&quot;,
+    &quot;author&quot;: &quot;Votre Nom&quot;,
+    &quot;album&quot;: &quot;Battles&quot;,
+    &quot;sound&quot;: &quot;musicinterface:custom/battle_theme&quot;,
+    &quot;cover&quot;: &quot;musicinterface:textures/covers/battle_theme.png&quot;,
+    &quot;enabled&quot;: true,
+    &quot;weight&quot;: 2,
+    &quot;genres&quot;: [&quot;orchestral&quot;],
+    &quot;moods&quot;: [&quot;intense&quot;],
+    &quot;tags&quot;: [&quot;battle&quot;, &quot;combat&quot;],
+    &quot;energy&quot;: 0.9,
+    &quot;contexts&quot;: [
+      {
+        &quot;combat&quot;: true,
+        &quot;priority&quot;: 100
+      }
+    ]
+  }
+]</code></pre>
+<p>La piste <code>route_01</code> correspond à une situation sans combat. La piste <code>battle_theme</code> peut correspondre à un combat Cobblemon. <strong>Il faut aussi passer le réglage Cobblemon Battle Music sur Context</strong>, comme expliqué plus bas.</p>
+<h3 id="reference-des-champs">Référence des champs</h3>
+<div class='guide-table-scroll'><table><thead><tr><th>Champ</th><th>Type</th><th>Utilité</th></tr></thead><tbody><tr><td><code>id</code></td><td>texte</td><td>Identifiant unique de la piste, obligatoire</td></tr><tr><td><code>sound</code></td><td>identifiant de ressource</td><td>Événement sonore déclaré dans <code>sounds.json</code>, obligatoire</td></tr><tr><td><code>title</code></td><td>texte</td><td>Titre affiché ; l'ID sert de valeur par défaut</td></tr><tr><td><code>author</code> / <code>album</code></td><td>textes</td><td>Artiste et album</td></tr><tr><td><code>cover</code></td><td>identifiant de ressource</td><td>Image PNG ; facultative avec image de secours</td></tr><tr><td><code>enabled</code></td><td>booléen</td><td>Piste activée initialement ; défaut <code>true</code></td></tr><tr><td><code>weight</code></td><td>entier</td><td>Poids relatif du tirage aléatoire ; minimum et défaut <code>1</code></td></tr><tr><td><code>genres</code> / <code>moods</code> / <code>tags</code></td><td>texte ou tableau de textes</td><td>Descriptions utilisées par la Radio, les mixes et les recommandations</td></tr><tr><td><code>energy</code></td><td>nombre</td><td>Proximité énergétique pour la Radio, entre <code>0.0</code> et <code>1.0</code> ; défaut <code>0.5</code></td></tr><tr><td><code>cooldown</code></td><td>entier</td><td>Délai minimal en secondes avant une autre sélection automatique ; défaut <code>0</code></td></tr><tr><td><code>volume</code></td><td>nombre</td><td>Multiplicateur de volume de la piste, entre <code>0.0</code> et <code>1.0</code> ; défaut <code>1.0</code></td></tr><tr><td><code>fade_in</code> / <code>fade_out</code></td><td>entiers</td><td>Durées facultatives des fondus de la piste, en secondes</td></tr><tr><td><code>context_fallback</code></td><td>booléen</td><td>Rend la piste éligible au fallback <strong>Dedicated</strong> ; défaut <code>false</code></td></tr><tr><td><code>contexts</code></td><td>objet ou tableau</td><td>Règles de sélection automatique selon le contexte</td></tr><tr><td><code>duration</code></td><td>texte</td><td>Métadonnée facultative acceptée par le parseur ; pas nécessaire pour calculer la durée réelle</td></tr></tbody></table></div>
+<p>Les champs facultatifs peuvent être omis. Un pack au format simple des versions précédentes reste lisible par le parseur 2.0.</p>
+<p>Il n'existe pas de liste imposée de genres, moods et tags. Utilisez des valeurs cohérentes entre vos pistes, comme <code>calm</code>, <code>ambient</code>, <code>exploration</code> ou <code>orchestral</code>, pour améliorer les correspondances de la Radio.</p>
+<h2 id="tags-et-contextes">Tags et contextes</h2>
+<p>Les deux notions ne jouent pas le même rôle :</p>
+<ul>
+<li><strong>Tags, genres et moods :</strong> ils décrivent <strong>le style</strong> de la musique. Un tag <code>battle</code> améliore les rapprochements avec d'autres musiques semblables, mais ne lance <strong>pas</strong> automatiquement la piste en combat.</li>
+<li><strong>Contexts :</strong> ils indiquent <strong>quand la musique peut être sélectionnée</strong> par le système de lecture automatique.</li>
+</ul>
+<p>Exemple de champs <strong>à l'intérieur d'une piste</strong> :</p>
+<pre><code>{
+  &quot;tags&quot;: [&quot;battle&quot;, &quot;boss&quot;],
+  &quot;contexts&quot;: [
+    {
+      &quot;combat&quot;: true,
+      &quot;priority&quot;: 100
+    }
+  ]
+}</code></pre>
+<p>C'est la propriété <code>contexts</code> qui pose la condition de combat. Ce bloc illustre des champs, il ne constitue pas à lui seul un <code>music_data.json</code> complet.</p>
+<h3 id="champs-autorises-dans-une-regle-de-contexte">Champs autorisés dans une règle de contexte</h3>
+<div class='guide-table-scroll'><table><thead><tr><th>Champ</th><th>Exemple</th><th>Fonctionnement</th></tr></thead><tbody><tr><td><code>priority</code></td><td><code>100</code></td><td>La priorité numérique la plus haute gagne ; défaut <code>0</code></td></tr><tr><td><code>dimensions</code></td><td><code>[&quot;minecraft:overworld&quot;]</code></td><td>Identifiants des dimensions</td></tr><tr><td><code>biomes</code></td><td><code>[&quot;minecraft:plains&quot;]</code></td><td>Identifiants des biomes</td></tr><tr><td><code>biome_tags</code></td><td><code>[&quot;#minecraft:is_forest&quot;]</code></td><td>Tags de biomes ; le préfixe <code>#</code> est accepté</td></tr><tr><td><code>time</code></td><td><code>[&quot;day&quot;]</code></td><td>Valeurs possibles : <code>day</code>, <code>night</code></td></tr><tr><td><code>weather</code></td><td><code>[&quot;clear&quot;, &quot;rain&quot;]</code></td><td>Valeurs possibles : <code>clear</code>, <code>rain</code>, <code>thunder</code></td></tr><tr><td><code>combat</code></td><td><code>true</code></td><td>Booléen indiquant si un combat Cobblemon pris en charge est actif</td></tr></tbody></table></div>
+<p>Une propriété acceptant une liste peut contenir <strong>une chaîne seule</strong> ou <strong>un tableau</strong>. Dans une même propriété, plusieurs valeurs se lisent comme un <strong>OU</strong>. Entre les propriétés d'une même règle, les conditions se combinent comme un <strong>ET</strong>. Plusieurs objets de règles permettent de décrire plusieurs situations alternatives.</p>
+<p>Exemple : musique pour <strong>la pluie ou l'orage, de nuit, dans les plaines de l'Overworld, hors combat</strong> :</p>
+<pre><code>{
+  &quot;dimensions&quot;: [&quot;minecraft:overworld&quot;],
+  &quot;biomes&quot;: [&quot;minecraft:plains&quot;],
+  &quot;time&quot;: [&quot;night&quot;],
+  &quot;weather&quot;: [&quot;rain&quot;, &quot;thunder&quot;],
+  &quot;combat&quot;: false,
+  &quot;priority&quot;: 30
+}</code></pre>
+<p><strong>La priorité est explicite.</strong> Une règle avec davantage de critères ne gagne pas automatiquement face à une règle plus simple. C'est le nombre défini dans <code>priority</code> qui départage les contextes correspondants.</p>
+<h2 id="6-musique-dexploration-et-ambient">6. Musique d'exploration et Ambient</h2>
+<p>Ajoutez cette propriété dans une piste destinée à l'exploration :</p>
+<pre><code>&quot;contexts&quot;: [
+  {
+    &quot;combat&quot;: false,
+    &quot;priority&quot;: 10
+  }
+]</code></pre>
+<p>Vous pouvez ajouter <code>&quot;biomes&quot;: [&quot;minecraft:forest&quot;]</code> dans cette règle pour limiter la piste à la forêt, ou encore utiliser <code>time</code> et <code>weather</code>.</p>
+<p><strong>Ambient</strong> est aussi un mode de lecture global : le lecteur peut laisser un intervalle entre deux morceaux. Le mode <strong>Continuous</strong> supprime cet intervalle volontaire. Il n'est pas nécessaire d'ajouter un tag spécial pour activer ces modes.</p>
+<h2 id="7-musique-de-combat-cobblemon">7. Musique de combat Cobblemon</h2>
+<p>Dans la piste de combat, utilisez :</p>
+<pre><code>&quot;contexts&quot;: [
+  {
+    &quot;combat&quot;: true,
+    &quot;priority&quot;: 100
+  }
+]</code></pre>
+<p>Puis dans Music Interface :</p>
+<ol>
+<li>Installez une version de Cobblemon compatible avec votre loader et votre version de Minecraft, lorsqu'elle existe.</li>
+<li>Activez <strong>Context Music</strong> dans les paramètres du mod.</li>
+<li>Passez <strong>Cobblemon Battle Music</strong> sur <strong>Context</strong>. Le réglage par défaut, <strong>External</strong>, suspend la musique Music Interface pendant les combats Cobblemon détectés.</li>
+<li>Choisissez <strong>Context Transition: Crossfade</strong> si vous souhaitez que le mod change une piste déjà lancée <strong>par le système contextuel</strong> lors d'un changement de contexte. Par défaut, <strong>Finish</strong> laisse la piste se terminer.</li>
+<li>Prévoyez également des pistes hors combat ou un fallback pour le retour à l'exploration.</li>
+</ol>
+<p>L'intégration s'appuie sur des événements de combat Cobblemon pris en charge. Elle ne détecte pas automatiquement tous les systèmes de combat des autres mods. Une musique lancée manuellement, la file d'attente, une playlist ou la Radio peuvent être prioritaires sur la lecture contextuelle.</p>
+<h2 id="8-choisir-une-musique-pour-lecran-titre">8. Choisir une musique pour l'écran titre</h2>
+<p>La méthode recommandée passe par les <strong>paramètres du lecteur</strong>, pas par un tag <code>menu</code> :</p>
+<ol>
+<li>Ajoutez une piste normale aux fichiers <code>music_data.json</code> et <code>sounds.json</code>, par exemple avec l'ID <code>main_menu_theme</code>.</li>
+<li>Dans Music Interface, activez <strong>Custom Menu Music</strong>.</li>
+<li>Renseignez <strong>Title-screen track ID</strong> avec <code>main_menu_theme</code>.</li>
+</ol>
+<p>Si le champ est <strong>vide</strong>, Music Interface peut sélectionner automatiquement une piste de la bibliothèque pour l'écran titre. Un champ vide <strong>ne désactive pas</strong> la musique. Pour couper les musiques personnalisées du menu, désactivez <strong>Custom Menu Music</strong>.</p>
+<p>L'option <strong>Allow Vanilla Menu Music</strong> concerne séparément la musique du menu d'origine de Minecraft. Les règles de contexte du monde ne servent pas à filtrer les pistes proposées automatiquement sur l'écran titre.</p>
+<h2 id="9-placer-les-contextes-dans-musiccontextsjson">9. Placer les contextes dans music_contexts.json</h2>
+<p>Pour séparer les règles des informations sur les chansons, créez le fichier facultatif <code>assets/musicinterface/music_contexts.json</code>.</p>
+<p>Premier format accepté : un <strong>objet associant chaque ID à ses règles</strong> :</p>
+<pre><code>{
+  &quot;route_01&quot;: [
+    {
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 10
+    },
+    {
+      &quot;biomes&quot;: [&quot;minecraft:forest&quot;],
+      &quot;time&quot;: [&quot;day&quot;],
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 30
+    }
+  ],
+  &quot;battle_theme&quot;: [
+    {
+      &quot;combat&quot;: true,
+      &quot;priority&quot;: 100
+    }
+  ]
+}</code></pre>
+<p>Deuxième format accepté : un <strong>tableau</strong> où chaque règle indique le champ <code>track</code> :</p>
+<pre><code>[
+  {
+    &quot;track&quot;: &quot;route_01&quot;,
+    &quot;combat&quot;: false,
+    &quot;priority&quot;: 10
+  },
+  {
+    &quot;track&quot;: &quot;battle_theme&quot;,
+    &quot;combat&quot;: true,
+    &quot;priority&quot;: 100
+  }
+]</code></pre>
+<p>Ces règles sont <strong>ajoutées</strong> aux éventuels <code>contexts</code> déjà déclarés directement dans <code>music_data.json</code>. Si plusieurs packs fournissent des règles externes pour le même ID, la définition externe du pack le plus prioritaire l'emporte sur les autres définitions externes. Un ID inexistant produit un avertissement.</p>
+<p>Pour débuter, choisissez <strong>l'une des deux méthodes</strong> plutôt que de déclarer deux fois les mêmes règles.</p>
+<h2 id="10-que-se-passe-t-il-si-aucune-regle-ne-correspond">10. Que se passe-t-il si aucune règle ne correspond ?</h2>
+<p>Le réglage <strong>Context Fallback</strong> propose :</p>
+<ul>
+<li><strong>Library</strong> (par défaut) : sélection dans les pistes disponibles de la bibliothèque quand aucun contexte explicite ne correspond.</li>
+<li><strong>Dedicated</strong> : uniquement des pistes portant <code>&quot;context_fallback&quot;: true</code> dans cette situation.</li>
+</ul>
+<p>Exemple d'<strong>objet représentant une seule piste</strong>, à placer dans le tableau <code>music_data.json</code> :</p>
+<pre><code>{
+  &quot;id&quot;: &quot;route_01&quot;,
+  &quot;title&quot;: &quot;Route 01&quot;,
+  &quot;sound&quot;: &quot;musicinterface:custom/route_01&quot;,
+  &quot;context_fallback&quot;: true,
+  &quot;contexts&quot;: [
+    {
+      &quot;combat&quot;: false,
+      &quot;priority&quot;: 10
+    }
+  ]
+}</code></pre>
+<h2 id="11-ajouter-les-pochettes">11. Ajouter les pochettes</h2>
+<p>Placez les images PNG dans <code>assets/musicinterface/textures/covers/</code>. Référencez chaque image dans la piste :</p>
+<pre><code>&quot;cover&quot;: &quot;musicinterface:textures/covers/route_01.png&quot;</code></pre>
+<p>Une pochette n'est pas obligatoire pour la lecture. Le lecteur dispose d'une image de secours. En cas de chemin invalide, les diagnostics peuvent signaler la ressource manquante. <strong>La couleur du contour des notifications Now Playing est calculée automatiquement à partir de la couleur dominante de la pochette.</strong> Si aucune pochette exploitable n'est disponible, une couleur par défaut est utilisée. Aucun réglage ni champ JSON ne permet actuellement de choisir librement cette couleur.</p>
+<h2 id="12-activer-actualiser-et-cumuler-les-music-packs">12. Activer, actualiser et cumuler les Music Packs</h2>
+<ol>
+<li>Placez le <strong>dossier</strong> ou le fichier <strong>ZIP</strong> dans <code>resourcepacks/</code>.</li>
+<li>Activez-le dans le menu <strong>Resource Packs</strong> de Minecraft.</li>
+<li>Ouvrez Music Interface et vérifiez la bibliothèque.</li>
+<li>Après toute modification, utilisez <code>F3+T</code> pour recharger les ressources.</li>
+</ol>
+<p>Music Interface fusionne les fichiers <code>music_data.json</code> des packs actifs. En cas de collision entre deux pistes portant le même <code>id</code>, <strong>la définition du pack le plus prioritaire l'emporte</strong>. Conservez des IDs stables et uniques : les favoris et playlists les utilisent.</p>
+<p>La commande cliente <code>/musicinterface_diagnostics</code> affiche le nombre de packs, les pistes, les collisions d'IDs et les avertissements, notamment les sons ou pochettes manquants. Sous NeoForge, <code>/musicinterface diagnostics</code> existe également côté client ; sur certains serveurs, une commande de même nom peut être réservée aux administrateurs.</p>
+<h2 id="13-resoudre-les-problemes-courants">13. Résoudre les problèmes courants</h2>
+<div class='guide-table-scroll'><table><thead><tr><th>Problème</th><th>Vérification</th></tr></thead><tbody><tr><td>Minecraft indique un pack incompatible</td><td>Adaptez <code>pack.mcmeta</code> à votre version exacte</td></tr><tr><td>Aucune piste n'apparaît</td><td>Vérifiez le chemin, l'activation, le tableau JSON, puis <code>F3+T</code></td></tr><tr><td>La piste apparaît, mais reste muette</td><td>Vérifiez l'OGG réel, l'événement dans <code>sounds.json</code> et le champ <code>sound</code></td></tr><tr><td>La pochette ne s'affiche pas</td><td>Vérifiez le PNG et le chemin <code>cover</code></td></tr><tr><td>Le tag <code>battle</code> ne déclenche rien</td><td>Définissez <code>combat: true</code> et activez le mode Cobblemon <code>context</code></td></tr><tr><td>Une piste est jouée au mauvais endroit</td><td>Contrôlez les règles, leurs priorités, le fallback et la source de lecture active</td></tr><tr><td>Le contexte change, mais pas la musique</td><td>Le mode par défaut est <code>finish</code> ; <code>crossfade</code> concerne la lecture contextuelle</td></tr><tr><td>Un ID de menu vide joue toujours de la musique</td><td>C'est normal : vide signifie sélection automatique</td></tr><tr><td>Une piste écrase celle d'un autre pack</td><td>Modifiez l'ID ou l'ordre de priorité des packs</td></tr><tr><td>Rien ne joue juste après l'entrée dans un monde</td><td>Vérifiez le silence initial et les délais du mode Ambient</td></tr><tr><td>Le modèle est incompatible avec une version 26.x</td><td>Corrigez le <code>pack.mcmeta</code> généré pour cette version</td></tr></tbody></table></div>
+<p><strong>Conseil :</strong> commencez avec un seul fichier OGG et une seule piste valide, puis ajoutez les métadonnées et les contextes. Si vous distribuez des chansons ou des illustrations, vérifiez que vous disposez des droits nécessaires.</p>
+<p>Voir également le <a href="./#overview">guide général Music Interface 2.0</a> et le <a href="./music-packs.html">Music Pack guide en anglais</a>.</p></div><p class="guide-footer"><a href="./">← Retour au wiki</a></p></article></main></div><script>const saved=localStorage.getItem('musicinterface-wiki-theme');if(saved==='dark'||saved==='light')document.documentElement.dataset.theme=saved;document.getElementById('themeToggle').addEventListener('click',()=>{const d=document.documentElement;d.dataset.theme=d.dataset.theme==='dark'?'light':'dark';localStorage.setItem('musicinterface-wiki-theme',d.dataset.theme)});</script></body></html>

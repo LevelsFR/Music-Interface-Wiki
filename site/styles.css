@@ -589,3 +589,30 @@ html[data-theme="light"] .command > code { color: #194f9b; }
   table { display: block; }
   .process-list li { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* Standalone EN/FR documentation pages */
+.guide-page { background:var(--bg); }
+.guide-topbar { position:sticky;top:0;z-index:40;min-height:62px;padding:10px 24px;background:var(--sidebar);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px; }
+.guide-brand { color:var(--text);text-decoration:none;font-weight:800; }
+.guide-brand span { font-size:12px;color:var(--muted);font-weight:500; }
+.guide-topbar nav { display:flex;align-items:center;flex-wrap:wrap;gap:18px;font-size:13px; }
+.guide-topbar nav a { color:var(--text);text-decoration:none; }
+.guide-topbar button { cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--text);padding:6px 9px;border-radius:6px; }
+.guide-layout { display:grid;grid-template-columns:270px minmax(0,1fr); }
+.guide-sidebar { position:sticky;top:62px;height:calc(100vh - 62px);overflow:auto;padding:24px 16px;border-right:1px solid var(--line);background:var(--sidebar); }
+.guide-sidebar .sidebar-title { margin:22px 0 8px; }
+.guide-toc { display:grid;gap:3px; }
+.guide-toc a { display:block;padding:6px 8px;color:var(--muted);text-decoration:none;border-radius:6px;font-size:12px;line-height:1.35; }
+.guide-toc a:hover { color:var(--text);background:var(--surface-2); }
+.guide-toc .toc-level-3 { padding-left:19px; }
+.guide-main { grid-column:auto;padding:36px 32px 100px; }
+.guide-content { max-width:920px;margin:auto; }
+.guide-body h1 { font-size:clamp(1.9rem,3vw,2.6rem); }
+.guide-body h2,.guide-body h3 { scroll-margin-top:90px; }
+.guide-body pre { overflow-x:auto;padding:18px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px; }
+.guide-body pre code { white-space:pre;overflow-wrap:normal; }
+.guide-body blockquote { margin:14px 0;padding:5px 15px;border-left:3px solid var(--accent);background:var(--surface-2); }
+.guide-table-scroll { overflow-x:auto; }
+.guide-body table { min-width:520px; }
+.guide-footer { margin-top:50px;padding-top:25px;border-top:1px solid var(--line); }
+@media(max-width:940px) { .guide-layout { display:block; } .guide-sidebar { position:static;height:auto;max-height:250px; } .guide-toc { max-height:130px;overflow:auto; } .guide-main { padding:24px 18px 65px; } }
