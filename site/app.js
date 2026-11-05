@@ -11,7 +11,7 @@
   const results = document.getElementById("searchResults");
   const valid = new Set(panels.map(p => p.dataset.panel));
   const normalize = value => (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const slug = value => normalize(value).replace(/[^a-z0-9\\s-]/g, "").trim().replace(/\\s+/g, "-");
+  const slug = value => normalize(value).replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
   const entries = [];
   panels.forEach(panel => {
     const tab = panel.dataset.panel;
@@ -22,9 +22,9 @@
       h.id = anchor;
       let text = "", next = h.nextElementSibling;
       while (next && !/^H[23]$/.test(next.tagName)) { text += " " + next.textContent; next = next.nextElementSibling; }
-      entries.push({label: h.textContent.trim(), tab, hash: anchor, text: (h1 + " " + h.textContent + " " + text).replace(/\\s+/g," ").slice(0,5000), type:"section"});
+      entries.push({label: h.textContent.trim(), tab, hash: anchor, text: (h1 + " " + h.textContent + " " + text).replace(/\s+/g," ").slice(0,5000), type:"section"});
     });
-    entries.push({label:h1,tab,hash:tab,text:panel.textContent.replace(/\\s+/g," ").slice(0,1200),type:"tab"});
+    entries.push({label:h1,tab,hash:tab,text:panel.textContent.replace(/\s+/g," ").slice(0,1200),type:"tab"});
   });
   function showTab(tab, hash = tab, updateHash = true) {
     if(!valid.has(tab)) tab = "overview";
@@ -50,6 +50,16 @@
   const savedTheme = localStorage.getItem("musicinterface-wiki-theme");
   if(savedTheme === "dark" || savedTheme === "light") root.dataset.theme = savedTheme;
   themeToggle?.addEventListener("click", () => {root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";localStorage.setItem("musicinterface-wiki-theme", root.dataset.theme);});
+  // Optional index for the standalone Music Pack guides and version pages.
+  const extraIndexUrl = lang === "fr" ? "../search-index.json" : "search-index.json";
+  fetch(extraIndexUrl).then(response => response.ok ? response.json() : [])
+    .then(items => {
+      for (const item of items) {
+        if (item.lang !== lang) continue;
+        entries.push({label:item.title,tab:"",hash:"",text:item.title+" "+item.text,type:"external",external:(lang === "fr" ? "../" : "")+item.url});
+      }
+      if(search?.value.trim().length >= 2) renderSearch();
+    }).catch(() => {});
   function closeResults(){if(!results)return;results.hidden=true;results.replaceChildren();}
   function renderSearch(){
     if(!search||!results)return;
@@ -60,10 +70,10 @@
     results.replaceChildren();
     if(!matches.length){const none=document.createElement("div");none.className="search-empty";none.textContent=lang==="fr"?"Aucun résultat":"No result found";results.append(none);}
     matches.slice(0,12).forEach(m=>{
-      const a=document.createElement("a");a.className="search-result";a.href="#"+m.hash;
+      const a=document.createElement("a");a.className="search-result";a.href=m.external||("#"+m.hash);
       const strong=document.createElement("strong");strong.textContent=m.label;
       const sub=document.createElement("span");const at=normalize(m.text).indexOf(q);sub.textContent=(at>50?"…":"")+m.text.slice(Math.max(0,at-50),Math.max(0,at-50)+140)+(m.text.length>140?"…":"");
-      a.append(strong,sub);a.addEventListener("click",e=>{e.preventDefault();showTab(m.tab,m.hash);search.value="";closeResults();});results.append(a);
+      a.append(strong,sub);a.addEventListener("click",e=>{if(!m.external){e.preventDefault();showTab(m.tab,m.hash);}search.value="";closeResults();});results.append(a);
     });results.hidden=false;
   }
   search?.addEventListener("input",renderSearch);

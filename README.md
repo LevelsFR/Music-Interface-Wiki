@@ -12,11 +12,11 @@ For first-time users, start with the [Installation](https://levelsfr.github.io/M
 
 ## Guides
 
-The site covers installation, library use, favorites, playlists, sharing, queue, Radio, Smart Mixes, listening statistics, settings, context-aware playback, Cobblemon battle music, commands, music resource packs, diagnostics and troubleshooting.
+The site has English and French navigation with in-site Music Pack guides, dedicated release notes, and heading-level search. It covers installation, library use, favorites, playlists, sharing, queue, Radio, Smart Mixes, listening statistics, settings, context-aware playback, Cobblemon battle music, commands, music resource packs, diagnostics and troubleshooting.
 
 - [Open the official wiki](https://levelsfr.github.io/Music-Interface-Wiki/)
-- [Music Pack creation (English)](https://levelsfr.github.io/Music-Interface-Wiki/#musicpacks)
-- [Création de Music Packs (français)](docs/MUSIC_PACK_FR.md)
+- [Music Pack creation (English), on the website](https://levelsfr.github.io/Music-Interface-Wiki/music-packs.html)
+- [Création de Music Packs (français), sur le site](https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/music-interface)
 - [Modrinth](https://modrinth.com/mod/music-interface)
 - [Discord / Our Story Network](https://discord.gg/kb8NSTF45n)
@@ -25,7 +25,7 @@ The site covers installation, library use, favorites, playlists, sharing, queue,
 
 This repository hosts **documentation only**, not the private Music Interface Java sources. The site is a static HTML/CSS/JS wiki whose visual layout, navigation, community links, and GitHub Pages workflow match the established [Recipe Item Sync wiki](https://github.com/LevelsFR/Recipe-Item-Sync-Wiki) template.
 
-The pinned GitHub Actions workflow at `.github/workflows/pages.yml` deploys the `site/` directory on changes to `main`. Set **Settings → Pages → Build and deployment → Source = GitHub Actions** once to activate Pages.
+The pinned GitHub Actions workflow at `.github/workflows/pages.yml` regenerates the two public HTML Music Pack guides and their search index from `docs/MUSIC_PACK_EN.md` and `docs/MUSIC_PACK_FR.md`, validates the site and deploys `site/` on changes to `main`. This keeps guide edits published without copying private Java sources. Set **Settings → Pages → Build and deployment → Source = GitHub Actions** once to activate Pages.
 
 ## Permissions
 

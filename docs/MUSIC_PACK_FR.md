@@ -8,7 +8,7 @@ Pour écouter des musiques personnalisées, il faut **ajouter un Music Pack** (r
 
 Music Interface utilise des **resource packs Minecraft** pour charger les chansons. Il n'est pas nécessaire de coder en Java. Le format des pistes est commun à Fabric et NeoForge. En revanche, les informations de compatibilité de Minecraft dans `pack.mcmeta` doivent correspondre à votre version du jeu.
 
-Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le [guide général](https://levelsfr.github.io/Music-Interface-Wiki/#overview). Le guide général est actuellement en anglais.
+Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le [guide général](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview). Le guide général est actuellement en anglais.
 
 ## Réponses rapides
 
@@ -399,4 +399,4 @@ La commande cliente `/musicinterface_diagnostics` affiche le nombre de packs, le
 
 **Conseil :** commencez avec un seul fichier OGG et une seule piste valide, puis ajoutez les métadonnées et les contextes. Si vous distribuez des chansons ou des illustrations, vérifiez que vous disposez des droits nécessaires.
 
-Voir également le [guide général Music Interface 2.0](docs/PROJECT_GUIDE.md) et le [Music Pack guide en anglais](https://levelsfr.github.io/Music-Interface-Wiki/#musicpacks).
+Voir également le [guide général Music Interface 2.0](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview) et le [Music Pack guide en anglais](https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html).

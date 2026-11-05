@@ -5,6 +5,8 @@ on:
     branches: ["main"]
     paths:
       - "site/**"
+      - "docs/**"
+      - "scripts/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -35,6 +37,14 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
+      - name: Build guides and search index
+        run: node scripts/render-guides.mjs
+
+      - name: Check generated site
+        run: |
+          node --check site/app.js
+          node scripts/validate-site.mjs
 
       - name: Upload site
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
