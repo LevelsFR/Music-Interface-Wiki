@@ -626,3 +626,8 @@ html[data-theme="light"] .command > code { color: #194f9b; }
 @media(max-width:820px){.topbar{grid-template-columns:auto minmax(0,1fr) repeat(6,auto)}}
 @media(max-width:680px){.topbar{grid-template-columns:auto minmax(0,1fr) auto auto}}
 @media(max-width:420px){.topbar{gap:5px;padding:0 5px}.lang-toggle{min-width:31px;padding:3px}}
+
+/* Copy action for tutorial code blocks */
+.guide-body pre{position:relative}
+.code-copy{position:absolute;top:8px;right:8px;padding:4px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--text);font:600 11px/1.4 system-ui;cursor:pointer}
+.guide-body pre code{display:block;padding-top:20px}

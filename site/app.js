@@ -66,7 +66,7 @@
     const q=normalize(search.value.trim());
     if(q.length<2){closeResults();return;}
     let matches=entries.filter(e=>normalize(e.text).includes(q)).map(e=>({...e,score:normalize(e.label).includes(q)?0:1}));
-    matches.sort((a,b)=>a.score-b.score || (a.type==="section"?-1:1));
+    matches.sort((a,b)=>a.score-b.score || ((a.type==="section"?0:a.type==="external"?1:2)-(b.type==="section"?0:b.type==="external"?1:2)) || a.label.localeCompare(b.label));
     results.replaceChildren();
     if(!matches.length){const none=document.createElement("div");none.className="search-empty";none.textContent=lang==="fr"?"Aucun résultat":"No result found";results.append(none);}
     matches.slice(0,12).forEach(m=>{
