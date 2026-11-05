@@ -1,143 +1,80 @@
 (() => {
   const root = document.documentElement;
   const body = document.body;
-  const tabs = Array.from(document.querySelectorAll("[data-tab]"));
-  const tabLinks = Array.from(document.querySelectorAll("[data-tab-link]"));
-  const panels = Array.from(document.querySelectorAll("[data-panel]"));
+  const lang = root.lang === "fr" ? "fr" : "en";
+  const tabs = [...document.querySelectorAll("[data-tab]")];
+  const tabLinks = [...document.querySelectorAll("[data-tab-link]")];
+  const panels = [...document.querySelectorAll("[data-panel]")];
   const menuButton = document.getElementById("menuButton");
   const themeToggle = document.getElementById("themeToggle");
   const search = document.getElementById("wikiSearch");
   const results = document.getElementById("searchResults");
-
-  const validTabs = new Set(panels.map(panel => panel.dataset.panel));
-
-  function showTab(name, updateHash = true) {
-    if (!validTabs.has(name)) name = "overview";
-
-    panels.forEach(panel => panel.classList.toggle("active", panel.dataset.panel === name));
-    tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.tab === name));
-    tabLinks.forEach(link => link.classList.toggle("active", link.dataset.tabLink === name));
-
-    if (updateHash) history.replaceState(null, "", "#" + name);
+  const valid = new Set(panels.map(p => p.dataset.panel));
+  const normalize = value => (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const slug = value => normalize(value).replace(/[^a-z0-9\\s-]/g, "").trim().replace(/\\s+/g, "-");
+  const entries = [];
+  panels.forEach(panel => {
+    const tab = panel.dataset.panel;
+    const h1 = panel.querySelector("h1")?.textContent.trim() || tab;
+    const headings = [...panel.querySelectorAll("h2,h3")];
+    headings.forEach((h, i) => {
+      const anchor = tab + "--" + slug(h.textContent);
+      h.id = anchor;
+      let text = "", next = h.nextElementSibling;
+      while (next && !/^H[23]$/.test(next.tagName)) { text += " " + next.textContent; next = next.nextElementSibling; }
+      entries.push({label: h.textContent.trim(), tab, hash: anchor, text: (h1 + " " + h.textContent + " " + text).replace(/\\s+/g," ").slice(0,5000), type:"section"});
+    });
+    entries.push({label:h1,tab,hash:tab,text:panel.textContent.replace(/\\s+/g," ").slice(0,1200),type:"tab"});
+  });
+  function showTab(tab, hash = tab, updateHash = true) {
+    if(!valid.has(tab)) tab = "overview";
+    panels.forEach(p => p.classList.toggle("active", p.dataset.panel === tab));
+    tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
+    tabLinks.forEach(t => t.classList.toggle("active", t.dataset.tabLink === tab));
+    if(updateHash) history.replaceState(null, "", "#" + hash);
     body.classList.remove("menu-open");
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }
-
-  tabs.forEach(tab => tab.addEventListener("click", () => showTab(tab.dataset.tab)));
-  tabLinks.forEach(link => {
-    link.addEventListener("click", event => {
-      event.preventDefault();
-      showTab(link.dataset.tabLink);
+    requestAnimationFrame(() => {
+      if(hash !== tab) document.getElementById(hash)?.scrollIntoView({behavior:"smooth",block:"start"});
+      else window.scrollTo({top:0,behavior:"instant"});
     });
-  });
-
+  }
+  function fromHash() {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    const tab = valid.has(hash) ? hash : (hash.split("--")[0] || "overview");
+    showTab(tab, hash || tab, false);
+  }
+  tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+  tabLinks.forEach(a => a.addEventListener("click", e => {e.preventDefault();showTab(a.dataset.tabLink)}));
   menuButton?.addEventListener("click", () => body.classList.toggle("menu-open"));
-
-  document.addEventListener("click", event => {
-    if (window.innerWidth <= 820 && body.classList.contains("menu-open")) {
-      if (!event.target.closest("#sidebar") && !event.target.closest("#menuButton")) {
-        body.classList.remove("menu-open");
-      }
-    }
-  });
-
-  const storedTheme = localStorage.getItem("musicinterface-wiki-theme");
-  if (storedTheme === "light" || storedTheme === "dark") {
-    root.dataset.theme = storedTheme;
+  document.addEventListener("click", e => { if(window.innerWidth <= 820 && body.classList.contains("menu-open") && !e.target.closest("#sidebar") && !e.target.closest("#menuButton"))body.classList.remove("menu-open");});
+  const savedTheme = localStorage.getItem("musicinterface-wiki-theme");
+  if(savedTheme === "dark" || savedTheme === "light") root.dataset.theme = savedTheme;
+  themeToggle?.addEventListener("click", () => {root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";localStorage.setItem("musicinterface-wiki-theme", root.dataset.theme);});
+  function closeResults(){if(!results)return;results.hidden=true;results.replaceChildren();}
+  function renderSearch(){
+    if(!search||!results)return;
+    const q=normalize(search.value.trim());
+    if(q.length<2){closeResults();return;}
+    let matches=entries.filter(e=>normalize(e.text).includes(q)).map(e=>({...e,score:normalize(e.label).includes(q)?0:1}));
+    matches.sort((a,b)=>a.score-b.score || (a.type==="section"?-1:1));
+    results.replaceChildren();
+    if(!matches.length){const none=document.createElement("div");none.className="search-empty";none.textContent=lang==="fr"?"Aucun résultat":"No result found";results.append(none);}
+    matches.slice(0,12).forEach(m=>{
+      const a=document.createElement("a");a.className="search-result";a.href="#"+m.hash;
+      const strong=document.createElement("strong");strong.textContent=m.label;
+      const sub=document.createElement("span");const at=normalize(m.text).indexOf(q);sub.textContent=(at>50?"…":"")+m.text.slice(Math.max(0,at-50),Math.max(0,at-50)+140)+(m.text.length>140?"…":"");
+      a.append(strong,sub);a.addEventListener("click",e=>{e.preventDefault();showTab(m.tab,m.hash);search.value="";closeResults();});results.append(a);
+    });results.hidden=false;
   }
-
-  themeToggle?.addEventListener("click", () => {
-    root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
-    localStorage.setItem("musicinterface-wiki-theme", root.dataset.theme);
-  });
-
-  const searchable = panels.map(panel => {
-    const title = panel.querySelector("h1")?.textContent.trim() || panel.dataset.panel;
-    const headings = Array.from(panel.querySelectorAll("h2,h3")).map(el => el.textContent.trim());
-    return {
-      tab: panel.dataset.panel,
-      title,
-      headings,
-      text: panel.textContent.replace(/\s+/g, " ").trim()
-    };
-  });
-
-  function closeResults() {
-    results.hidden = true;
-    results.innerHTML = "";
-  }
-
-  function renderSearch(query) {
-    const q = query.trim().toLowerCase();
-    if (q.length < 2) {
-      closeResults();
-      return;
-    }
-
-    const matches = [];
-    searchable.forEach(item => {
-      if (!item.text.toLowerCase().includes(q)) return;
-
-      let label = item.title;
-      const heading = item.headings.find(h => h.toLowerCase().includes(q));
-      if (heading) label += " · " + heading;
-
-      const pos = item.text.toLowerCase().indexOf(q);
-      const start = Math.max(0, pos - 70);
-      const end = Math.min(item.text.length, pos + q.length + 100);
-      const excerpt = (start > 0 ? "…" : "") + item.text.slice(start, end) + (end < item.text.length ? "…" : "");
-
-      matches.push({ ...item, label, excerpt });
-    });
-
-    results.innerHTML = "";
-    if (!matches.length) {
-      results.innerHTML = '<div class="search-empty">No result found</div>';
-      results.hidden = false;
-      return;
-    }
-
-    matches.slice(0, 8).forEach(match => {
-      const link = document.createElement("a");
-      link.href = "#" + match.tab;
-      link.className = "search-result";
-      link.innerHTML = "<strong></strong><span></span>";
-      link.querySelector("strong").textContent = match.label;
-      link.querySelector("span").textContent = match.excerpt;
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        showTab(match.tab);
-        search.value = "";
-        closeResults();
-      });
-      results.appendChild(link);
-    });
-    results.hidden = false;
-  }
-
-  search?.addEventListener("input", () => renderSearch(search.value));
-  search?.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      search.value = "";
-      closeResults();
-      search.blur();
-    }
-  });
-
-  document.addEventListener("keydown", event => {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-      event.preventDefault();
-      search?.focus();
-    }
-  });
-
-  document.addEventListener("click", event => {
-    if (!event.target.closest(".search-wrap")) closeResults();
-  });
-
-  const initial = location.hash.replace("#", "");
-  showTab(validTabs.has(initial) ? initial : "overview", false);
+  search?.addEventListener("input",renderSearch);
+  search?.addEventListener("keydown",e=>{if(e.key==="Escape"){search.value="";closeResults();search.blur();}});
+  document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();search?.focus();}});
+  document.addEventListener("click",e=>{if(!e.target.closest(".search-wrap"))closeResults();});
+  window.addEventListener("hashchange",fromHash);
+  fromHash();
 })();
+
+
 
 (() => {
   async function getJson(url, timeout = 6500) {

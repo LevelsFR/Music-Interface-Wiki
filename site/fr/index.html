@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wiki officiel de Music Interface 2.0 en français : installation, Music Packs, Radio, playlists, contextes et aide.">
+  <title>Music Interface v2.0 Documentation</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" type="button" aria-label="Ouvrir la navigation">☰</button>
+
+    <a class="brand" href="#overview" data-tab-link="overview">
+      <span class="brand-mark">MI</span>
+      <span class="brand-copy">
+        <strong>Music Interface</strong>
+        <small>v2.0 Documentation</small>
+      </span>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true"></span>
+      <input id="wikiSearch" type="search" placeholder="Rechercher dans la documentation..." autocomplete="off">
+      <kbd>Ctrl K</kbd>
+      <div class="search-results" id="searchResults" hidden></div>
+    </div>
+
+    <a class="community-badge bisecthosting-badge" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored" aria-label="Save 25% on BisectHosting servers with code OurStory">
+      <span class="community-icon bisecthosting-icon" aria-hidden="true">BH</span>
+      <span class="community-copy">
+        <strong>25% OFF Servers</strong>
+        <small>BisectHosting <span class="community-divider">•</span> Code <b>OurStory</b></small>
+      </span>
+    </a>
+
+    <a class="community-badge discord-badge" id="discordBadge" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer" aria-label="Join the Our Story Network Discord">
+      <svg class="community-icon discord-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19.54 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15.1 15.1 0 0 0-5.86 0L8.56 4a16.5 16.5 0 0 0-4.1 1.35C1.87 9.2 1.17 12.96 1.52 16.67a16.7 16.7 0 0 0 5.03 2.55l1.23-1.68c-.67-.25-1.3-.56-1.9-.93l.46-.36c3.67 1.69 7.65 1.69 11.28 0l.47.36c-.6.37-1.24.69-1.9.94l1.22 1.67a16.6 16.6 0 0 0 5.04-2.55c.42-4.3-.72-8.03-2.91-11.33ZM8.5 14.44c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Zm7 0c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Z"/>
+      </svg>
+      <span class="community-copy">
+        <strong>Discord</strong>
+        <small id="discordStats"><span class="status-dot"></span>Join the server</small>
+      </span>
+    </a>
+
+    <a class="community-badge curseforge-badge" id="curseforgeBadge" href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer" aria-label="View Music Interface on CurseForge">
+      <span class="community-icon curseforge-icon" aria-hidden="true">CF</span>
+      <span class="community-copy">
+        <strong>CurseForge</strong>
+        <small id="curseforgeStats">Music Interface</small>
+      </span>
+    </a>
+
+    <a class="community-badge modrinth-badge" id="modrinthBadge" href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer" aria-label="View Music Interface on Modrinth">
+      <span class="community-icon modrinth-icon" aria-hidden="true">MR</span>
+      <span class="community-copy">
+        <strong>Modrinth</strong>
+        <small id="modrinthStats">Music Interface</small>
+      </span>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Changer le thème">
+      <span class="theme-icon theme-icon-sun">☀</span>
+      <span class="theme-icon theme-icon-moon">☾</span>
+    </button>
+    <a class="lang-toggle" href="../" hreflang="en" aria-label="Read in English">EN</a>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="sidebar-title">Documentation</div>
+      <nav class="sidebar-navigation" aria-label="Rubriques de documentation">
+        <a href="#overview" data-tab-link="overview" class="active">👋 Présentation</a>
+        <a href="#installation" data-tab-link="installation">📦 Installation</a>
+        <a href="#configuration" data-tab-link="configuration">⚙️ Configuration</a>
+        <a href="#commands" data-tab-link="commands">⌨️ Commandes</a>
+        <a href="#musicpacks" data-tab-link="musicpacks">🎵 Music Packs</a>
+        <a href="#troubleshooting" data-tab-link="troubleshooting">🛠️ Assistance</a>
+      </nav>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Liens</div>
+        <a class="sidebar-link" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored">🤝 BisectHosting Partner</a>
+        <a class="sidebar-link" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">💬 Discord</a>
+        <a class="sidebar-link" href="https://www.curseforge.com/minecraft/mc-mods/music-interface" target="_blank" rel="noopener noreferrer">🧡 CurseForge</a>
+        <a class="sidebar-link" href="https://modrinth.com/mod/music-interface" target="_blank" rel="noopener noreferrer">🟢 Modrinth</a>
+        <a class="sidebar-link" href="https://github.com/LevelsFR/Music-Interface-Wiki" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
+        <a class="sidebar-link" href="https://www.patreon.com/c/OurStoryCollection" target="_blank" rel="noopener noreferrer">❤️ Patreon</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <strong>Music Interface</strong>
+        <span>Documentation version 2.0</span>
+      </div>
+    </aside>
+
+    <main>
+      <div class="tabs" role="tablist" aria-label="Onglets de documentation">
+        <button class="tab active" type="button" data-tab="overview">Présentation</button>
+        <button class="tab" type="button" data-tab="installation">Installation</button>
+        <button class="tab" type="button" data-tab="configuration">Configuration</button>
+        <button class="tab" type="button" data-tab="commands">Commandes</button>
+        <button class="tab" type="button" data-tab="musicpacks">Music Packs</button>
+        <button class="tab" type="button" data-tab="troubleshooting">Assistance</button>
+      </div>
+
+      
+<article>
+<section class="tab-panel active" id="overview" data-panel="overview">
+<div class="page-heading"><span class="page-kicker">Music Interface v2.0</span><h1>Bienvenue sur Music Interface</h1><p class="page-description">Votre lecteur musical dans Minecraft : gérez vos morceaux, vos playlists et les musiques adaptées au jeu.</p></div>
+<div class="hint hint-info"><strong>Music Interface ne contient aucune musique.</strong><p>Ce mod ajoute un lecteur et un gestionnaire de bandes-son, pas des chansons. Pour afficher des pistes, activez un <a href="music-packs.html">Music Pack</a>, c'est-à-dire un resource pack Minecraft contenant vos propres fichiers audio OGG et des définitions JSON. Les musiques vanilla et celles des autres mods ne sont pas automatiquement importées dans la bibliothèque.</p></div>
+<h2>Commencer en cinq étapes</h2>
+<ol><li>Téléchargez la bonne version du mod selon Minecraft et votre loader.</li><li>Installez ses dépendances.</li><li>Ajoutez un Music Pack compatible dans <code>resourcepacks/</code> puis activez-le.</li><li>Ouvrez le lecteur depuis le raccourci configuré dans les contrôles.</li><li>Si la bibliothèque est vide, rechargez les ressources avec <code>F3+T</code> ou lancez <code>/musicinterface_diagnostics</code>.</li></ol>
+<p><a href="music-packs.html"><strong>Lire le tutoriel complet de création d'un Music Pack →</strong></a></p>
+<h2>Bibliothèque et organisation</h2>
+<p>Le lecteur permet de chercher des pistes, naviguer par artiste ou album, gérer les favoris et les playlists, afficher l'historique récent, changer de vue et contrôler la lecture.</p>
+<ul><li><strong>Playlists :</strong> création, ordre des pistes, lecture aléatoire et répétition.</li><li><strong>Partage :</strong> codes de partage et import de playlists. Le code transmet la liste de pistes, jamais les fichiers son.</li><li><strong>Queue :</strong> <em>Play Next</em>, <em>Add to Queue</em>, réorganisation et sauvegarde en playlist. La persistance de la file est activée par défaut.</li><li><strong>Radio :</strong> lecture continue de pistes proches d'un morceau de référence, tant que des titres compatibles sont disponibles.</li></ul>
+<h2>Radio, Smart Mixes et statistiques</h2>
+<p><strong>Track Radio</strong> utilise les genres, tags, moods, artiste, album, Music Pack et préférences locales. <strong>Made for You</strong> propose quatre sélections : <em>For You</em>, <em>On Repeat</em>, <em>Rediscover</em> et <em>Current Context</em>. Le profil d'écoute reste enregistré localement, sans envoi de télémétrie par le code du profil.</p>
+<h2>À quoi servent les moods ?</h2>
+<p>Les <code>moods</code> décrivent l'ambiance d'une chanson, par exemple <code>calm</code> ou <code>energetic</code>. Avec <code>tags</code>, <code>genres</code> et <code>energy</code>, ils améliorent les recommandations et la Radio. <strong>Ils ne déclenchent pas à eux seuls la musique d'un combat, d'un biome ou du menu.</strong> Pour cela, utilisez les règles <code>contexts</code> décrites dans le <a href="music-packs.html">guide Music Pack</a>.</p>
+<h2>Notifications de lecture</h2>
+<p>Les notifications <em>Now Playing</em> affichent la pochette, le titre et éventuellement l'artiste et l'album. Leur couleur de contour provient automatiquement de la pochette, avec une couleur de secours si aucune image n'est utilisable. <strong>Il n'existe pas de paramètre séparé pour choisir manuellement cette couleur.</strong> En revanche, la position, l'animation et les métadonnées affichées sont réglables.</p>
+<h2>Versions et documentation</h2>
+<p>Consultez les <a href="releases.html">notes de version</a> et la <a href="#installation" data-tab-link="installation">compatibilité</a> avant de télécharger un fichier. Ce wiki concerne Music Interface v2.0.</p>
+</section>
+<section class="tab-panel" id="installation" data-panel="installation">
+<div class="page-heading"><span class="page-kicker">Bien démarrer</span><h1>Installation</h1><p class="page-description">Le bon JAR, les bonnes dépendances et un Music Pack activé.</p></div>
+<h2>Installation pas à pas</h2>
+<ol><li>Ouvrez la <a href="https://www.curseforge.com/minecraft/mc-mods/music-interface/files/all" target="_blank" rel="noopener noreferrer">liste des fichiers CurseForge</a> ou <a href="https://modrinth.com/mod/music-interface/versions" target="_blank" rel="noopener noreferrer">Modrinth</a>.</li><li>Choisissez <strong>exactement</strong> votre version Minecraft et votre loader : Fabric ou NeoForge.</li><li>Installez les dépendances affichées pour ce fichier et placez les JAR dans <code>mods/</code>.</li><li>Lancez Minecraft. Installez votre Music Pack dans <code>resourcepacks/</code> puis activez-le.</li><li>Ouvrez le lecteur depuis les contrôles Minecraft. Consultez les diagnostics si aucune piste n'apparaît.</li></ol>
+<div class="hint hint-warning"><strong>Un projet Gradle configuré ne garantit pas un JAR publié et testé.</strong><p>Le code source v2.0 possède neuf cibles Minecraft et deux loaders, soit 18 combinaisons configurées. Vérifiez toujours la page du téléchargement correspondant à votre version.</p></div>
+<h2>Versions ciblées par le code source</h2>
+<table><thead><tr><th>Versions Minecraft</th><th>Loaders</th><th>Java pour compilation</th></tr></thead><tbody>
+<tr><td>1.21.1, 1.21.4, 1.21.5, 1.21.8, 1.21.10, 1.21.11</td><td>Fabric et NeoForge</td><td>Java 21</td></tr>
+<tr><td>26.1, 26.2, 26.3</td><td>Fabric et NeoForge</td><td>Java 25</td></tr></tbody></table>
+<h2>Dépendances déclarées pour Minecraft 1.21.1</h2>
+<table><thead><tr><th>Fabric</th><th>NeoForge</th></tr></thead><tbody>
+<tr><td>Fabric Loader ≥ 0.18.4, Fabric API, Architectury API ≥ 13.0.8</td><td>NeoForge 21.1.x, Architectury API ≥ 13.0.8</td></tr>
+<tr><td>Cloth Config recommandé pour l'écran de réglages</td><td>Cloth Config facultatif pour l'écran de réglages</td></tr></tbody></table>
+<p>Les dépendances peuvent varier selon la version. Consultez les informations du fichier que vous installez. Un mod compilé ne signifie pas qu'un test en jeu a été réussi.</p>
+</section>
+<section class="tab-panel" id="configuration" data-panel="configuration">
+<div class="page-heading"><span class="page-kicker">Lecture et comportements</span><h1>Configuration</h1><p class="page-description">Configurez la lecture automatique, les contextes et les notifications.</p></div>
+<h2>Comment fonctionne la musique contextuelle ?</h2>
+<p><strong>Métadonnées</strong> : <code>tags</code>, <code>genres</code>, <code>moods</code> et <code>energy</code> servent à classer les chansons et alimentent la Radio et les recommandations. <strong>Contextes</strong> : des règles dans <code>music_data.json</code> ou <code>music_contexts.json</code> déclenchent la sélection automatique selon dimension, biome, tags de biome, jour/nuit, météo ou combat Cobblemon.</p>
+<p>Une règle correspond quand toutes ses conditions renseignées sont respectées. Le scheduler utilise la priorité numérique la plus élevée parmi les règles compatibles. Le mode de transition par défaut est <strong>Finish</strong> : une piste contextuelle déjà jouée n'est pas interrompue immédiatement. Choisissez <strong>Crossfade</strong> pour permettre la transition des pistes gérées par le contexte.</p>
+<h2>Modes de lecture</h2>
+<ul><li><strong>Ambient</strong> : musique espacée de pauses, par défaut de 15 à 90 secondes entre les morceaux.</li><li><strong>Continuous</strong> : pas de délai volontaire entre les pistes.</li><li><strong>World join silence</strong> : délai initial de 10 secondes par défaut en entrant dans un monde.</li><li><strong>Queue prioritaire</strong> : les morceaux ajoutés manuellement passent avant les sélections automatiques.</li></ul>
+<h2>Musique de l'écran titre</h2>
+<p>La musique personnalisée de menu est activée par défaut. Un champ <code>titleScreenTrackId</code> vide signifie une sélection possible dans la bibliothèque, pas une désactivation. Pour choisir une piste précise, renseignez son ID. Pour arrêter la musique personnalisée du menu, désactivez l'option correspondante. La musique vanilla du menu possède un réglage distinct.</p>
+<h2>Combats Cobblemon</h2>
+<p>Le mode par défaut <code>cobblemonBattleMode = external</code> laisse la priorité au système audio du combat. Pour une piste personnalisée, sélectionnez <code>context</code>, activez les contextes, puis définissez une règle <code>"combat": true</code> sur la piste. Un simple tag <code>battle</code> ne suffit pas.</p>
+<h2>Quelques valeurs par défaut importantes</h2>
+<table><thead><tr><th>Paramètre</th><th>Valeur initiale</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>playbackMode</code></td><td><code>ambient</code></td><td>Lecture espacée</td></tr>
+<tr><td><code>contextMusicEnabled</code></td><td><code>true</code></td><td>Musique contextuelle active</td></tr>
+<tr><td><code>contextTransitionMode</code></td><td><code>finish</code></td><td>Attend la fin du morceau</td></tr>
+<tr><td><code>contextFallbackMode</code></td><td><code>library</code></td><td>Retour à la bibliothèque normale</td></tr>
+<tr><td><code>cobblemonBattleMode</code></td><td><code>external</code></td><td>Priorité au son de combat externe</td></tr>
+<tr><td><code>persistQueue</code></td><td><code>true</code></td><td>Conserve la file au redémarrage</td></tr>
+<tr><td><code>worldJoinSilenceSeconds</code></td><td><code>10</code></td><td>Silence initial après connexion</td></tr>
+<tr><td><code>toastPosition</code></td><td><code>TOP_RIGHT</code></td><td>Position de la notification</td></tr>
+<tr><td><code>toastAnimation</code></td><td><code>SLIDE</code></td><td>Animation d'apparition</td></tr>
+<tr><td><code>vanillaMusicEnabled</code></td><td><code>false</code></td><td>Musique vanilla en jeu</td></tr></tbody></table>
+<p>L'écran de paramètres utilise l'intégration optionnelle de Cloth Config. Les configurations locales sont enregistrées dans <code>config/musicinterface/</code>.</p>
+</section>
+<section class="tab-panel" id="commands" data-panel="commands">
+<div class="page-heading"><span class="page-kicker">Référence</span><h1>Commandes</h1><p class="page-description">Distinguez bien les commandes du client de celles du serveur.</p></div>
+<h2>Commandes côté client</h2>
+<table><thead><tr><th>Commande</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>/musicinterface_diagnostics</code></td><td>Diagnostic des Music Packs, conflits, pistes et avertissements</td></tr>
+<tr><td><code>/musicinterface_open_resourcepacks</code></td><td>Ouvre le dossier des resource packs</td></tr>
+<tr><td><code>/musicinterface_import_playlist &lt;code&gt;</code></td><td>Importe une playlist depuis son code</td></tr>
+<tr><td><code>/musicinterface_import_shared &lt;token&gt;</code></td><td>Importe un jeton de partage reçu</td></tr>
+<tr><td><code>/musicgui</code></td><td>Ouvre le lecteur sur Fabric</td></tr>
+<tr><td><code>/musicinterface</code></td><td>Ouvre le lecteur sur NeoForge</td></tr>
+<tr><td><code>/musicinterface diagnostics</code></td><td>Alias diagnostic local NeoForge</td></tr></tbody></table>
+<h2>Commandes serveur, niveau de permission 2</h2>
+<table><thead><tr><th>Commande</th><th>Fonction</th></tr></thead><tbody>
+<tr><td><code>/musicinterface list</code></td><td>Liste les identifiants de pistes connus du serveur</td></tr>
+<tr><td><code>/musicinterface search &lt;text&gt;</code></td><td>Recherche de pistes</td></tr>
+<tr><td><code>/musicinterface play &lt;id&gt; &lt;targets&gt;</code></td><td>Demande la lecture d'une piste à certains joueurs</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt;</code></td><td>Arrêt de la lecture</td></tr>
+<tr><td><code>/musicinterface stop &lt;targets&gt; fade</code></td><td>Arrêt en fondu</td></tr></tbody></table>
+<p>Les commandes serveur nécessitent l'installation compatible côté serveur et peuvent nécessiter la présence du mod côté client. Elles n'envoient pas les fichiers OGG aux joueurs.</p>
+</section>
+<section class="tab-panel" id="musicpacks" data-panel="musicpacks">
+<div class="page-heading"><span class="page-kicker">Ajouter vos propres titres</span><h1>Music Packs</h1><p class="page-description">Créez une bibliothèque musicale complète sans écrire de code Java.</p></div>
+<div class="hint hint-info"><strong>Tutoriel français complet directement sur le site</strong><p>Le guide présente la structure des dossiers, les fichiers OGG, <code>sounds.json</code>, <code>music_data.json</code>, les pochettes, la musique de menu, les contextes et les combats Cobblemon.</p><p><a href="music-packs.html"><strong>Ouvrir le guide français de création des Music Packs →</strong></a></p></div>
+<h2>Structure minimale</h2>
+<pre><code>resourcepacks/
+  Mon Music Pack/
+    pack.mcmeta
+    assets/
+      musicinterface/
+        music_data.json
+        sounds.json
+        sounds/
+          custom/
+            ma_piste.ogg</code></pre>
+<h2>Un modèle sans audio n'est pas une musique</h2>
+<p>Le bouton de génération de modèle crée l'arborescence, les fichiers JSON et une pochette d'exemple, mais <strong>aucun véritable fichier OGG</strong>. Ajoutez votre propre audio, déclarez-le dans <code>sounds.json</code> puis associez une piste dans <code>music_data.json</code>.</p>
+<h2>Plusieurs Music Packs à la fois</h2>
+<p>Les packs actifs, en dossier ou en ZIP, peuvent être combinés. Si deux packs réutilisent le même ID de piste, le pack ayant la priorité la plus élevée l'emporte. Les diagnostics signalent les doublons. Conservez donc des identifiants uniques par piste.</p>
+<h2>Créer des musiques contextuelles</h2>
+<p>Associez des règles <code>contexts</code> dans le JSON. Les <code>moods</code> et les tags décrivent l'ambiance mais n'établissent pas le déclencheur. Des exemples JSON complets sont fournis dans le <a href="music-packs.html">guide français</a>.</p>
+</section>
+<section class="tab-panel" id="troubleshooting" data-panel="troubleshooting">
+<div class="page-heading"><span class="page-kicker">Aide et diagnostic</span><h1>Résolution des problèmes</h1><p class="page-description">Les vérifications concrètes avant de demander de l'aide.</p></div>
+<h2>Pourquoi ma bibliothèque est vide ?</h2><p>Music Interface n'installe aucune piste par défaut. Activez un Music Pack contenant un <code>music_data.json</code> valide et des sons OGG. Rechargez les ressources avec <code>F3+T</code>, puis lancez <code>/musicinterface_diagnostics</code>.</p>
+<h2>Une musique apparaît mais reste silencieuse</h2><p>Contrôlez le chemin OGG, l'événement dans <code>sounds.json</code> et la valeur <code>sound</code> associée dans <code>music_data.json</code>. Une simple piste avec un titre ne garantit pas qu'un son existe.</p>
+<h2>Pourquoi une musique de combat ne démarre pas ?</h2><p>Le mode Cobblemon est <code>external</code> par défaut. Sélectionnez <code>context</code> et définissez des règles avec <code>combat: true</code>. Le tag <code>battle</code> seul n'active rien.</p>
+<h2>Pourquoi les moods ne déclenchent-ils pas les événements ?</h2><p>Ils alimentent la Radio et les recommandations. Pour déclencher une musique à un moment particulier, utilisez les règles de contexte et leurs priorités.</p>
+<h2>Comment changer la couleur du cadre des notifications ?</h2><p>La couleur du contour est extraite automatiquement de la pochette. Il n'existe pas d'option manuelle de couleur. Vous pouvez modifier la pochette, la position ou l'animation de la notification.</p>
+<h2>Deux Music Packs définissent la même piste</h2><p>Chaque piste doit idéalement avoir son ID unique. Si deux packs partagent un ID, la version du pack prioritaire remplace l'autre. Consultez les diagnostics pour repérer les doublons.</p>
+<h2>Le modèle est indiqué comme incompatible</h2><p>La génération utilise <code>pack_format: 34</code> comme base. Adaptez <code>pack.mcmeta</code> à votre version exacte de Minecraft.</p>
+<h2>Mes réglages ou playlists ont disparu</h2><p>Les données sont locales dans <code>config/musicinterface/</code>. Sauvegardez ce dossier avant de changer d'instance ou de réinstaller le jeu. Les statistiques et la file persistante peuvent être stockées séparément des playlists.</p>
+<h2>Que transmettre pour obtenir du support ?</h2><p>Votre version exacte de Minecraft, Fabric ou NeoForge, le nom du JAR Music Interface, les dépendances installées, le pack, les étapes de reproduction et les extraits utiles de <code>latest.log</code> après suppression des informations privées.</p>
+<div class="hint hint-info"><strong>Support</strong><p>Rejoignez le <a href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">Discord Our Story Network</a>.</p></div>
+</section>
+</article>
+    </main>
+  </div>
+</body>
+</html>
