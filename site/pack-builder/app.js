@@ -132,7 +132,7 @@
   const saveStatus = document.getElementById("saveStatus");
   const saveStatusText = document.getElementById("saveStatusText");
   const toast = document.getElementById("toast");
-  let lang = localStorage.getItem("musicinterface-pack-builder-lang") || (navigator.language.toLowerCase().startsWith("fr") ? "fr" : "en");
+  let lang = localStorage.getItem("musicinterface-pack-builder-lang") || "en";
   let db = null;
   let currentStep = 0;
   let state = freshProject();
