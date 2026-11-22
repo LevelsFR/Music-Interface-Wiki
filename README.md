@@ -1,6 +1,8 @@
 # Music Interface Wiki
 
-Official public documentation for **Music Interface 2.0**, by LevelsFR / Our Story Network.
+Official documentation for the **Music Interface v2.1 source**, by LevelsFR / Our Story Network.
+
+> **Release status checked 22 November 2026:** public CurseForge and Modrinth listings still show v2.0 as the latest release. The wiki documents v2.1 source behavior; do not assume a feature marked v2.1 exists in a v2.0 JAR.
 
 > **Music Interface contains no bundled music.** It is a Minecraft music player and context-aware soundtrack manager, **not a song pack, song downloader or streaming service**. To hear custom tracks or populate the library, enable a compatible Music Pack (Minecraft resource pack) containing your own OGG audio files and track definitions. Minecraft's vanilla music and other music mods' tracks are not automatically imported into the Music Interface library.
 
@@ -15,6 +17,7 @@ For first-time users, start with the [Installation](https://levelsfr.github.io/M
 The site has English/French navigation, ten standalone documentation pages, in-site Music Pack guides, release notes and heading-level search. It covers installation, library use, favorites, playlists, sharing, queue, Radio, Smart Mixes, listening statistics, settings, context-aware playback, Cobblemon battle music, commands, music resource packs, diagnostics and troubleshooting.
 
 - [Open the official wiki](https://levelsfr.github.io/Music-Interface-Wiki/)
+- [Open the Music Pack Builder](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/)
 - [Music Pack creation (English), on the website](https://levelsfr.github.io/Music-Interface-Wiki/music-packs.html)
 - [Création de Music Packs (français), sur le site](https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html)
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/music-interface)
