@@ -7,7 +7,7 @@ const slug = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(
 function inline(s, lang) {
   const reCode = new RegExp(tick + "([^" + tick + "]+)" + tick, "g");
   return esc(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_,label,url) => {
-    if (lang === "fr") url = url.replace("https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview","./#overview").replace("https://levelsfr.github.io/Music-Interface-Wiki/#overview","./#overview").replace("docs/PROJECT_GUIDE.md","./#overview").replace("https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html","./music-packs.html").replace("https://levelsfr.github.io/Music-Interface-Wiki/#musicpacks","./music-packs.html");
+    if (lang === "fr") url = url.replace("https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview","./#overview").replace("https://levelsfr.github.io/Music-Interface-Wiki/#overview","./#overview").replace("docs/PROJECT_GUIDE.md","./#overview").replace("https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html","./music-packs.html").replace("https://levelsfr.github.io/Music-Interface-Wiki/music-packs.html","../music-packs.html").replace("https://levelsfr.github.io/Music-Interface-Wiki/#musicpacks","./music-packs.html");
     else url = url.replace("docs/PROJECT_GUIDE.md","./#overview").replace("WIKI_CREATION_PACK_MUSIQUE.md","./fr/music-packs.html");
     return '<a href="'+esc(url)+'">'+label+'</a>';
   }).replace(reCode,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/\*([^*]+)\*/g,"<em>$1</em>");
@@ -47,7 +47,7 @@ for(const lang of ["en","fr"]){
   writeFileSync(path,output,"utf8");
   all.push(...result.index);
 }
-all.push({lang:"en",title:"Release notes",url:"releases.html",text:"Music Interface v2.0 release September 28 2026 v1.9 August 19 2026"});
-all.push({lang:"fr",title:"Notes de version",url:"fr/releases.html",text:"Music Interface v2.0 publiée le 28 septembre 2026 v1.9 19 août 2026"});
+all.push({lang:"en",title:"Release notes",url:"releases.html",text:"Music Interface v2.1 source documentation; latest public release v2.0 September 28 2026; v1.9 August 19 2026"});
+all.push({lang:"fr",title:"Notes de version",url:"fr/releases.html",text:"Documentation Music Interface code source v2.1 ; dernière version publique v2.0 publiée le 28 septembre 2026 ; v1.9 19 août 2026"});
 writeFileSync(join(root,"site/search-index.json"),JSON.stringify(all,null,2)+"\n","utf8");
 console.log("Generated EN/FR guides and "+all.length+" search entries");
