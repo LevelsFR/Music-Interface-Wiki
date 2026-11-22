@@ -47,6 +47,7 @@ jobs:
       - name: Check generated site
         run: |
           node --check site/app.js
+          node --check site/pack-builder/app.js
           node scripts/validate-site.mjs
 
       - name: Upload site
