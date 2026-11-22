@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Wiki officiel de Music Interface 2.0 en français : installation, Music Packs, Radio, playlists, contextes et aide.">
-  <title>Music Interface v2.0 | Documentation française</title>
+  <meta name="description" content="Wiki officiel de Music Interface 2.1 en français : installation, Music Packs, Radio, playlists, contextes et aide.">
+  <title>Music Interface v2.1 | Documentation française</title>
   <link rel="alternate" hreflang="en" href="https://levelsfr.github.io/Music-Interface-Wiki/">
   <link rel="canonical" href="https://levelsfr.github.io/Music-Interface-Wiki/fr/">
   <link rel="stylesheet" href="../styles.css">
@@ -18,7 +18,7 @@
       <span class="brand-mark">MI</span>
       <span class="brand-copy">
         <strong>Music Interface</strong>
-        <small>v2.0 Documentation</small>
+        <small>v2.1 Documentation</small>
       </span>
     </a>
 
@@ -39,7 +39,7 @@
 
     <a class="community-badge discord-badge" id="discordBadge" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer" aria-label="Join the Our Story Network Discord">
       <svg class="community-icon discord-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M19.54 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15.1 15.1 0 0 0-5.86 0L8.56 4a16.5 16.5 0 0 0-4.1 1.35C1.87 9.2 1.17 12.96 1.52 16.67a16.7 16.7 0 0 0 5.03 2.55l1.23-1.68c-.67-.25-1.3-.56-1.9-.93l.46-.36c3.67 1.69 7.65 1.69 11.28 0l.47.36c-.6.37-1.24.69-1.9.94l1.22 1.67a16.6 16.6 0 0 0 5.04-2.55c.42-4.3-.72-8.03-2.91-11.33ZM8.5 14.44c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Zm7 0c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Z"/>
+        <path fill="currentColor" d="M19.54 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15.1 15.1 0 0 0-5.86 0L8.56 4a16.5 16.5 0 0 0-4.1 1.35C1.87 9.2 1.17 12.96 1.52 16.67a16.7 16.7 0 0 0 5.03 2.55l1.23-1.68c-.67-.25-1.3-.56-1.9-.93l.46-.36c3.67 1.69 7.65 1.69 11.28 0l.47.36c-.6.37-1.24.69-1.9.94l1.22 1.67a16.6 16.6 0 0 0 5.04-2.55c.42-4.3-.72-8.03-2.91-11.33ZM8.5 14.44c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.12 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Zm7 0c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.12 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Z"/>
       </svg>
       <span class="community-copy">
         <strong>Discord</strong>
@@ -76,12 +76,12 @@
       <nav class="sidebar-navigation" aria-label="Rubriques de documentation">
         <a href="#overview" data-tab-link="overview" class="active">👋 Présentation</a>
         <a href="#installation" data-tab-link="installation">📦 Installation</a>
-        <a href="#configuration" data-tab-link="configuration">⚙️ Configuration</a>
-        <a href="#commands" data-tab-link="commands">⌨️ Commandes</a>
         <a href="#musicpacks" data-tab-link="musicpacks">🎵 Music Packs</a>
         <a href="../pack-builder/">🧰 Créer un pack</a>
+        <a href="#configuration" data-tab-link="configuration">⚙️ Configuration</a>
+        <a href="#commands" data-tab-link="commands">⌨️ Commandes</a>
         <a href="#troubleshooting" data-tab-link="troubleshooting">🛠️ Assistance</a>
-        <a href="music-packs.html">📖 Tutoriel Music Pack</a>
+        <a href="music-packs.html">📖 Tutoriel complet Music Pack</a>
         <a href="releases.html">📋 Notes de version</a>
         <a href="../" hreflang="en">🌍 English</a>
       </nav>
@@ -100,7 +100,7 @@
 
       <div class="sidebar-footer">
         <strong>Music Interface</strong>
-        <span>Documentation version 2.0</span>
+        <span>Documentation version 2.1</span>
       </div>
     </aside>
 
@@ -108,23 +108,24 @@
       <div class="tabs" role="tablist" aria-label="Onglets de documentation">
         <button class="tab active" type="button" data-tab="overview">Présentation</button>
         <button class="tab" type="button" data-tab="installation">Installation</button>
+        <button class="tab" type="button" data-tab="musicpacks">Music Packs</button>
         <button class="tab" type="button" data-tab="configuration">Configuration</button>
         <button class="tab" type="button" data-tab="commands">Commandes</button>
-        <button class="tab" type="button" data-tab="musicpacks">Music Packs</button>
         <button class="tab" type="button" data-tab="troubleshooting">Assistance</button>
       </div>
 
       
 <article>
 <section class="tab-panel active" id="overview" data-panel="overview">
-<div class="page-heading"><span class="page-kicker">Music Interface v2.0</span><h1>Bienvenue sur Music Interface</h1><p class="page-description">Votre lecteur musical dans Minecraft : gérez vos morceaux, vos playlists et les musiques adaptées au jeu.</p></div>
+<div class="page-heading"><span class="page-kicker">Music Interface v2.1</span><h1>Bienvenue sur Music Interface</h1><p class="page-description">Votre lecteur musical dans Minecraft : gérez vos morceaux, vos playlists et les musiques adaptées au jeu.</p></div>
 <div class="hint hint-info"><strong>Music Interface ne contient aucune musique.</strong><p>Ce mod ajoute un lecteur et un gestionnaire de bandes-son, pas des chansons. Pour afficher des pistes, activez un <a href="music-packs.html">Music Pack</a>, c'est-à-dire un resource pack Minecraft contenant vos propres fichiers audio OGG et des définitions JSON. Les musiques vanilla et celles des autres mods ne sont pas automatiquement importées dans la bibliothèque.</p></div>
+<div class="hint hint-warning"><strong>Ce wiki suit le code source v2.1.</strong><p>Au 22 novembre 2026, les listes publiques CurseForge et Modrinth affichent encore la v2.0 comme dernière version. Les options ajoutées en 2.1 nécessitent un JAR v2.1 correspondant. Vérifiez la version exacte de Minecraft et le loader indiqués sur la fiche du fichier.</p><p><a href="https://www.curseforge.com/minecraft/mc-mods/music-interface/files/all" target="_blank" rel="noopener noreferrer">Fichiers CurseForge</a> · <a href="https://modrinth.com/mod/music-interface/versions" target="_blank" rel="noopener noreferrer">Versions Modrinth</a></p></div><div class="hint hint-info"><strong>Nouveautés du code source v2.1</strong><ul><li>Codes de partage de playlists compressés et plus courts.</li><li>Une option Cobblemon qui laisse la piste actuelle continuer pendant le combat.</li><li>Une option pour garder la musique pendant un changement de dimension.</li></ul></div>
 <h2>Commencer en cinq étapes</h2>
-<ol><li>Téléchargez la bonne version du mod selon Minecraft et votre loader.</li><li>Installez ses dépendances.</li><li>Ajoutez un Music Pack compatible dans <code>resourcepacks/</code> puis activez-le.</li><li>Ouvrez le lecteur depuis le raccourci configuré dans les contrôles.</li><li>Si la bibliothèque est vide, rechargez les ressources avec <code>F3+T</code> ou lancez <code>/musicinterface_diagnostics</code>.</li></ol>
-<p><a href="music-packs.html"><strong>Lire le tutoriel complet de création d'un Music Pack →</strong></a></p>
+<ol><li>Ouvrez le <a href="../pack-builder/">créateur de Music Pack</a> et choisissez la version de Minecraft.</li><li>Ajoutez vos fichiers audio OGG. Ils restent dans votre navigateur et ne sont pas envoyés au wiki.</li><li>Renseignez les titres et, si besoin, l’artiste, l’album, la pochette et les règles de lecture.</li><li>Vérifiez le pack puis exportez le ZIP. Téléchargez aussi une sauvegarde de projet <code>.mipack</code> si vous souhaitez le reprendre plus tard.</li><li>Placez le ZIP dans <code>resourcepacks/</code>, activez-le dans Minecraft puis rechargez avec <code>F3+T</code>.</li></ol>
+<p><a href="../pack-builder/"><strong>Ouvrir le créateur de Music Pack →</strong></a> · <a href="music-packs.html">Lire le guide complet, avec ou sans créateur</a></p>
 <h2>Bibliothèque et organisation</h2>
 <p>Le lecteur permet de chercher des pistes, naviguer par artiste ou album, gérer les favoris et les playlists, afficher l'historique récent, changer de vue et contrôler la lecture.</p>
-<ul><li><strong>Playlists :</strong> création, ordre des pistes, lecture aléatoire et répétition.</li><li><strong>Partage :</strong> codes de partage et import de playlists. Le code transmet la liste de pistes, jamais les fichiers son.</li><li><strong>Queue :</strong> <em>Play Next</em>, <em>Add to Queue</em>, réorganisation et sauvegarde en playlist. La persistance de la file est activée par défaut.</li><li><strong>Radio :</strong> lecture continue de pistes proches d'un morceau de référence, tant que des titres compatibles sont disponibles.</li></ul>
+<ul><li><strong>Playlists :</strong> création, ordre des pistes, lecture aléatoire et répétition.</li><li><strong>Partage :</strong> les codes compressés de la v2.1 transmettent la liste des identifiants de pistes, jamais les fichiers audio. Les anciens codes restent importables.</li><li><strong>Queue :</strong> <em>Play Next</em>, <em>Add to Queue</em>, réorganisation et sauvegarde en playlist. La persistance de la file est activée par défaut.</li><li><strong>Radio :</strong> lecture continue de pistes proches d'un morceau de référence, tant que des titres compatibles sont disponibles.</li></ul>
 <h2>Radio, Smart Mixes et statistiques</h2>
 <p><strong>Track Radio</strong> utilise les genres, tags, moods, artiste, album, Music Pack et préférences locales. <strong>Made for You</strong> propose quatre sélections : <em>For You</em>, <em>On Repeat</em>, <em>Rediscover</em> et <em>Current Context</em>. Le profil d'écoute reste enregistré localement, sans envoi de télémétrie par le code du profil.</p>
 <h2>À quoi servent les moods ?</h2>
@@ -132,14 +133,16 @@
 <h2>Notifications de lecture</h2>
 <p>Les notifications <em>Now Playing</em> affichent la pochette, le titre et éventuellement l'artiste et l'album. Leur couleur de contour provient automatiquement de la pochette, avec une couleur de secours si aucune image n'est utilisable. <strong>Il n'existe pas de paramètre séparé pour choisir manuellement cette couleur.</strong> En revanche, la position, l'animation et les métadonnées affichées sont réglables.</p>
 <h2>Versions et documentation</h2>
-<p>Consultez les <a href="releases.html">notes de version</a> et la <a href="#installation" data-tab-link="installation">compatibilité</a> avant de télécharger un fichier. Ce wiki concerne Music Interface v2.0.</p>
+<p>Ce wiki documente le code source v2.1 ; les dernières versions publiques listées sont encore en v2.0. Consultez les <a href="releases.html">notes de version</a> et la <a href="#installation" data-tab-link="installation">compatibilité</a> avant de télécharger un fichier.</p>
+<h2>Titres et langues</h2>
+<p>Le nom de l'interface peut être traduit, mais le champ <code>title</code> d'une piste est affiché tel qu'il est écrit dans <code>music_data.json</code>. Il n'est pas résolu comme une clé de traduction d'un fichier <code>lang</code>. En v2.1, prévoyez donc un titre lisible ou des métadonnées adaptées à chaque langue.</p>
 </section>
 <section class="tab-panel" id="installation" data-panel="installation">
 <div class="page-heading"><span class="page-kicker">Bien démarrer</span><h1>Installation</h1><p class="page-description">Le bon JAR, les bonnes dépendances et un Music Pack activé.</p></div>
 <h2>Installation pas à pas</h2>
 <ol><li>Ouvrez la <a href="https://www.curseforge.com/minecraft/mc-mods/music-interface/files/all" target="_blank" rel="noopener noreferrer">liste des fichiers CurseForge</a> ou <a href="https://modrinth.com/mod/music-interface/versions" target="_blank" rel="noopener noreferrer">Modrinth</a>.</li><li>Choisissez <strong>exactement</strong> votre version Minecraft et votre loader : Fabric ou NeoForge.</li><li>Installez les dépendances affichées pour ce fichier et placez les JAR dans <code>mods/</code>.</li><li>Lancez Minecraft. Installez votre Music Pack dans <code>resourcepacks/</code> puis activez-le.</li><li>Ouvrez le lecteur depuis les contrôles Minecraft. Consultez les diagnostics si aucune piste n'apparaît.</li></ol>
-<div class="hint hint-warning"><strong>Un projet Gradle configuré ne garantit pas un JAR publié et testé.</strong><p>Le code source v2.0 possède neuf cibles Minecraft et deux loaders, soit 18 combinaisons configurées. Vérifiez toujours la page du téléchargement correspondant à votre version.</p></div>
-<div class="hint hint-warning"><strong>Attention aux métadonnées de publication.</strong><p>Un fichier CurseForge (<a href="https://www.curseforge.com/minecraft/mc-mods/music-interface/files/9004584">identifiant 9004584</a>) est nommé <code>musicinterface-fabric-1.21.1-2.0.jar</code>, mais sa fiche indique Minecraft <code>1.21.5</code>. Cette incohérence ne prouve pas sa compatibilité avec l'une ou l'autre version. Vérifiez les métadonnées du JAR avant installation.</p></div>
+<div class="hint hint-warning"><strong>Les cibles du code source ne sont pas des versions publiées vérifiées.</strong><p>La branche v2.1 configure neuf versions de Minecraft pour Fabric et NeoForge. Cela ne garantit pas qu'un JAR soit publié ou testé en jeu pour chacune des 18 combinaisons. Vérifiez la version et le loader sur la fiche du fichier et dans ses métadonnées.</p></div>
+
 <h2>Versions ciblées par le code source</h2>
 <table><thead><tr><th>Versions Minecraft</th><th>Loaders</th><th>Java pour compilation</th></tr></thead><tbody>
 <tr><td>1.21.1, 1.21.4, 1.21.5, 1.21.8, 1.21.10, 1.21.11</td><td>Fabric et NeoForge</td><td>Java 21</td></tr>
@@ -157,17 +160,19 @@
 <p>Une règle correspond quand toutes ses conditions renseignées sont respectées. Le scheduler utilise la priorité numérique la plus élevée parmi les règles compatibles. Le mode de transition par défaut est <strong>Finish</strong> : une piste contextuelle déjà jouée n'est pas interrompue immédiatement. Choisissez <strong>Crossfade</strong> pour permettre la transition des pistes gérées par le contexte.</p>
 <h2>Modes de lecture</h2>
 <ul><li><strong>Ambient</strong> : musique espacée de pauses, par défaut de 15 à 90 secondes entre les morceaux.</li><li><strong>Continuous</strong> : pas de délai volontaire entre les pistes.</li><li><strong>World join silence</strong> : délai initial de 10 secondes par défaut en entrant dans un monde.</li><li><strong>Queue prioritaire</strong> : les morceaux ajoutés manuellement passent avant les sélections automatiques.</li></ul>
+<p>En v2.1, <code>continueMusicAcrossDimensions</code> (désactivé par défaut) garde la piste en cours lors d'un changement de dimension. Quand cette option est activée, le délai de silence à l'entrée dans le monde est ignoré après cette transition.</p>
 <h2>Musique de l'écran titre</h2>
 <p>La musique personnalisée de menu est activée par défaut. Un champ <code>titleScreenTrackId</code> vide signifie une sélection possible dans la bibliothèque, pas une désactivation. Pour choisir une piste précise, renseignez son ID. Pour arrêter la musique personnalisée du menu, désactivez l'option correspondante. La musique vanilla du menu possède un réglage distinct.</p>
 <h2>Combats Cobblemon</h2>
-<p>Le mode par défaut <code>cobblemonBattleMode = external</code> laisse la priorité au système audio du combat. Pour une piste personnalisée, sélectionnez <code>context</code>, activez les contextes, puis définissez une règle <code>"combat": true</code> sur la piste. Un simple tag <code>battle</code> ne suffit pas.</p>
+<p>Le mode par défaut <code>cobblemonBattleMode = external</code> laisse la priorité au système audio du combat. En v2.1, <code>continue</code> conserve la piste Music Interface déjà en cours pendant le combat. Pour lancer une musique de combat dédiée, sélectionnez <code>context</code>, activez les contextes, puis définissez une règle <code>"combat": true</code> sur la piste. Un simple tag <code>battle</code> ne suffit pas.</p>
 <h2>Quelques valeurs par défaut importantes</h2>
 <table><thead><tr><th>Paramètre</th><th>Valeur initiale</th><th>Fonction</th></tr></thead><tbody>
 <tr><td><code>playbackMode</code></td><td><code>ambient</code></td><td>Lecture espacée</td></tr>
 <tr><td><code>contextMusicEnabled</code></td><td><code>true</code></td><td>Musique contextuelle active</td></tr>
 <tr><td><code>contextTransitionMode</code></td><td><code>finish</code></td><td>Attend la fin du morceau</td></tr>
 <tr><td><code>contextFallbackMode</code></td><td><code>library</code></td><td>Retour à la bibliothèque normale</td></tr>
-<tr><td><code>cobblemonBattleMode</code></td><td><code>external</code></td><td>Priorité au son de combat externe</td></tr>
+<tr><td><code>cobblemonBattleMode</code></td><td><code>external</code></td><td>Priorité au son externe ; <code>continue</code> conserve la piste actuelle en v2.1</td></tr>
+<tr><td><code>continueMusicAcrossDimensions</code></td><td><code>false</code></td><td>Conserve la piste pendant les changements de dimension si activé (v2.1)</td></tr>
 <tr><td><code>persistQueue</code></td><td><code>true</code></td><td>Conserve la file au redémarrage</td></tr>
 <tr><td><code>worldJoinSilenceSeconds</code></td><td><code>10</code></td><td>Silence initial après connexion</td></tr>
 <tr><td><code>toastPosition</code></td><td><code>TOP_RIGHT</code></td><td>Position de la notification</td></tr>
@@ -196,26 +201,17 @@
 <p>Les commandes serveur nécessitent l'installation compatible côté serveur et peuvent nécessiter la présence du mod côté client. Elles n'envoient pas les fichiers OGG aux joueurs.</p>
 </section>
 <section class="tab-panel" id="musicpacks" data-panel="musicpacks">
-<div class="page-heading"><span class="page-kicker">Ajouter vos propres titres</span><h1>Music Packs</h1><p class="page-description">Créez une bibliothèque musicale complète sans écrire de code Java.</p></div>
-<div class="hint hint-info"><strong>Envie de créer votre pack sans modifier de JSON ?</strong><p><a href="../pack-builder/"><strong>Ouvrir le créateur de Music Pack →</strong></a> Vos fichiers audio restent dans votre navigateur.</p></div>
-<div class="hint hint-info"><strong>Tutoriel français complet directement sur le site</strong><p>Le guide présente la structure des dossiers, les fichiers OGG, <code>sounds.json</code>, <code>music_data.json</code>, les pochettes, la musique de menu, les contextes et les combats Cobblemon.</p><p><a href="music-packs.html"><strong>Ouvrir le guide français de création des Music Packs →</strong></a></p></div>
-<h2>Structure minimale</h2>
-<pre><code>resourcepacks/
-  Mon Music Pack/
-    pack.mcmeta
-    assets/
-      musicinterface/
-        music_data.json
-        sounds.json
-        sounds/
-          custom/
-            ma_piste.ogg</code></pre>
-<h2>Un modèle sans audio n'est pas une musique</h2>
-<p>Le bouton de génération de modèle crée l'arborescence, les fichiers JSON et une pochette d'exemple, mais <strong>aucun véritable fichier OGG</strong>. Ajoutez votre propre audio, déclarez-le dans <code>sounds.json</code> puis associez une piste dans <code>music_data.json</code>.</p>
-<h2>Plusieurs Music Packs à la fois</h2>
-<p>Les packs actifs, en dossier ou en ZIP, peuvent être combinés. Si deux packs réutilisent le même ID de piste, le pack ayant la priorité la plus élevée l'emporte. Les diagnostics signalent les doublons. Conservez donc des identifiants uniques par piste.</p>
-<h2>Créer des musiques contextuelles</h2>
-<p>Associez des règles <code>contexts</code> dans le JSON. Les <code>moods</code> et les tags décrivent l'ambiance mais n'établissent pas le déclencheur. Des exemples JSON complets sont fournis dans le <a href="music-packs.html">guide français</a>.</p>
+<div class="page-heading"><span class="page-kicker">Ajouter vos propres titres</span><h1>Music Packs</h1><p class="page-description">Ajoutez des musiques à Music Interface sans modifier de JSON, ou suivez le guide complet.</p></div>
+<div class="hint hint-info"><strong>Music Interface ne contient aucune musique.</strong><p>Un Music Pack est un resource pack Minecraft qui contient des fichiers OGG, leurs déclarations de son et les métadonnées des pistes. Le mod ne télécharge pas de chansons.</p></div>
+<h2>Créer un pack en cinq étapes</h2>
+<ol><li>Ouvrez le <a href="../pack-builder/">créateur de Music Pack</a> et choisissez la version de Minecraft.</li><li>Ajoutez vos fichiers OGG ; l'audio reste dans votre navigateur et n'est pas téléversé sur le wiki.</li><li>Renseignez les titres et, si besoin, artiste, album, pochette et règles de lecture.</li><li>Vérifiez le contenu puis exportez le ZIP. Une sauvegarde <code>.mipack</code> permet de reprendre le projet plus tard.</li><li>Placez le ZIP dans <code>resourcepacks/</code>, activez-le dans le menu Resource Packs et appuyez sur <code>F3+T</code>.</li></ol>
+<p><a href="../pack-builder/"><strong>Ouvrir le créateur de Music Pack →</strong></a> · <a href="music-packs.html"><strong>Lire le guide complet étape par étape →</strong></a></p>
+<h2>Moods, tags et contextes</h2>
+<p>Les <code>moods</code>, <code>tags</code> et <code>genres</code> décrivent la musique et aident la Radio et les recommandations. Ils ne déclenchent pas une piste par eux-mêmes. Pour choisir une musique selon le biome, la météo, la dimension ou un combat, utilisez les règles <code>contexts</code> du guide.</p>
+<h2>Utiliser le générateur de modèle du jeu</h2>
+<p>Le modèle généré dans le lecteur fournit l'arborescence, des JSON de départ et une pochette d'exemple, mais aucun fichier audio OGG. Ajoutez votre propre audio avant de tester la piste.</p>
+<h2>Plusieurs packs actifs</h2>
+<p>Les packs en dossier ou en ZIP peuvent être combinés. Si deux packs utilisent le même ID, la priorité du resource pack détermine la définition chargée. Choisissez des IDs uniques pour éviter les collisions.</p>
 </section>
 <section class="tab-panel" id="troubleshooting" data-panel="troubleshooting">
 <div class="page-heading"><span class="page-kicker">Aide et diagnostic</span><h1>Résolution des problèmes</h1><p class="page-description">Les vérifications concrètes avant de demander de l'aide.</p></div>
