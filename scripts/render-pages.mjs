@@ -11,6 +11,7 @@ for(const lang of ["en","fr"]){
   const headings=[...content.matchAll(/<h([23]) id="([^"]+)">([\s\S]*?)<\/h\1>/g)];
   const toc=headings.map(m=>'<a class="toc-level-'+m[1]+'" href="#'+m[2]+'">'+m[3].replace(/<[^>]*>/g,"")+'</a>').join("\n");
   content=content.replace(/href="#(overview|installation|configuration|commands|musicpacks|troubleshooting)"(?=[^>]*data-tab-link)/g,'href="../#$1"').replace(/href="(music-packs\.html|releases\.html)"/g,'href="../$1"');
+  content=content.replace(/href="pack-builder\/"/g,lang==="fr"?'href="../../pack-builder/"':'href="../pack-builder/');
   if(lang==="en")content=content.replace(/href="fr\/music-packs\.html"/g,'href="../fr/music-packs.html"');
   const target=join(root,"site",lang==="fr"?"fr/docs":"docs",id+".html");
   let page=readFileSync(target,"utf8");
