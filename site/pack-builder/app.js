@@ -351,7 +351,7 @@
     updateSummary();
   }
   function heading(title, description) {
-    return '<div class="step-heading"><p class="eyebrow">' + t("step" + (currentStep + 1)) + '</p><h2 tabindex="-1">' + title + '</h2><p>' + description + '</p></div>';
+    return '<div class="step-heading"><p class="eyebrow">' + t(["stepPack", "stepTracks", "stepRules", "stepFinish"][currentStep]) + '</p><h2 tabindex="-1">' + title + '</h2><p>' + description + '</p></div>';
   }
 
   function renderPackStep() {
@@ -446,12 +446,12 @@
         '<details class="track-options"><summary>' + t("advanced") + '</summary><div class="track-fields">' +
           fieldInput(track, "id", t("trackId"), "text") + fieldInput(track, "genres", t("genres"), "text", "ambient, orchestral") +
           fieldInput(track, "moods", t("moods"), "text", "calm, intense") + fieldInput(track, "tags", t("tags"), "text", "exploration, battle") +
-          fieldInput(track, "weight", t("weight"), "number", "", "min=\\"1\\" step=\\"1\\"") +
-          fieldInput(track, "energy", t("energy"), "number", "", "min=\\"0\\" max=\\"1\\" step=\\"0.1\\"") +
-          fieldInput(track, "volume", t("volume"), "number", "", "min=\\"0\\" max=\\"1\\" step=\\"0.1\\"") +
-          fieldInput(track, "cooldown", t("cooldown"), "number", "", "min=\\"0\\" step=\\"1\\"") +
-          fieldInput(track, "fadeIn", t("fadeIn"), "number", "", "min=\\"0\\" step=\\"1\\"") +
-          fieldInput(track, "fadeOut", t("fadeOut"), "number", "", "min=\\"0\\" step=\\"1\\"") +
+          fieldInput(track, "weight", t("weight"), "number", "", "min=\"1\" step=\"1\"") +
+          fieldInput(track, "energy", t("energy"), "number", "", "min=\"0\" max=\"1\" step=\"0.1\"") +
+          fieldInput(track, "volume", t("volume"), "number", "", "min=\"0\" max=\"1\" step=\"0.1\"") +
+          fieldInput(track, "cooldown", t("cooldown"), "number", "", "min=\"0\" step=\"1\"") +
+          fieldInput(track, "fadeIn", t("fadeIn"), "number", "", "min=\"0\" step=\"1\"") +
+          fieldInput(track, "fadeOut", t("fadeOut"), "number", "", "min=\"0\" step=\"1\"") +
         '</div></details></article>';
     }).join("");
     target.querySelectorAll("[data-field]").forEach(input => {
@@ -548,6 +548,10 @@
   function splitValues(value) {
     return String(value || "").split(",").map(item => item.trim()).filter(Boolean);
   }
+  function numberOr(value, fallback) {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : fallback;
+  }
   function updateRuleField(event) {
     const track = state.tracks.find(item => item.uid === event.target.dataset.track);
     const rule = track && track.contexts.find(item => item.uid === event.target.dataset.rule);
@@ -567,8 +571,8 @@
       sound: "musicinterface:custom/" + id,
       enabled: true,
       weight: Math.max(1, parseInt(track.weight, 10) || 1),
-      energy: Math.max(0, Math.min(1, Number(track.energy) || 0.5)),
-      volume: Math.max(0, Math.min(1, Number(track.volume) || 0)),
+      energy: Math.max(0, Math.min(1, numberOr(track.energy, 0.5))),
+      volume: Math.max(0, Math.min(1, numberOr(track.volume, 1))),
       cooldown: Math.max(0, parseInt(track.cooldown, 10) || 0)
     };
     if (track.coverBlob) item.cover = "musicinterface:textures/covers/" + id + ".png";
@@ -862,6 +866,7 @@
     for (let index = 0; index < count; index++) {
       if (view.getUint32(cursor, true) !== 0x02014b50) throw new Error(t("invalidProject"));
       const method = view.getUint16(cursor + 10, true);
+      const storedCrc = view.getUint32(cursor + 16, true);
       const compressed = view.getUint32(cursor + 20, true);
       const uncompressed = view.getUint32(cursor + 24, true);
       const nameLength = view.getUint16(cursor + 28, true);
@@ -875,11 +880,11 @@
       if (view.getUint32(localOffset, true) !== 0x04034b50) throw new Error(t("invalidProject"));
       const localNameLength = view.getUint16(localOffset + 26, true);
       const localExtraLength = view.getUint16(localOffset + 28, true);
+      const localName = decoder.decode(bytes.subarray(localOffset + 30, localOffset + 30 + localNameLength));
+      if (localName !== name) throw new Error(t("invalidProject"));
       const dataStart = localOffset + 30 + localNameLength + localExtraLength;
       const blob = new Blob([bytes.slice(dataStart, dataStart + uncompressed)]);
-      if (await crc32(blob) !== view.getUint32(cursor - commentLength - extraLength - 22, true)) {
-        // Central-directory CRC is checked below using the stable file payload.
-      }
+      if (await crc32(blob) !== storedCrc) throw new Error(t("invalidProject"));
       files.set(name, blob);
     }
     return files;
