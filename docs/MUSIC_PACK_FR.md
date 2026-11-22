@@ -10,6 +10,10 @@ Music Interface utilise des **resource packs Minecraft** pour charger les chanso
 
 Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le [guide général](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview). Le guide général est actuellement en anglais.
 
+### Créer un pack sans modifier de JSON
+
+[Ouvrir le créateur de Music Pack](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) pour ajouter les OGG, renseigner les pistes et exporter un ZIP prêt à utiliser. Les musiques et les images restent dans votre navigateur : elles ne sont pas envoyées au wiki.
+
 ## Réponses rapides
 
 - **Comment attribuer une musique à un événement ?** Avec `contexts` dans `music_data.json` ou dans le fichier facultatif `music_contexts.json`.
