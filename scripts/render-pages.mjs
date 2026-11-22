@@ -21,6 +21,7 @@ for(const lang of ["en","fr"]){
   page=page.replace(/<div class="guide-body">[\s\S]*?<\/div><p class="guide-footer">/,'<div class="guide-body">'+content+'</div><p class="guide-footer">');
   const title=content.match(/<h1>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]*>/g,"")||id;
   page=page.replace(/<title>[^<]* \| Music Interface Wiki<\/title>/,'<title>'+title+' | Music Interface Wiki</title>');
+  page=page.replaceAll("v2.0 Wiki","v2.1 Wiki").replace('content="Music Interface 2.0 ','content="Music Interface v2.1 source: ');
   writeFileSync(target,page,"utf8");
   console.log("Updated",lang,id);
  }
