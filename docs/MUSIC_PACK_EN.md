@@ -6,6 +6,10 @@ Music Interface reads music from a standard Minecraft **resource pack**. You do 
 
 For the player, settings, queues, playlists and Radio, see the [complete user guide](docs/PROJECT_GUIDE.md).
 
+### Create a pack without editing JSON
+
+[Open the Music Pack Builder](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) to add OGG files, set track details and export a ready-to-use ZIP. Audio and images stay in your browser; they are not uploaded to the wiki.
+
 ## Quick answers
 
 - **Where are songs assigned to events?** In a track's `contexts` field or optional `music_contexts.json`.
