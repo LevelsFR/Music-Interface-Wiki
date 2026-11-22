@@ -28,7 +28,7 @@
       stepRules: "La lecture", stepRulesHint: "Quand les jouer",
       stepFinish: "Vérifier et exporter", stepFinishHint: "Ton fichier ZIP",
       previewLabel: "Aperçu", summaryTitle: "Ton pack", summaryTracks: "Musiques", summarySize: "Taille audio",
-      summaryHint: "Commence par donner un nom à ton pack.", clearButton: "Effacer ce projet",
+      summaryHint: "Commence par donner un nom à ton pack.", clearButton: "Effacer ce projet", contextFallback: "Autoriser cette piste comme secours Dedicated", duration: "Durée (facultative)",
       back: "Retour", next: "Continuer", footerPrivacy: "Aucun compte · aucun envoi de fichiers · fonctionne avec Fabric et NeoForge",
       footerGuide: "Lire le guide des Music Packs", guide: "Guide", saved: "Enregistré dans ce navigateur",
       saving: "Enregistrement local…", saveError: "Enregistrement local impossible", sessionOnly: "Session uniquement",
@@ -82,7 +82,7 @@
       stepRules: "Playback", stepRulesHint: "When tracks play",
       stepFinish: "Review and export", stepFinishHint: "Your ZIP file",
       previewLabel: "Preview", summaryTitle: "Your pack", summaryTracks: "Tracks", summarySize: "Audio size",
-      summaryHint: "Start by naming your pack.", clearButton: "Clear this project",
+      summaryHint: "Start by naming your pack.", clearButton: "Clear this project", contextFallback: "Allow this track as Dedicated fallback", duration: "Duration (optional)",
       back: "Back", next: "Continue", footerPrivacy: "No account · no file uploads · works with Fabric and NeoForge",
       footerGuide: "Read the Music Pack guide", guide: "Guide", saved: "Saved in this browser",
       saving: "Saving locally…", saveError: "Could not save locally", sessionOnly: "This session only",
@@ -236,7 +236,7 @@
         uid: track.uid, id: track.id, title: track.title, author: track.author, album: track.album,
         audioName: track.audioName, audioBlob: track.audioBlob || null, coverName: track.coverName || "",
         coverBlob: track.coverBlob || null, genres: track.genres || "", moods: track.moods || "",
-        tags: track.tags || "", weight: track.weight || "1", energy: track.energy || "0.5",
+        tags: track.tags || "", duration: track.duration || "", contextFallback: Boolean(track.contextFallback), weight: track.weight || "1", energy: track.energy || "0.5",
         volume: track.volume || "1", cooldown: track.cooldown || "0", fadeIn: track.fadeIn || "",
         fadeOut: track.fadeOut || "", ruleMode: track.ruleMode || "none",
         contexts: (track.contexts || []).map(rule => ({ ...rule }))
@@ -376,7 +376,7 @@
   async function onPackIcon(event) {
     const file = event.target.files && event.target.files[0];
     if (!file) return;
-    if (!isPng(file)) { showToast(t("invalidCover")); event.target.value = ""; return; }
+    if (!await hasPngHeader(file)) { showToast(t("invalidCover")); event.target.value = ""; return; }
     state.packIcon = file;
     state.packIconName = file.name;
     scheduleSave();
@@ -384,6 +384,12 @@
   }
   function isPng(file) {
     return file && (file.type === "image/png" || file.name.toLowerCase().endsWith(".png"));
+  }
+  async function hasPngHeader(file) {
+    if (!isPng(file)) return false;
+    const bytes = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+    const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+    return signature.every((value, index) => bytes[index] === value);
   }
   function isOgg(file) { return file && file.name.toLowerCase().endsWith(".ogg"); }
   async function hasOggHeader(file) {
@@ -413,7 +419,7 @@
       state.tracks.push({
         uid: makeUid(), id, title: file.name.replace(/\.ogg$/i, "").replace(/[_-]+/g, " "),
         author: "", album: "", audioName: file.name, audioBlob: file,
-        coverName: "", coverBlob: null, genres: "", moods: "", tags: "",
+        coverName: "", coverBlob: null, genres: "", moods: "", tags: "", duration: "", contextFallback: false,
         weight: "1", energy: "0.5", volume: "1", cooldown: "0", fadeIn: "", fadeOut: "",
         ruleMode: "none", contexts: []
       });
@@ -451,7 +457,8 @@
           fieldInput(track, "volume", t("volume"), "number", "", "min=\"0\" max=\"1\" step=\"0.1\"") +
           fieldInput(track, "cooldown", t("cooldown"), "number", "", "min=\"0\" step=\"1\"") +
           fieldInput(track, "fadeIn", t("fadeIn"), "number", "", "min=\"0\" step=\"1\"") +
-          fieldInput(track, "fadeOut", t("fadeOut"), "number", "", "min=\"0\" step=\"1\"") +
+          fieldInput(track, "fadeOut", t("fadeOut"), "number", "", "min=\"0\" step=\"1\"") + fieldInput(track, "duration", t("duration"), "text") +
+          '<label class="field wide checkbox-field"><span><input data-field="contextFallback" data-track="' + escapeHtml(track.uid) + '" type="checkbox"' + (track.contextFallback ? " checked" : "") + '> ' + t("contextFallback") + '</span></label>' +
         '</div></details></article>';
     }).join("");
     target.querySelectorAll("[data-field]").forEach(input => {
@@ -473,7 +480,7 @@
     const track = state.tracks.find(item => item.uid === event.target.dataset.track);
     if (!track) return;
     const key = event.target.dataset.field;
-    track[key] = event.target.type === "number" ? event.target.value : event.target.value;
+    track[key] = event.target.type === "checkbox" ? event.target.checked : event.target.value;
     if (key === "title") event.target.closest(".track-card").querySelector("[data-title-display]").textContent = track.title || track.id;
     scheduleSave();
   }
@@ -481,7 +488,7 @@
     const track = state.tracks.find(item => item.uid === event.target.dataset.coverInput);
     const file = event.target.files && event.target.files[0];
     if (!track || !file) return;
-    if (!isPng(file)) { showToast(t("invalidCover")); event.target.value = ""; return; }
+    if (!await hasPngHeader(file)) { showToast(t("invalidCover")); event.target.value = ""; return; }
     track.coverBlob = file; track.coverName = file.name;
     scheduleSave(); drawTrackCards();
   }
@@ -581,6 +588,8 @@
     if (splitValues(track.tags).length) item.tags = splitValues(track.tags);
     if (track.fadeIn !== "") item.fade_in = Math.max(0, parseInt(track.fadeIn, 10) || 0);
     if (track.fadeOut !== "") item.fade_out = Math.max(0, parseInt(track.fadeOut, 10) || 0);
+    if (track.duration && String(track.duration).trim()) item.duration = String(track.duration).trim();
+    if (track.contextFallback) item.context_fallback = true;
     const contexts = (track.contexts || []).map(rule => {
       const output = { priority: Math.max(0, parseInt(rule.priority, 10) || 0) };
       ["dimensions", "biomes", "biome_tags"].forEach(key => { if (rule[key] && rule[key].length) output[key] = rule[key]; });
@@ -788,7 +797,7 @@
           cover: track.coverBlob ? "covers/" + track.id + ".png" : null, coverName: track.coverName,
           genres: track.genres, moods: track.moods, tags: track.tags, weight: track.weight,
           energy: track.energy, volume: track.volume, cooldown: track.cooldown, fadeIn: track.fadeIn,
-          fadeOut: track.fadeOut, ruleMode: track.ruleMode, contexts: track.contexts
+          fadeOut: track.fadeOut, duration: track.duration, contextFallback: track.contextFallback, ruleMode: track.ruleMode, contexts: track.contexts
         }))
       };
       const entries = [{ path: "project.json", blob: new Blob([JSON.stringify(manifest, null, 2)], { type: "application/json" }) }];
@@ -827,14 +836,14 @@
         const audio = files.get(item.audio);
         if (!audio) throw new Error(t("invalidProject"));
         const cover = item.cover ? files.get(item.cover) || null : null;
-        if (!await hasOggHeader(audio)) throw new Error(t("invalidProject"));
+        if (!await hasOggHeader(audio) || (cover && !await hasPngHeader(cover)) || (imported.packIcon && !await hasPngHeader(imported.packIcon))) throw new Error(t("invalidProject"));
         imported.tracks.push({
           uid: String(item.uid || makeUid()), id: String(item.id || ""), title: String(item.title || ""),
           author: String(item.author || ""), album: String(item.album || ""), audioName: String(item.audioName || item.audio),
           audioBlob: audio, coverBlob: cover, coverName: String(item.coverName || ""),
           genres: String(item.genres || ""), moods: String(item.moods || ""), tags: String(item.tags || ""),
           weight: String(item.weight || "1"), energy: String(item.energy || "0.5"), volume: String(item.volume || "1"),
-          cooldown: String(item.cooldown || "0"), fadeIn: String(item.fadeIn || ""), fadeOut: String(item.fadeOut || ""),
+          cooldown: String(item.cooldown || "0"), fadeIn: String(item.fadeIn || ""), fadeOut: String(item.fadeOut || ""), duration: String(item.duration || ""), contextFallback: Boolean(item.contextFallback),
           ruleMode: String(item.ruleMode || "none"), contexts: Array.isArray(item.contexts) ? item.contexts.map(rule => createRule(rule)) : []
         });
       }
