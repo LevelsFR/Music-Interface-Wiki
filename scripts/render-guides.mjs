@@ -44,6 +44,7 @@ for(const lang of ["en","fr"]){
   let output=current.replace(/<nav class="guide-toc">[\s\S]*?<\/nav>/,'<nav class="guide-toc">'+result.toc+'</nav>');
   output=output.replace(/<div class="guide-body">[\s\S]*?<\/div><p class="guide-footer">/,'<div class="guide-body">'+result.content+'</div><p class="guide-footer">');
   output=output.replaceAll("v2.0 Wiki","v2.1 Wiki");
+  output=output.replace('<span class="page-kicker">Music Interface 2.0</span>','<span class="page-kicker">Music Interface v2.1 source</span>');
   const description=lang==="fr"?"Guide Music Pack pour le code source v2.1 de Music Interface ; les versions publiques sont encore en v2.0.":"Music Pack guide for the Music Interface v2.1 source; public releases remain v2.0.";
   output=output.replace(/<meta name="description" content="[^"]*">/,'<meta name="description" content="'+description+'">');
   if(output===current && !current.includes(result.content))throw Error("Guide replacement failed: "+path);
