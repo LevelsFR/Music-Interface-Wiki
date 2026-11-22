@@ -2,7 +2,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 const root=join(process.cwd(),"site");
 const check=(ok,message)=>{if(!ok)throw Error(message);};
-const routes=["index.html","fr/index.html","music-packs.html","fr/music-packs.html","releases.html","fr/releases.html","app.js","styles.css","search-index.json",...["overview","installation","configuration","commands","troubleshooting"].flatMap(p=>["docs/"+p+".html","fr/docs/"+p+".html"])];
+const routes=["index.html","fr/index.html","music-packs.html","fr/music-packs.html","releases.html","fr/releases.html","app.js","styles.css","search-index.json",...["overview","installation","configuration","commands","troubleshooting"].flatMap(p=>["docs/"+p+".html","fr/docs/"+p+".html"]),"pack-builder/index.html","pack-builder/app.js","pack-builder/styles.css"];
 for(const route of routes) check(existsSync(join(root,route)),"Missing site file: "+route);
 for(const page of routes.filter(p=>p.endsWith(".html"))){
   const html=readFileSync(join(root,page),"utf8");
