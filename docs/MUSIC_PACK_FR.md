@@ -1,4 +1,6 @@
-# Créer un Music Pack pour Music Interface 2.0
+# Créer un Music Pack pour Music Interface 2.1
+
+> **État des versions (22 novembre 2026) :** ce guide décrit le code source v2.1. Les listes publiques CurseForge et Modrinth affichent encore la v2.0 comme dernière version. Les fonctions indiquées v2.1 nécessitent un JAR v2.1 correspondant. Une cible présente dans le code source ne prouve pas qu’un JAR a été publié ou testé en jeu.
 
 **Un guide accessible pour ajouter vos musiques, pochettes et thèmes adaptés aux situations dans Minecraft.**
 
@@ -8,7 +10,17 @@ Pour écouter des musiques personnalisées, il faut **ajouter un Music Pack** (r
 
 Music Interface utilise des **resource packs Minecraft** pour charger les chansons. Il n'est pas nécessaire de coder en Java. Le format des pistes est commun à Fabric et NeoForge. En revanche, les informations de compatibilité de Minecraft dans `pack.mcmeta` doivent correspondre à votre version du jeu.
 
-Pour apprendre à utiliser le lecteur, la Radio, les playlists, les paramètres et les commandes, consultez le [guide général](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview). Le guide général est actuellement en anglais.
+Pour utiliser le lecteur, la Radio, les playlists, les réglages et les commandes, consultez le [guide général en français](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview).
+
+### Créer un pack sans modifier de JSON
+
+1. Ouvrez le [créateur de Music Pack](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) et choisissez la version de Minecraft.
+2. Ajoutez vos fichiers OGG et renseignez les titres ; les fichiers restent dans le navigateur et ne sont pas téléversés.
+3. Ajoutez si besoin l’artiste, l’album, la pochette et les règles de contexte.
+4. Vérifiez le résultat puis exportez le ZIP. Gardez une copie `.mipack` pour reprendre le projet plus tard.
+5. Placez le ZIP dans `resourcepacks/`, activez-le dans Minecraft et appuyez sur `F3+T` pour recharger les ressources.
+
+Suivez les étapes détaillées ci-dessous si vous préférez gérer vous-même les dossiers et les JSON.
 
 ### Créer un pack sans modifier de JSON
 
@@ -182,7 +194,7 @@ La piste `route_01` correspond à une situation sans combat. La piste `battle_th
 | `contexts` | objet ou tableau | Règles de sélection automatique selon le contexte |
 | `duration` | texte | Métadonnée facultative acceptée par le parseur ; pas nécessaire pour calculer la durée réelle |
 
-Les champs facultatifs peuvent être omis. Un pack au format simple des versions précédentes reste lisible par le parseur 2.0.
+Les champs facultatifs peuvent être omis. Les champs facultatifs peuvent être omis et les définitions simples des anciens formats de pack restent prises en charge par le parseur v2.1.
 
 Il n'existe pas de liste imposée de genres, moods et tags. Utilisez des valeurs cohérentes entre vos pistes, comme `calm`, `ambient`, `exploration` ou `orchestral`, pour améliorer les correspondances de la Radio.
 
@@ -403,4 +415,4 @@ La commande cliente `/musicinterface_diagnostics` affiche le nombre de packs, le
 
 **Conseil :** commencez avec un seul fichier OGG et une seule piste valide, puis ajoutez les métadonnées et les contextes. Si vous distribuez des chansons ou des illustrations, vérifiez que vous disposez des droits nécessaires.
 
-Voir également le [guide général Music Interface 2.0](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview) et le [Music Pack guide en anglais](https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html).
+Voir également le [guide général Music Interface](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview) et le [guide Music Pack en anglais](https://levelsfr.github.io/Music-Interface-Wiki/music-packs.html).
