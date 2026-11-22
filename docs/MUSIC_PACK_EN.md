@@ -8,7 +8,7 @@ Music Interface reads music from a standard Minecraft **resource pack**. You do 
 
 For the player, settings, queues, playlists and Radio, see the [complete user guide](docs/PROJECT_GUIDE.md).
 
-### Create a pack without editing JSON
+### Quick start with the Music Pack Builder
 
 1. Open the [Music Pack Builder](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) and choose your Minecraft version.
 2. Add OGG tracks and set titles; audio stays in your browser and is not uploaded.
@@ -17,10 +17,6 @@ For the player, settings, queues, playlists and Radio, see the [complete user gu
 5. Put the ZIP in `resourcepacks/`, enable it in Minecraft and press `F3+T` to reload.
 
 Use the manual steps below if you prefer to manage the JSON and folders yourself.
-
-### Create a pack without editing JSON
-
-[Open the Music Pack Builder](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) to add OGG files, set track details and export a ready-to-use ZIP. Audio and images stay in your browser; they are not uploaded to the wiki.
 
 ## Quick answers
 
