@@ -12,7 +12,7 @@ Music Interface utilise des **resource packs Minecraft** pour charger les chanso
 
 Pour utiliser le lecteur, la Radio, les playlists, les réglages et les commandes, consultez le [guide général en français](https://levelsfr.github.io/Music-Interface-Wiki/fr/#overview).
 
-### Créer un pack sans modifier de JSON
+### Démarrage rapide avec le créateur de Music Pack
 
 1. Ouvrez le [créateur de Music Pack](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) et choisissez la version de Minecraft.
 2. Ajoutez vos fichiers OGG et renseignez les titres ; les fichiers restent dans le navigateur et ne sont pas téléversés.
@@ -21,10 +21,6 @@ Pour utiliser le lecteur, la Radio, les playlists, les réglages et les commande
 5. Placez le ZIP dans `resourcepacks/`, activez-le dans Minecraft et appuyez sur `F3+T` pour recharger les ressources.
 
 Suivez les étapes détaillées ci-dessous si vous préférez gérer vous-même les dossiers et les JSON.
-
-### Créer un pack sans modifier de JSON
-
-[Ouvrir le créateur de Music Pack](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) pour ajouter les OGG, renseigner les pistes et exporter un ZIP prêt à utiliser. Les musiques et les images restent dans votre navigateur : elles ne sont pas envoyées au wiki.
 
 ## Réponses rapides
 
