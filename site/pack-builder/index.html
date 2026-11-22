@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Créez un Music Pack pour Minecraft sans écrire de JSON. Vos fichiers restent dans votre navigateur.">
+  <meta name="color-scheme" content="dark light">
+  <title>Créateur de Music Pack | Music Interface Wiki</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true">♫</span>
+      <span><strong>Music Interface</strong><small>Wiki · Pack builder</small></span>
+    </a>
+    <nav class="top-actions" aria-label="Navigation">
+      <a id="guideLink" href="../fr/music-packs.html">Guide</a>
+      <button class="quiet-button" id="languageButton" type="button" aria-label="Changer de langue">EN</button>
+      <button class="quiet-button theme-button" id="themeButton" type="button" aria-label="Changer le thème">☀ / ☾</button>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <div class="heading-row">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow">Music Interface · outil de création</p>
+        <h1 data-i18n="pageTitle">Crée ton Music Pack</h1>
+        <p class="page-intro" data-i18n="pageIntro">Ajoute tes musiques, règle leur lecture et récupère un pack prêt à activer dans Minecraft.</p>
+      </div>
+      <div class="save-pill" id="saveStatus" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span><span id="saveStatusText">Enregistré dans ce navigateur</span>
+      </div>
+    </div>
+
+    <aside class="privacy-note" aria-labelledby="privacyTitle">
+      <span class="privacy-icon" aria-hidden="true">⌂</span>
+      <div>
+        <strong id="privacyTitle" data-i18n="privacyTitle">Tes fichiers restent chez toi</strong>
+        <p data-i18n="privacyBody">Les musiques et les images sont traitées dans ce navigateur. Elles ne sont pas envoyées à GitHub ni à un serveur. Tu peux les sauvegarder dans un fichier de projet pour les garder ou les déplacer.</p>
+      </div>
+    </aside>
+
+    <div class="wizard">
+      <nav class="stepper" id="stepper" aria-label="Étapes de création">
+        <button class="step-item active" type="button" data-step="0" aria-current="step"><span class="step-number">1</span><span class="step-copy"><strong data-i18n="stepPack">Le pack</strong><small data-i18n="stepPackHint">Nom et version</small></span></button>
+        <button class="step-item" type="button" data-step="1"><span class="step-number">2</span><span class="step-copy"><strong data-i18n="stepTracks">Les musiques</strong><small data-i18n="stepTracksHint">Audio et pochettes</small></span></button>
+        <button class="step-item" type="button" data-step="2"><span class="step-number">3</span><span class="step-copy"><strong data-i18n="stepRules">La lecture</strong><small data-i18n="stepRulesHint">Quand les jouer</small></span></button>
+        <button class="step-item" type="button" data-step="3"><span class="step-number">4</span><span class="step-copy"><strong data-i18n="stepFinish">Vérifier et exporter</strong><small data-i18n="stepFinishHint">Ton fichier ZIP</small></span></button>
+      </nav>
+
+      <div class="workspace">
+        <section class="editor-panel" id="stepContent" aria-live="polite" aria-busy="false"></section>
+
+        <aside class="summary-panel" aria-labelledby="summaryTitle">
+          <div class="summary-heading">
+            <span class="summary-mark" aria-hidden="true">♫</span>
+            <div><p class="eyebrow" data-i18n="previewLabel">Aperçu</p><h2 id="summaryTitle" data-i18n="summaryTitle">Ton pack</h2></div>
+          </div>
+          <div class="pack-preview">
+            <div class="preview-art" id="previewArt"><span aria-hidden="true">♫</span></div>
+            <div class="preview-copy">
+              <strong id="previewName">Mon pack musical</strong>
+              <span id="previewVersion">Minecraft 1.21.1</span>
+            </div>
+          </div>
+          <dl class="summary-stats">
+            <div><dt data-i18n="summaryTracks">Musiques</dt><dd id="summaryTracks">0</dd></div>
+            <div><dt data-i18n="summarySize">Taille audio</dt><dd id="summarySize">0 Mo</dd></div>
+          </dl>
+          <div class="summary-divider"></div>
+          <p class="summary-hint" id="summaryHint" data-i18n="summaryHint">Commence par donner un nom à ton pack.</p>
+          <button class="text-button" id="clearButton" type="button" data-i18n="clearButton">Effacer ce projet</button>
+        </aside>
+      </div>
+
+      <div class="wizard-footer">
+        <button class="secondary-button" id="backButton" type="button" disabled data-i18n="back">Retour</button>
+        <div class="footer-actions">
+          <button class="primary-button" id="nextButton" type="button"><span data-i18n="next">Continuer</span><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <span data-i18n="footerPrivacy">Aucun compte · aucun envoi de fichiers · fonctionne avec Fabric et NeoForge</span>
+      <a id="footerGuide" href="../fr/music-packs.html" data-i18n="footerGuide">Lire le guide des Music Packs</a>
+    </footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
