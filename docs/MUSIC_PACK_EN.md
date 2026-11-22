@@ -1,10 +1,22 @@
-# Creating a Music Pack for Music Interface 2.0
+# Creating a Music Pack for Music Interface 2.1
+
+> **Version status (22 November 2026):** This guide documents the v2.1 source. Public CurseForge and Modrinth listings still show v2.0 as the latest release. Features marked v2.1 require a matching v2.1 JAR. A source target does not prove that a matching JAR has been published or tested in game.
 
 **A beginner-friendly guide to adding your own songs, cover art and music for specific situations in Minecraft.**
 
 Music Interface reads music from a standard Minecraft **resource pack**. You do not need to program a mod. The track metadata format works on Fabric and NeoForge, but vanilla resource-pack compatibility metadata must match the Minecraft version you use.
 
 For the player, settings, queues, playlists and Radio, see the [complete user guide](docs/PROJECT_GUIDE.md).
+
+### Create a pack without editing JSON
+
+1. Open the [Music Pack Builder](https://levelsfr.github.io/Music-Interface-Wiki/pack-builder/) and choose your Minecraft version.
+2. Add OGG tracks and set titles; audio stays in your browser and is not uploaded.
+3. Add optional artist, album, cover and context rules.
+4. Review and export the ZIP. Save a `.mipack` backup to continue editing later.
+5. Put the ZIP in `resourcepacks/`, enable it in Minecraft and press `F3+T` to reload.
+
+Use the manual steps below if you prefer to manage the JSON and folders yourself.
 
 ### Create a pack without editing JSON
 
@@ -176,7 +188,7 @@ Save a **JSON array** inside `assets/musicinterface/music_data.json`. Here are t
 | `contexts` | object or array | Rules controlling contextual autoplay |
 | `duration` | string | Accepted optional metadata; not required for playback timing |
 
-Optional fields can be omitted. Simple older track definitions remain valid in the 2.0 parser.
+Optional fields can be omitted. Optional fields can be omitted, and simple track definitions from earlier pack formats remain supported by the v2.1 parser.
 
 Use consistent labels, such as `calm` or `orchestral`, across your library to make Radio similarity useful. No fixed genre, mood or tag vocabulary is required.
 
@@ -383,4 +395,4 @@ Use the local `/musicinterface_diagnostics` client command to see active packs, 
 
 **Advice:** start with one OGG and one JSON entry, make it play, then add contexts and metadata. Keep permissions for the recordings and artwork you distribute.
 
-See [Music Interface user guide](docs/PROJECT_GUIDE.md) and [French Music Pack guide](WIKI_CREATION_PACK_MUSIQUE.md).
+See the [Music Interface user guide](https://levelsfr.github.io/Music-Interface-Wiki/#overview) and the [French Music Pack guide](https://levelsfr.github.io/Music-Interface-Wiki/fr/music-packs.html).
